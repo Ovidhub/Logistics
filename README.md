@@ -7,7 +7,8 @@ A logistics / shipment-tracking single-page web application built with React, Vi
 ## Tech stack
 
 - **React 19** + **TypeScript**
-- **Vite 7** (build tooling, bundled to a single HTML file via `vite-plugin-singlefile`)
+- **Vite 7** (standard multi-file production build)
+- **PHP 8 + MySQL** REST API (in `api/`) with JWT auth
 - **Tailwind CSS 4**
 - **React Router 7** (HashRouter — works on any static host)
 - **Leaflet / react-leaflet** for route maps
@@ -23,16 +24,19 @@ npm run build    # produce a production build in dist/
 npm run preview  # preview the production build locally
 ```
 
-## Demo credentials
+## Admin accounts
 
-| Portal       | URL              | Username     | Password    |
-|--------------|------------------|--------------|-------------|
-| Admin        | `/#/admin`       | `admin`      | `admin123`  |
-| Super Admin  | `/#/super-admin` | `superadmin` | `super123`  |
+Two roles, stored in the `users` table with bcrypt-hashed passwords. There are
+no hardcoded credentials — passwords are set at deploy time (see [DEPLOY.md](DEPLOY.md)).
+
+| Portal       | URL              | Username (seed) |
+|--------------|------------------|-----------------|
+| Admin        | `/#/admin`       | `admin`         |
+| Super Admin  | `/#/super-admin` | `superadmin`    |
 
 ## Deployment
 
-The build outputs a self-contained `dist/index.html`. Because the app uses `HashRouter`, no server-side route rewriting is required — host the contents of `dist/` on any static host (Netlify, Vercel, GitHub Pages, Cloudflare Pages, S3, etc.).
+`npm run build` outputs a static `dist/` (`index.html` + `assets/`). The app needs the PHP + MySQL backend in `api/` to function. For full step-by-step deployment to Hostinger (database, API config, upload), see **[DEPLOY.md](DEPLOY.md)**. Because the app uses `HashRouter`, the static frontend needs no server-side route rewriting of its own.
 
 ## Backend
 
