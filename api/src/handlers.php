@@ -54,3 +54,30 @@ function handle_create_shipment(PDO $db, array $input, ?array $auth, array $para
   if (!Validation::isStatus($status)) return Response::error(400, 'Invalid status');
   return Response::created(Shipments::create($db, $input, $status));
 }
+
+function handle_update_shipment(PDO $db, array $input, ?array $auth, array $params, array $config): array
+{
+  if ($err = require_role($auth, ['admin', 'superadmin'])) return $err;
+  if (!Shipments::findRow($db, $params['id'])) return Response::error(404, 'Shipment not found');
+  if (isset($input['status']) && !Validation::isStatus($input['status'])) return Response::error(400, 'Invalid status');
+  Shipments::update($db, $params['id'], $input);
+  return Response::ok(Shipments::findApi($db, $params['id']));
+}
+
+function handle_delete_shipment(PDO $db, array $input, ?array $auth, array $params, array $config): array
+{
+  if ($err = require_role($auth, ['admin', 'superadmin'])) return $err;
+  if (!Shipments::findRow($db, $params['id'])) return Response::error(404, 'Shipment not found');
+  Shipments::delete($db, $params['id']);
+  return Response::ok(['deleted' => true]);
+}
+
+function handle_update_status(PDO $db, array $input, ?array $auth, array $params, array $config): array
+{
+  if ($err = require_role($auth, ['admin', 'superadmin'])) return $err;
+  if (!Shipments::findRow($db, $params['id'])) return Response::error(404, 'Shipment not found');
+  $status = $input['status'] ?? '';
+  if (!Validation::isStatus($status)) return Response::error(400, 'Invalid status');
+  Shipments::updateStatus($db, $params['id'], $status, $input['location'] ?? '', $input['description'] ?? '');
+  return Response::ok(Shipments::findApi($db, $params['id']));
+}
