@@ -25,3 +25,15 @@ function handle_track(PDO $db, array $input, ?array $auth, array $params, array 
   }
   return Response::ok($shipment);
 }
+
+function handle_get_settings(PDO $db, array $input, ?array $auth, array $params, array $config): array
+{
+  return Response::ok(Settings::get($db));
+}
+
+function handle_update_settings(PDO $db, array $input, ?array $auth, array $params, array $config): array
+{
+  if ($err = require_role($auth, ['superadmin'])) return $err;
+  Settings::save($db, $input);
+  return Response::ok(Settings::get($db));
+}
