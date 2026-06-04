@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Crown, Lock, Eye, EyeOff, ChevronRight, ShieldAlert } from 'lucide-react';
+import { api, setAuth, clearAuth } from '../utils/api';
 
 interface SuperAdminLoginProps {
   onLogin: () => void;
@@ -14,15 +15,24 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-
-    if (username === 'superadmin' && password === 'super123') {
+    try {
+      const res = await api<{ token: string; role: string }>('/auth/login', {
+        method: 'POST',
+        body: { username, password },
+      });
+      if (res.role !== 'superadmin') {
+        clearAuth();
+        setError('This account does not have super admin access');
+        return;
+      }
+      setAuth(res.token, res.role);
       onLogin();
       navigate('/super-admin');
-    } else {
-      setError('Invalid super admin credentials');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Login failed');
     }
   };
 
@@ -79,7 +89,7 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="superadmin"
+                placeholder="Enter your username"
                 className="w-full px-4 py-2.5 rounded border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all"
               />
             </div>
@@ -91,7 +101,7 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="super123"
+                  placeholder="Enter your password"
                   className="w-full px-4 py-2.5 pr-10 rounded border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all"
                 />
                 <button
@@ -123,11 +133,7 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
             </button>
           </form>
 
-          <div className="mt-6 p-3 bg-slate-50 rounded text-xs text-slate-500 text-center border border-slate-200">
-            <p className="font-bold text-slate-600 mb-1">Demo Credentials</p>
-            <p>Username: <span className="font-mono text-slate-700">superadmin</span></p>
-            <p>Password: <span className="font-mono text-slate-700">super123</span></p>
-          </div>
+
         </motion.div>
       </div>
     </div>
