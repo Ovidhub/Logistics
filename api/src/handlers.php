@@ -37,3 +37,20 @@ function handle_update_settings(PDO $db, array $input, ?array $auth, array $para
   Settings::save($db, $input);
   return Response::ok(Settings::get($db));
 }
+
+function handle_list_shipments(PDO $db, array $input, ?array $auth, array $params, array $config): array
+{
+  if ($err = require_role($auth, ['admin', 'superadmin'])) return $err;
+  return Response::ok(Shipments::all($db));
+}
+
+function handle_create_shipment(PDO $db, array $input, ?array $auth, array $params, array $config): array
+{
+  if ($err = require_role($auth, ['admin', 'superadmin'])) return $err;
+  $required = ['senderName', 'senderAddress', 'senderPhone', 'receiverName', 'receiverAddress', 'receiverPhone', 'itemDescription', 'origin', 'destination', 'estimatedDelivery'];
+  $missing = Validation::requireFields($input, $required);
+  if ($missing) return Response::error(400, 'Missing fields: ' . implode(', ', $missing));
+  $status = $input['status'] ?? 'pending';
+  if (!Validation::isStatus($status)) return Response::error(400, 'Invalid status');
+  return Response::created(Shipments::create($db, $input, $status));
+}
