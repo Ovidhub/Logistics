@@ -58,15 +58,15 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
     setDirty(true);
   };
 
-  const handleSave = () => {
-    updateSettings(formData);
+  const handleSave = async () => {
+    await updateSettings(formData);
     setDirty(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
   };
 
-  const handleReset = () => {
-    resetSettings();
+  const handleReset = async () => {
+    await resetSettings();
     setShowResetConfirm(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
