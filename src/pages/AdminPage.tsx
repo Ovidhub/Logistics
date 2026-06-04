@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
@@ -34,10 +34,11 @@ import ReceiptModal from '../components/ReceiptModal';
 
 interface AdminPageProps {
   shipments: Shipment[];
-  addShipment: (data: any) => Shipment;
-  updateShipment: (id: string, updates: Partial<Shipment>) => void;
-  deleteShipment: (id: string) => void;
-  updateShipmentStatus: (id: string, status: ShipmentStatus, location: string, description: string) => void;
+  refresh: () => Promise<void>;
+  addShipment: (data: any) => Promise<Shipment>;
+  updateShipment: (id: string, updates: Partial<Shipment>) => Promise<void>;
+  deleteShipment: (id: string) => Promise<void>;
+  updateShipmentStatus: (id: string, status: ShipmentStatus, location: string, description: string) => Promise<void>;
   onLogout: () => void;
 }
 
@@ -82,6 +83,7 @@ function formatDate(dateStr: string) {
 
 export default function AdminPage({
   shipments,
+  refresh,
   addShipment,
   updateShipment,
   deleteShipment,
@@ -118,6 +120,10 @@ export default function AdminPage({
 
   const [receiptShipment, setReceiptShipment] = useState<Shipment | null>(null);
 
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
   const filteredShipments = shipments.filter(
     (s) =>
       s.trackingNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -149,9 +155,9 @@ export default function AdminPage({
     });
   };
 
-  const handleAdd = (e: React.FormEvent) => {
+  const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault();
-    const newShipment = addShipment({
+    const newShipment = await addShipment({
       ...formData,
       weight: parseFloat(formData.weight) || 0,
       status: 'pending',
@@ -161,10 +167,10 @@ export default function AdminPage({
     setExpandedRow(newShipment.id);
   };
 
-  const handleEdit = (e: React.FormEvent) => {
+  const handleEdit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedShipment) return;
-    updateShipment(selectedShipment.id, {
+    await updateShipment(selectedShipment.id, {
       ...formData,
       weight: parseFloat(formData.weight) || 0,
     });
@@ -172,17 +178,17 @@ export default function AdminPage({
     setSelectedShipment(null);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (!selectedShipment) return;
-    deleteShipment(selectedShipment.id);
+    await deleteShipment(selectedShipment.id);
     setShowDeleteModal(false);
     setSelectedShipment(null);
   };
 
-  const handleStatusUpdate = (e: React.FormEvent) => {
+  const handleStatusUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedShipment) return;
-    updateShipmentStatus(
+    await updateShipmentStatus(
       selectedShipment.id,
       statusUpdate.status,
       statusUpdate.location,
