@@ -15,13 +15,24 @@ Db::init($config);
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-// Derive the route path relative to this script's directory (e.g. /api).
-$base = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
 $uriPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-if ($base !== '' && str_starts_with($uriPath, $base)) {
-  $path = substr($uriPath, strlen($base));
-} else {
+if (php_sapi_name() === 'cli-server') {
+  // PHP built-in dev server (php -S): the router script handles every request,
+  // and REQUEST_URI is already the route path (optionally prefixed with /api).
   $path = $uriPath;
+  if (str_starts_with($path, '/api/')) {
+    $path = substr($path, 4);
+  } elseif ($path === '/api') {
+    $path = '/';
+  }
+} else {
+  // Apache (production): strip this script's directory (e.g. /api) from the URI.
+  $base = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
+  if ($base !== '' && str_starts_with($uriPath, $base)) {
+    $path = substr($uriPath, strlen($base));
+  } else {
+    $path = $uriPath;
+  }
 }
 if ($path === '') $path = '/';
 

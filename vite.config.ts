@@ -15,4 +15,14 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  // Dev only: forward /api to the local PHP API so the SPA can use same-origin
+  // requests (matching production). Override the target with VITE_API_TARGET.
+  server: {
+    proxy: {
+      "/api": {
+        target: process.env.VITE_API_TARGET || "http://127.0.0.1:8765",
+        changeOrigin: true,
+      },
+    },
+  },
 });

@@ -32,3 +32,6 @@ Thumbs.db
 # Backend secrets and local databases
 api/config.php
 *.sqlite
+
+# Playwright / local test artifacts
+.playwright-mcp/
