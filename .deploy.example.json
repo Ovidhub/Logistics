@@ -1,0 +1,7 @@
+{
+  "host": "YOUR_SSH_HOST",
+  "port": "65002",
+  "user": "YOUR_SSH_USER",
+  "key": "~/.ssh/hostinger_deploy",
+  "docroot": "/home/YOUR_SSH_USER/domains/yourdomain.com/public_html"
+}

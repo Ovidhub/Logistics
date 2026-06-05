@@ -69,6 +69,23 @@ Final layout:
 - `https://yourdomain.com/#/admin/login` — log in with your admin password, create/edit/delete a shipment.
 - `https://yourdomain.com/#/super-admin/login` — log in with your superadmin password, change site settings, confirm they persist after refresh.
 
+## Updating the live site (after the first deploy)
+
+Once the database and `config.php` exist on the server, pushing code changes is a
+single command:
+
+```bash
+npm run deploy
+```
+
+It rebuilds the frontend and uploads `dist/` + the `api/` code over SSH. It does
+**not** touch the server's `config.php`, the database, or admin passwords. It reads
+server details from `.deploy.json` (gitignored — copy `.deploy.example.json` to
+`.deploy.json` and fill it in; needs the deploy SSH key from setup).
+
+Schema or admin-password changes are separate one-off steps (re-import `schema.sql`,
+or run `php api/tools/seed_local.php "newAdminPass" "newSuperPass"` on the server).
+
 ### Troubleshooting
 
 - **401 on every admin action / login fails immediately after success:** the `Authorization` header may be stripped. Confirm `api/.htaccess` was uploaded.

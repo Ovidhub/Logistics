@@ -35,3 +35,7 @@ api/config.php
 
 # Playwright / local test artifacts
 .playwright-mcp/
+
+# Deploy config (server details) and staging
+.deploy.json
+.deploy_stage/

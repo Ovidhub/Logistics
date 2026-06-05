@@ -8,7 +8,8 @@
     "dev:api": "php -S 127.0.0.1:8765 -t api api/index.php",
     "dev:all": "concurrently -k -n api,web -c blue,green \"npm:dev:api\" \"npm:dev\"",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "node scripts/deploy.mjs"
   },
   "dependencies": {
     "@types/leaflet": "^1.9.21",
