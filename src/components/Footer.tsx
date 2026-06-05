@@ -49,7 +49,6 @@ export default function Footer() {
               <li className={`${c.textHover} transition-colors cursor-pointer`}>Ocean Freight</li>
               <li className={`${c.textHover} transition-colors cursor-pointer`}>Road Transport</li>
               <li className={`${c.textHover} transition-colors cursor-pointer`}>Warehousing</li>
-              <li className={`${c.textHover} transition-colors cursor-pointer`}>Custom Brokerage</li>
             </ul>
           </div>
 
