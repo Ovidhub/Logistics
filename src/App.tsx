@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getToken, getRole, clearAuth } from './utils/api';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
@@ -26,10 +27,16 @@ function DocumentTitle() {
 }
 
 function App() {
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
-  const [isSuperAdminLoggedIn, setIsSuperAdminLoggedIn] = useState(false);
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
+    const role = getRole();
+    return getToken() !== null && (role === 'admin' || role === 'superadmin');
+  });
+  const [isSuperAdminLoggedIn, setIsSuperAdminLoggedIn] = useState(
+    () => getToken() !== null && getRole() === 'superadmin'
+  );
   const {
     shipments,
+    refresh,
     addShipment,
     updateShipment,
     deleteShipment,
@@ -62,11 +69,15 @@ function App() {
                   isAdminLoggedIn ? (
                     <AdminPage
                       shipments={shipments}
+                      refresh={refresh}
                       addShipment={addShipment}
                       updateShipment={updateShipment}
                       deleteShipment={deleteShipment}
                       updateShipmentStatus={updateShipmentStatus}
-                      onLogout={() => setIsAdminLoggedIn(false)}
+                      onLogout={() => {
+                        clearAuth();
+                        setIsAdminLoggedIn(false);
+                      }}
                     />
                   ) : (
                     <Navigate to="/admin/login" replace />
@@ -81,7 +92,12 @@ function App() {
                 path="/super-admin"
                 element={
                   isSuperAdminLoggedIn ? (
-                    <SuperAdminPage onLogout={() => setIsSuperAdminLoggedIn(false)} />
+                    <SuperAdminPage
+                      onLogout={() => {
+                        clearAuth();
+                        setIsSuperAdminLoggedIn(false);
+                      }}
+                    />
                   ) : (
                     <Navigate to="/super-admin/login" replace />
                   )

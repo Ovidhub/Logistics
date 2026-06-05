@@ -31,7 +31,7 @@ import { useSettings } from '../hooks/useSettings';
 import { colorClasses, type PrimaryColor } from '../utils/colors';
 
 interface TrackPageProps {
-  getShipmentByTracking: (trackingNumber: string) => Shipment | undefined;
+  getShipmentByTracking: (trackingNumber: string) => Promise<Shipment | null>;
 }
 
 const statusIcons: Record<ShipmentStatus, React.ReactNode> = {
@@ -102,7 +102,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
   const [loading, setLoading] = useState(false);
   const [showReceipt, setShowReceipt] = useState(false);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setShipment(null);
@@ -113,15 +113,18 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
     }
 
     setLoading(true);
-    setTimeout(() => {
-      const found = getShipmentByTracking(trackingNumber.trim());
+    try {
+      const found = await getShipmentByTracking(trackingNumber.trim());
       if (found) {
         setShipment(found);
       } else {
         setError('No shipment found with this tracking number. Please check and try again.');
       }
+    } catch {
+      setError('Something went wrong. Please try again.');
+    } finally {
       setLoading(false);
-    }, 600);
+    }
   };
 
   const currentStep = shipment ? statusStepMap[shipment.status] : -1;
