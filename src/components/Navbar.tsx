@@ -60,16 +60,10 @@ export default function Navbar() {
           {/* CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <Link
-              to="/admin"
-              className={`text-sm font-semibold text-slate-700 ${c.textHover} transition-colors`}
-            >
-              Admin
-            </Link>
-            <Link
               to="/track"
               className={`${c.bg} ${c.bgHover} text-white text-sm font-semibold px-5 py-2.5 rounded transition-colors`}
             >
-              Started Now
+              Track Package
             </Link>
           </div>
 
@@ -92,13 +86,12 @@ export default function Navbar() {
             {navLink('/track', 'Track')}
             {navLink('/blog', 'Blog')}
             {navLink('/contact', 'Contact')}
-            {navLink('/admin', 'Admin')}
             <Link
               to="/track"
               onClick={() => setMobileOpen(false)}
               className={`block ${c.bg} ${c.bgHover} text-white text-sm font-semibold px-5 py-2.5 rounded transition-colors text-center mx-3 mt-2`}
             >
-              Started Now
+              Track Package
             </Link>
           </div>
         )}

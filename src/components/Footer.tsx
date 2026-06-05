@@ -38,7 +38,6 @@ export default function Footer() {
               <li><Link to="/services" className={`${c.textHover} transition-colors`}>Services</Link></li>
               <li><Link to="/track" className={`${c.textHover} transition-colors`}>Track Shipment</Link></li>
               <li><Link to="/contact" className={`${c.textHover} transition-colors`}>Contact</Link></li>
-              <li><Link to="/super-admin" className="hover:text-yellow-500 transition-colors text-xs opacity-60">Super Admin</Link></li>
             </ul>
           </div>
 
