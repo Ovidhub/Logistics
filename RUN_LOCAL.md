@@ -21,17 +21,24 @@ Good for clicking through the app fast. Uses a local SQLite file as the database
    php api/tools/seed_local.php
    ```
    Default logins: `admin / admin123`, `superadmin / super123`.
-3. **Start the API** (any free port; avoid 8000 if Laragon uses it):
+3. **Start both servers with one command:**
    ```bash
-   php -S 127.0.0.1:8765 -t api api/index.php
+   npm run dev:all
    ```
-4. **Start the frontend** (new terminal):
+   This launches the PHP API (port 8765) **and** the Vite frontend together.
+   Open the printed URL (http://localhost:5173); the Vite proxy forwards `/api/*`
+   to the PHP API. Stop both with Ctrl+C.
+
+   > Both servers must run. If only the frontend is up, logins fail with
+   > "Cannot reach the server" — that means the PHP API isn't running.
+
+   Prefer separate terminals (or a different API port)? Run them individually:
    ```bash
-   npm run dev
+   npm run dev:api                                   # PHP API on :8765
+   npm run dev                                        # Vite frontend on :5173
+   # custom API port: php -S 127.0.0.1:9000 -t api api/index.php
+   #                  VITE_API_TARGET=http://127.0.0.1:9000 npm run dev
    ```
-5. Open the printed URL (http://localhost:5173). The Vite proxy sends `/api/*`
-   to `http://127.0.0.1:8765`. To point at a different API port, set
-   `VITE_API_TARGET`, e.g. `VITE_API_TARGET=http://127.0.0.1:9000 npm run dev`.
 
 ---
 

@@ -42,11 +42,22 @@ export async function api<T>(path: string, options: ApiOptions = {}): Promise<T>
     if (token) headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${API_URL}${path}`, {
-    method: options.method || 'GET',
-    headers,
-    body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
-  });
+  // In dev, an unreachable API usually means the PHP server isn't running.
+  const devHint = import.meta.env.DEV
+    ? ' Make sure the PHP API server is running (npm run dev:all).'
+    : '';
+
+  let res: Response;
+  try {
+    res = await fetch(`${API_URL}${path}`, {
+      method: options.method || 'GET',
+      headers,
+      body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
+    });
+  } catch {
+    // fetch rejects on a true network failure (server down, DNS, offline).
+    throw new ApiError(0, `Cannot reach the server.${devHint}`);
+  }
 
   if (res.status === 401 && options.auth) {
     clearAuth();
@@ -63,10 +74,15 @@ export async function api<T>(path: string, options: ApiOptions = {}): Promise<T>
   }
 
   if (!res.ok) {
-    const message =
-      data && typeof data === 'object' && 'error' in data
-        ? String((data as { error: unknown }).error)
-        : `Request failed (${res.status})`;
+    let message: string;
+    if (data && typeof data === 'object' && 'error' in data) {
+      message = String((data as { error: unknown }).error);
+    } else if (res.status >= 500) {
+      // A bodyless 5xx (e.g. dev proxy can't reach the API) lands here.
+      message = `Server error (${res.status}).${devHint}`;
+    } else {
+      message = `Request failed (${res.status})`;
+    }
     throw new ApiError(res.status, message);
   }
 
