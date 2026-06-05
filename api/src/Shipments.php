@@ -13,7 +13,6 @@ class Shipments
     'weight' => 'weight',
     'origin' => 'origin',
     'destination' => 'destination',
-    'status' => 'status',
     'estimatedDelivery' => 'estimated_delivery',
   ];
 
