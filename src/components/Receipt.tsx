@@ -1,6 +1,7 @@
 import type { Shipment } from '../types';
 import { STATUS_LABELS } from '../types';
 import { Truck, MapPin, Calendar, Package, User, Phone, Weight, Clock, CheckCircle2 } from 'lucide-react';
+import { useSettings } from '../hooks/useSettings';
 
 interface ReceiptProps {
   shipment: Shipment;
@@ -29,6 +30,11 @@ function formatDateOnly(dateStr: string) {
 }
 
 export default function Receipt({ shipment, receiptId }: ReceiptProps) {
+  const { settings } = useSettings();
+  const accentLen = settings.siteNameAccent.length;
+  const accentPart = settings.siteName.slice(0, accentLen) || settings.siteName.charAt(0);
+  const restPart = settings.siteName.slice(accentLen);
+
   const id = receiptId || `RCP-${shipment.trackingNumber}-${Date.now().toString(36).toUpperCase()}`;
   const issuedAt = new Date().toLocaleString('en-US', {
     year: 'numeric',
@@ -48,14 +54,18 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
       <div className="border-b-2 border-emerald-600 pb-6 mb-6">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="bg-emerald-600 p-2.5 rounded-lg">
-              <Truck className="w-7 h-7 text-white" />
-            </div>
+            {settings.logoImage ? (
+              <img src={settings.logoImage} alt={settings.siteName} className="h-12 w-auto max-w-[160px] object-contain" />
+            ) : (
+              <div className="bg-emerald-600 p-2.5 rounded-lg">
+                <Truck className="w-7 h-7 text-white" />
+              </div>
+            )}
             <div>
               <h1 className="text-2xl font-bold text-slate-900">
-                Swift<span className="text-emerald-600">Track</span>
+                <span className="text-emerald-600">{accentPart}</span>{restPart}
               </h1>
-              <p className="text-xs text-slate-500">Logistics & Shipment Receipt</p>
+              <p className="text-xs text-slate-500">Logistics &amp; Shipment Receipt</p>
             </div>
           </div>
           <div className="text-right">
@@ -215,9 +225,9 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
       <div className="border-t-2 border-slate-200 pt-4 mt-6">
         <div className="flex items-center justify-between text-xs text-slate-500">
           <div>
-            <p className="font-semibold text-slate-700">SwiftTrack Logistics</p>
-            <p>support@swiftrack.com | +1 (800) 555-0199</p>
-            <p>123 Logistics Plaza, Portland, OR 97201</p>
+            <p className="font-semibold text-slate-700">{settings.siteName}</p>
+            <p>{settings.email} | {settings.phone}</p>
+            <p>{settings.address}</p>
           </div>
           <div className="text-right">
             <p>This is an official shipment receipt.</p>

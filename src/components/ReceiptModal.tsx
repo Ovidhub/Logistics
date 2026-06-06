@@ -4,6 +4,8 @@ import { X, Printer, Download, FileText, Loader2 } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import type { Shipment } from '../types';
+import type { SiteSettings } from '../types/settings';
+import { useSettings } from '../hooks/useSettings';
 import Receipt from './Receipt';
 
 interface ReceiptModalProps {
@@ -14,6 +16,8 @@ interface ReceiptModalProps {
 export default function ReceiptModal({ shipment, onClose }: ReceiptModalProps) {
   const receiptRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
+  const { settings } = useSettings();
+  const brand = (settings.siteName || 'Receipt').replace(/[^a-zA-Z0-9]+/g, '') || 'Receipt';
 
   const handlePrint = () => {
     const printContent = receiptRef.current;
@@ -87,7 +91,7 @@ export default function ReceiptModal({ shipment, onClose }: ReceiptModalProps) {
         heightLeft -= pageHeight;
       }
 
-      pdf.save(`SwiftTrack-Receipt-${shipment?.trackingNumber || 'tracking'}.pdf`);
+      pdf.save(`${brand}-Receipt-${shipment?.trackingNumber || 'tracking'}.pdf`);
     } catch (err) {
       console.error('Failed to generate PDF', err);
       alert('Failed to generate PDF. Please try again.');
@@ -98,12 +102,12 @@ export default function ReceiptModal({ shipment, onClose }: ReceiptModalProps) {
 
   const handleDownloadText = () => {
     if (!shipment) return;
-    const text = generateTextReceipt(shipment);
+    const text = generateTextReceipt(shipment, settings);
     const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `SwiftTrack-Receipt-${shipment.trackingNumber}.txt`;
+    link.download = `${brand}-Receipt-${shipment.trackingNumber}.txt`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -195,7 +199,7 @@ export default function ReceiptModal({ shipment, onClose }: ReceiptModalProps) {
   );
 }
 
-function generateTextReceipt(shipment: Shipment): string {
+function generateTextReceipt(shipment: Shipment, settings: SiteSettings): string {
   const divider = '═'.repeat(60);
   const subDivider = '─'.repeat(60);
   const issuedAt = new Date().toLocaleString();
@@ -203,7 +207,7 @@ function generateTextReceipt(shipment: Shipment): string {
 
   let txt = '';
   txt += `${divider}\n`;
-  txt += `  SWIFTTRACK LOGISTICS - SHIPMENT RECEIPT\n`;
+  txt += `  ${settings.siteName.toUpperCase()} - SHIPMENT RECEIPT\n`;
   txt += `${divider}\n\n`;
   txt += `Receipt ID:   ${id}\n`;
   txt += `Issued:       ${issuedAt}\n\n`;
@@ -253,8 +257,8 @@ function generateTextReceipt(shipment: Shipment): string {
   });
 
   txt += `${divider}\n`;
-  txt += `Thank you for choosing SwiftTrack!\n`;
-  txt += `Support: support@swiftrack.com | +1 (800) 555-0199\n`;
+  txt += `Thank you for choosing ${settings.siteName}!\n`;
+  txt += `Support: ${settings.email} | ${settings.phone}\n`;
   txt += `${divider}\n`;
 
   return txt;
