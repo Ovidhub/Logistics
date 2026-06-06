@@ -88,5 +88,10 @@ function handle_update_status(PDO $db, array $input, ?array $auth, array $params
   $status = $input['status'] ?? '';
   if (!Validation::isStatus($status)) return Response::error(400, 'Invalid status');
   Shipments::updateStatus($db, $params['id'], $status, $input['location'] ?? '', $input['description'] ?? '');
-  return Response::ok(Shipments::findApi($db, $params['id']));
+  $shipment = Shipments::findApi($db, $params['id']);
+  if (!empty($config['mail'])) {
+    try { send_status_notifications($shipment, $config); }
+    catch (\Throwable $e) { error_log('Status notify failed: ' . $e->getMessage()); }
+  }
+  return Response::ok($shipment);
 }

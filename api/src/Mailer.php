@@ -1,36 +1,77 @@
 <?php
 
 // Sends shipment notification emails via SMTP (PHPMailer). No-ops when mail is
-// not configured (e.g. local dev), so the rest of the app works without it.
+// not configured (e.g. local dev / tests), so the rest of the app works without it.
 
+function mailer_recipients(array $shipment): array
+{
+  $r = [];
+  if (!empty($shipment['senderEmail'])) {
+    $r[] = [$shipment['senderEmail'], $shipment['senderName'], 'sender'];
+  }
+  if (!empty($shipment['receiverEmail'])) {
+    $r[] = [$shipment['receiverEmail'], $shipment['receiverName'], 'receiver'];
+  }
+  return $r;
+}
+
+// Sent when a shipment is first created.
 function send_shipment_notifications(array $shipment, array $config): void
 {
   $mail = $config['mail'] ?? null;
-  if (empty($mail) || empty($mail['host'])) {
-    return; // mail not configured — skip silently
-  }
-
+  if (empty($mail) || empty($mail['host'])) return;
   require_once __DIR__ . '/../vendor/autoload.php';
 
-  $recipients = [];
-  if (!empty($shipment['senderEmail'])) {
-    $recipients[] = [$shipment['senderEmail'], $shipment['senderName'], 'sender'];
-  }
-  if (!empty($shipment['receiverEmail'])) {
-    $recipients[] = [$shipment['receiverEmail'], $shipment['receiverName'], 'receiver'];
-  }
-
-  foreach ($recipients as [$email, $name, $role]) {
+  $tn = $shipment['trackingNumber'];
+  $rows = [
+    ['Tracking number', $tn],
+    ['From', $shipment['origin']],
+    ['To', $shipment['destination']],
+    ['Item', $shipment['itemDescription']],
+    ['Estimated delivery', $shipment['estimatedDelivery']],
+  ];
+  foreach (mailer_recipients($shipment) as [$email, $name, $role]) {
+    $intro = $role === 'sender'
+      ? 'Your shipment has been registered. Here are the tracking details:'
+      : 'A shipment is on its way to you. Track it any time with the details below:';
     try {
-      send_one_notification($mail, $email, $name, $role, $shipment);
+      mailer_send($mail, $email, $name, "Shipment $tn registered", $intro, $rows, $tn);
     } catch (\Throwable $e) {
-      // Best-effort: never let an email failure break shipment creation.
       error_log('Shipment email to ' . $email . ' failed: ' . $e->getMessage());
     }
   }
 }
 
-function send_one_notification(array $mail, string $to, string $name, string $role, array $s): void
+// Sent when a shipment's status changes (expects the updated shipment, with the
+// new status and the latest event appended to events).
+function send_status_notifications(array $shipment, array $config): void
+{
+  $mail = $config['mail'] ?? null;
+  if (empty($mail) || empty($mail['host'])) return;
+  require_once __DIR__ . '/../vendor/autoload.php';
+
+  $tn = $shipment['trackingNumber'];
+  $label = Validation::STATUS_LABELS[$shipment['status']] ?? $shipment['status'];
+  $events = $shipment['events'] ?? [];
+  $last = $events ? end($events) : null;
+  $rows = [
+    ['Tracking number', $tn],
+    ['Status', $label],
+    ['Update', $last['description'] ?? ''],
+    ['Location', $last['location'] ?? ''],
+    ['Route', $shipment['origin'] . ' to ' . $shipment['destination']],
+  ];
+  $intro = "Your shipment status has been updated to \"$label\".";
+  foreach (mailer_recipients($shipment) as [$email, $name]) {
+    try {
+      mailer_send($mail, $email, $name, "Shipment $tn update: $label", $intro, $rows, $tn);
+    } catch (\Throwable $e) {
+      error_log('Status email to ' . $email . ' failed: ' . $e->getMessage());
+    }
+  }
+}
+
+function mailer_send(array $mail, string $to, string $name, string $subject, string $intro, array $rows, string $tn): void
 {
   $m = new \PHPMailer\PHPMailer\PHPMailer(true);
   $m->isSMTP();
@@ -46,24 +87,12 @@ function send_one_notification(array $mail, string $to, string $name, string $ro
   $m->setFrom($mail['user'], $fromName);
   $m->addAddress($to, $name);
 
-  $tn = $s['trackingNumber'];
   $site = rtrim($mail['site_url'] ?? '', '/');
   $trackUrl = $site . '/#/track';
 
-  $intro = $role === 'sender'
-    ? 'Your shipment has been registered. Here are the tracking details:'
-    : 'A shipment is on its way to you. Track it any time with the details below:';
-
-  $m->Subject = "Shipment $tn — $fromName";
+  $m->Subject = $subject . ' — ' . $fromName;
   $m->isHTML(true);
 
-  $rows = [
-    ['Tracking number', $tn],
-    ['From', $s['origin']],
-    ['To', $s['destination']],
-    ['Item', $s['itemDescription']],
-    ['Estimated delivery', $s['estimatedDelivery']],
-  ];
   $rowsHtml = '';
   $rowsText = '';
   foreach ($rows as [$label, $value]) {
@@ -74,10 +103,11 @@ function send_one_notification(array $mail, string $to, string $name, string $ro
   }
 
   $safeIntro = htmlspecialchars($intro, ENT_QUOTES, 'UTF-8');
+  $safeName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
   $m->Body = <<<HTML
 <div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:auto;">
   <h2 style="color:#dc2626;margin:0 0 8px;">$fromName</h2>
-  <p style="color:#334155;">Hi {$name},</p>
+  <p style="color:#334155;">Hi $safeName,</p>
   <p style="color:#334155;">$safeIntro</p>
   <table style="border-collapse:collapse;width:100%;background:#f8fafc;border-radius:8px;margin:12px 0;">
     $rowsHtml
