@@ -15,6 +15,8 @@ export interface Shipment {
   receiverName: string;
   receiverAddress: string;
   receiverPhone: string;
+  senderEmail: string;
+  receiverEmail: string;
   itemDescription: string;
   weight: number;
   origin: string;

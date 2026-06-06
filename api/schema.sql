@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS shipments (
   receiver_name VARCHAR(120) NOT NULL,
   receiver_address VARCHAR(255) NOT NULL,
   receiver_phone VARCHAR(40) NOT NULL,
+  sender_email VARCHAR(190) NOT NULL DEFAULT '',
+  receiver_email VARCHAR(190) NOT NULL DEFAULT '',
   item_description VARCHAR(255) NOT NULL,
   weight DECIMAL(10,2) NOT NULL DEFAULT 0,
   origin VARCHAR(120) NOT NULL,

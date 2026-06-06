@@ -23,6 +23,8 @@ function handle_track(PDO $db, array $input, ?array $auth, array $params, array 
   if (!$shipment) {
     return Response::error(404, 'No shipment found with this tracking number');
   }
+  // Don't expose customer emails on the public tracking endpoint.
+  unset($shipment['senderEmail'], $shipment['receiverEmail']);
   return Response::ok($shipment);
 }
 
@@ -47,12 +49,19 @@ function handle_list_shipments(PDO $db, array $input, ?array $auth, array $param
 function handle_create_shipment(PDO $db, array $input, ?array $auth, array $params, array $config): array
 {
   if ($err = require_role($auth, ['admin', 'superadmin'])) return $err;
-  $required = ['senderName', 'senderAddress', 'senderPhone', 'receiverName', 'receiverAddress', 'receiverPhone', 'itemDescription', 'origin', 'destination', 'estimatedDelivery'];
+  $required = ['senderName', 'senderAddress', 'senderPhone', 'receiverName', 'receiverAddress', 'receiverPhone', 'senderEmail', 'receiverEmail', 'itemDescription', 'origin', 'destination', 'estimatedDelivery'];
   $missing = Validation::requireFields($input, $required);
   if ($missing) return Response::error(400, 'Missing fields: ' . implode(', ', $missing));
+  if (!filter_var($input['senderEmail'], FILTER_VALIDATE_EMAIL)) return Response::error(400, 'Invalid sender email');
+  if (!filter_var($input['receiverEmail'], FILTER_VALIDATE_EMAIL)) return Response::error(400, 'Invalid receiver email');
   $status = $input['status'] ?? 'pending';
   if (!Validation::isStatus($status)) return Response::error(400, 'Invalid status');
-  return Response::created(Shipments::create($db, $input, $status));
+  $shipment = Shipments::create($db, $input, $status);
+  if (!empty($config['mail'])) {
+    try { send_shipment_notifications($shipment, $config); }
+    catch (\Throwable $e) { error_log('Shipment notify failed: ' . $e->getMessage()); }
+  }
+  return Response::created($shipment);
 }
 
 function handle_update_shipment(PDO $db, array $input, ?array $auth, array $params, array $config): array

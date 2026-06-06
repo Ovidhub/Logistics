@@ -9,6 +9,7 @@ require __DIR__ . '/src/Router.php';
 require __DIR__ . '/src/Helpers.php';
 require __DIR__ . '/src/Shipments.php';
 require __DIR__ . '/src/Settings.php';
+require __DIR__ . '/src/Mailer.php';
 require __DIR__ . '/src/handlers.php';
 
 Db::init($config);

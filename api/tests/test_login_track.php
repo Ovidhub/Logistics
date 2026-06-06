@@ -42,3 +42,10 @@ test('track returns 404 for unknown number', function () {
   $res = handle_track($db, [], null, ['trackingNumber' => 'NOPE'], $GLOBALS['test_config']);
   assert_eq(404, $res['status']);
 });
+
+test('public track does not expose customer emails', function () {
+  $db = test_db();
+  $res = handle_track($db, [], null, ['trackingNumber' => 'STTEST000001'], $GLOBALS['test_config']);
+  assert_true(!array_key_exists('senderEmail', $res['body']), 'senderEmail must be hidden');
+  assert_true(!array_key_exists('receiverEmail', $res['body']), 'receiverEmail must be hidden');
+});

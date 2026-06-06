@@ -15,6 +15,8 @@ CREATE TABLE shipments (
   receiver_name TEXT NOT NULL,
   receiver_address TEXT NOT NULL,
   receiver_phone TEXT NOT NULL,
+  sender_email TEXT NOT NULL DEFAULT '',
+  receiver_email TEXT NOT NULL DEFAULT '',
   item_description TEXT NOT NULL,
   weight REAL NOT NULL DEFAULT 0,
   origin TEXT NOT NULL,

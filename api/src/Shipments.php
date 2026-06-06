@@ -9,6 +9,8 @@ class Shipments
     'receiverName' => 'receiver_name',
     'receiverAddress' => 'receiver_address',
     'receiverPhone' => 'receiver_phone',
+    'senderEmail' => 'sender_email',
+    'receiverEmail' => 'receiver_email',
     'itemDescription' => 'item_description',
     'weight' => 'weight',
     'origin' => 'origin',
@@ -38,6 +40,8 @@ class Shipments
       'receiverName' => $r['receiver_name'],
       'receiverAddress' => $r['receiver_address'],
       'receiverPhone' => $r['receiver_phone'],
+      'senderEmail' => $r['sender_email'],
+      'receiverEmail' => $r['receiver_email'],
       'itemDescription' => $r['item_description'],
       'weight' => (float) $r['weight'],
       'origin' => $r['origin'],
@@ -96,11 +100,12 @@ class Shipments
     $id = Ids::generate();
     $tn = Ids::trackingNumber();
     $now = gmdate('Y-m-d H:i:s');
-    $db->prepare('INSERT INTO shipments (id, tracking_number, sender_name, sender_address, sender_phone, receiver_name, receiver_address, receiver_phone, item_description, weight, origin, destination, status, estimated_delivery, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)')
+    $db->prepare('INSERT INTO shipments (id, tracking_number, sender_name, sender_address, sender_phone, receiver_name, receiver_address, receiver_phone, sender_email, receiver_email, item_description, weight, origin, destination, status, estimated_delivery, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)')
        ->execute([
          $id, $tn,
          $input['senderName'], $input['senderAddress'], $input['senderPhone'],
          $input['receiverName'], $input['receiverAddress'], $input['receiverPhone'],
+         $input['senderEmail'] ?? '', $input['receiverEmail'] ?? '',
          $input['itemDescription'], (float) ($input['weight'] ?? 0),
          $input['origin'], $input['destination'], $status, $input['estimatedDelivery'], $now,
        ]);

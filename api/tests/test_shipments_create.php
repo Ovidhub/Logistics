@@ -4,6 +4,7 @@ function _valid_shipment_input(): array
   return [
     'senderName' => 'S', 'senderAddress' => 'A', 'senderPhone' => '1',
     'receiverName' => 'R', 'receiverAddress' => 'B', 'receiverPhone' => '2',
+    'senderEmail' => 'sender@example.com', 'receiverEmail' => 'receiver@example.com',
     'itemDescription' => 'Item', 'weight' => 3.5,
     'origin' => 'Portland, OR', 'destination' => 'Seattle, WA',
     'estimatedDelivery' => '2026-07-01',
@@ -48,4 +49,27 @@ test('created shipment appears in the list', function () {
   handle_create_shipment($db, _valid_shipment_input(), ['role' => 'admin'], [], $GLOBALS['test_config']);
   $list = handle_list_shipments($db, [], ['role' => 'admin'], [], $GLOBALS['test_config']);
   assert_eq(2, count($list['body']));
+});
+
+test('create rejects a malformed email with 400', function () {
+  $db = test_db();
+  $in = _valid_shipment_input();
+  $in['receiverEmail'] = 'not-an-email';
+  $res = handle_create_shipment($db, $in, ['role' => 'admin'], [], $GLOBALS['test_config']);
+  assert_eq(400, $res['status']);
+});
+
+test('create requires both emails', function () {
+  $db = test_db();
+  $in = _valid_shipment_input();
+  unset($in['senderEmail']);
+  $res = handle_create_shipment($db, $in, ['role' => 'admin'], [], $GLOBALS['test_config']);
+  assert_eq(400, $res['status']);
+});
+
+test('created shipment includes emails in the admin response', function () {
+  $db = test_db();
+  $res = handle_create_shipment($db, _valid_shipment_input(), ['role' => 'admin'], [], $GLOBALS['test_config']);
+  assert_eq('sender@example.com', $res['body']['senderEmail']);
+  assert_eq('receiver@example.com', $res['body']['receiverEmail']);
 });

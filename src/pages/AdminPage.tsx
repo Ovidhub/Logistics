@@ -102,9 +102,11 @@ export default function AdminPage({
     senderName: '',
     senderAddress: '',
     senderPhone: '',
+    senderEmail: '',
     receiverName: '',
     receiverAddress: '',
     receiverPhone: '',
+    receiverEmail: '',
     itemDescription: '',
     weight: '',
     origin: '',
@@ -144,9 +146,11 @@ export default function AdminPage({
       senderName: '',
       senderAddress: '',
       senderPhone: '',
+      senderEmail: '',
       receiverName: '',
       receiverAddress: '',
       receiverPhone: '',
+      receiverEmail: '',
       itemDescription: '',
       weight: '',
       origin: '',
@@ -205,9 +209,11 @@ export default function AdminPage({
       senderName: shipment.senderName,
       senderAddress: shipment.senderAddress,
       senderPhone: shipment.senderPhone,
+      senderEmail: shipment.senderEmail,
       receiverName: shipment.receiverName,
       receiverAddress: shipment.receiverAddress,
       receiverPhone: shipment.receiverPhone,
+      receiverEmail: shipment.receiverEmail,
       itemDescription: shipment.itemDescription,
       weight: shipment.weight.toString(),
       origin: shipment.origin,
@@ -519,6 +525,10 @@ export default function AdminPage({
                   <input required value={formData.senderPhone} onChange={(e) => setFormData({ ...formData, senderPhone: e.target.value })} className={inputClass} placeholder="+1 (555) 000-0000" />
                 </div>
                 <div className="sm:col-span-2">
+                  <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Sender Email</label>
+                  <input required type="email" value={formData.senderEmail} onChange={(e) => setFormData({ ...formData, senderEmail: e.target.value })} className={inputClass} placeholder="sender@example.com" />
+                </div>
+                <div className="sm:col-span-2">
                   <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Sender Address</label>
                   <input required value={formData.senderAddress} onChange={(e) => setFormData({ ...formData, senderAddress: e.target.value })} className={inputClass} placeholder="123 Main St, City, State ZIP" />
                 </div>
@@ -529,6 +539,10 @@ export default function AdminPage({
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Receiver Phone</label>
                   <input required value={formData.receiverPhone} onChange={(e) => setFormData({ ...formData, receiverPhone: e.target.value })} className={inputClass} placeholder="+1 (555) 000-0000" />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Receiver Email</label>
+                  <input required type="email" value={formData.receiverEmail} onChange={(e) => setFormData({ ...formData, receiverEmail: e.target.value })} className={inputClass} placeholder="receiver@example.com" />
                 </div>
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Receiver Address</label>
@@ -582,6 +596,10 @@ export default function AdminPage({
                   <input required value={formData.senderPhone} onChange={(e) => setFormData({ ...formData, senderPhone: e.target.value })} className={inputClass} />
                 </div>
                 <div className="sm:col-span-2">
+                  <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Sender Email</label>
+                  <input required type="email" value={formData.senderEmail} onChange={(e) => setFormData({ ...formData, senderEmail: e.target.value })} className={inputClass} />
+                </div>
+                <div className="sm:col-span-2">
                   <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Sender Address</label>
                   <input required value={formData.senderAddress} onChange={(e) => setFormData({ ...formData, senderAddress: e.target.value })} className={inputClass} />
                 </div>
@@ -592,6 +610,10 @@ export default function AdminPage({
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Receiver Phone</label>
                   <input required value={formData.receiverPhone} onChange={(e) => setFormData({ ...formData, receiverPhone: e.target.value })} className={inputClass} />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Receiver Email</label>
+                  <input required type="email" value={formData.receiverEmail} onChange={(e) => setFormData({ ...formData, receiverEmail: e.target.value })} className={inputClass} />
                 </div>
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Receiver Address</label>
