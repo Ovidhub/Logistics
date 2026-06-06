@@ -2,6 +2,7 @@ import type { Shipment } from '../types';
 import { STATUS_LABELS } from '../types';
 import { Truck, MapPin, Calendar, Package, User, Phone, Weight, Clock, CheckCircle2 } from 'lucide-react';
 import { useSettings } from '../hooks/useSettings';
+import { colorClasses, type PrimaryColor } from '../utils/colors';
 
 interface ReceiptProps {
   shipment: Shipment;
@@ -34,6 +35,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
   const accentLen = settings.siteNameAccent.length;
   const accentPart = settings.siteName.slice(0, accentLen) || settings.siteName.charAt(0);
   const restPart = settings.siteName.slice(accentLen);
+  const c = colorClasses[settings.primaryColor as PrimaryColor] || colorClasses.red;
 
   const id = receiptId || `RCP-${shipment.trackingNumber}-${Date.now().toString(36).toUpperCase()}`;
   const issuedAt = new Date().toLocaleString('en-US', {
@@ -51,19 +53,19 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
       style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
     >
       {/* Header */}
-      <div className="border-b-2 border-emerald-600 pb-6 mb-6">
+      <div className={`border-b-2 ${c.border} pb-6 mb-6`}>
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
             {settings.logoImage ? (
               <img src={settings.logoImage} alt={settings.siteName} className="h-12 w-auto max-w-[160px] object-contain" />
             ) : (
-              <div className="bg-emerald-600 p-2.5 rounded-lg">
+              <div className={`${c.bg} p-2.5 rounded-lg`}>
                 <Truck className="w-7 h-7 text-white" />
               </div>
             )}
             <div>
               <h1 className="text-2xl font-bold text-slate-900">
-                <span className="text-emerald-600">{accentPart}</span>{restPart}
+                <span className={c.text}>{accentPart}</span>{restPart}
               </h1>
               <p className="text-xs text-slate-500">Logistics &amp; Shipment Receipt</p>
             </div>
@@ -85,7 +87,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
           </div>
           <div className="text-right">
             <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Current Status</p>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
+            <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full ${c.bgLight} ${c.text} border ${c.border}`}>
               <CheckCircle2 className="w-4 h-4" />
               <span className="text-sm font-semibold">{STATUS_LABELS[shipment.status]}</span>
             </div>
@@ -96,7 +98,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
       {/* Route */}
       <div className="mb-6">
         <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <MapPin className="w-4 h-4 text-emerald-600" />
+          <MapPin className={`w-4 h-4 ${c.text}`} />
           Route Information
         </h2>
         <div className="border border-slate-200 rounded-lg p-4">
@@ -107,7 +109,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
             </div>
             <div className="flex items-center justify-center">
               <div className="flex-1 border-t-2 border-dashed border-slate-300"></div>
-              <Truck className="w-5 h-5 text-emerald-600 mx-2" />
+              <Truck className={`w-5 h-5 ${c.text} mx-2`} />
               <div className="flex-1 border-t-2 border-dashed border-slate-300"></div>
             </div>
             <div className="text-right">
@@ -137,7 +139,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
       {/* Package Details */}
       <div className="mb-6">
         <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <Package className="w-4 h-4 text-emerald-600" />
+          <Package className={`w-4 h-4 ${c.text}`} />
           Package Details
         </h2>
         <div className="border border-slate-200 rounded-lg overflow-hidden">
@@ -164,7 +166,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div>
           <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
-            <User className="w-4 h-4 text-emerald-600" />
+            <User className={`w-4 h-4 ${c.text}`} />
             Sender
           </h2>
           <div className="border border-slate-200 rounded-lg p-4 space-y-2">
@@ -177,7 +179,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
         </div>
         <div>
           <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
-            <User className="w-4 h-4 text-emerald-600" />
+            <User className={`w-4 h-4 ${c.text}`} />
             Receiver
           </h2>
           <div className="border border-slate-200 rounded-lg p-4 space-y-2">
@@ -193,7 +195,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
       {/* Tracking History */}
       <div className="mb-6">
         <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <Clock className="w-4 h-4 text-emerald-600" />
+          <Clock className={`w-4 h-4 ${c.text}`} />
           Tracking History
         </h2>
         <div className="border border-slate-200 rounded-lg p-4">

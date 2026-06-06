@@ -6,6 +6,7 @@ import html2canvas from 'html2canvas';
 import type { Shipment } from '../types';
 import type { SiteSettings } from '../types/settings';
 import { useSettings } from '../hooks/useSettings';
+import { colorClasses, type PrimaryColor } from '../utils/colors';
 import Receipt from './Receipt';
 
 interface ReceiptModalProps {
@@ -18,6 +19,7 @@ export default function ReceiptModal({ shipment, onClose }: ReceiptModalProps) {
   const [downloading, setDownloading] = useState(false);
   const { settings } = useSettings();
   const brand = (settings.siteName || 'Receipt').replace(/[^a-zA-Z0-9]+/g, '') || 'Receipt';
+  const c = colorClasses[settings.primaryColor as PrimaryColor] || colorClasses.red;
 
   const handlePrint = () => {
     const printContent = receiptRef.current;
@@ -135,8 +137,8 @@ export default function ReceiptModal({ shipment, onClose }: ReceiptModalProps) {
             {/* Toolbar */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
               <div className="flex items-center gap-2">
-                <div className="bg-emerald-100 p-1.5 rounded-lg">
-                  <FileText className="w-5 h-5 text-emerald-600" />
+                <div className={`${c.bgLight} p-1.5 rounded-lg`}>
+                  <FileText className={`w-5 h-5 ${c.text}`} />
                 </div>
                 <div>
                   <h2 className="text-lg font-semibold text-slate-900">Shipment Receipt</h2>
@@ -162,7 +164,7 @@ export default function ReceiptModal({ shipment, onClose }: ReceiptModalProps) {
                 <button
                   onClick={handleDownloadPDF}
                   disabled={downloading}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 rounded-lg transition-colors"
+                  className={`inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-white ${c.bg} ${c.bgHover} disabled:opacity-60 rounded-lg transition-colors`}
                 >
                   {downloading ? (
                     <>
