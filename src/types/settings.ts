@@ -3,6 +3,7 @@ export interface SiteSettings {
   siteName: string;
   siteNameAccent: string; // first letter highlighted
   logoIcon: string; // emoji or icon identifier
+  logoImage: string; // optional uploaded logo as a data URL; replaces the icon when set
   tagline: string;
 
   // Contact Info
@@ -52,6 +53,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   siteName: 'Atrans',
   siteNameAccent: 'A',
   logoIcon: 'truck',
+  logoImage: '',
   tagline: 'Digital & Trusted Transport Logistic Company',
 
   // Contact Info

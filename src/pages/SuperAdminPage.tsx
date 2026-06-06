@@ -47,6 +47,7 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
   const [saved, setSaved] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [dirty, setDirty] = useState(false);
+  const [logoError, setLogoError] = useState('');
 
   // Sync formData when settings change externally
   useEffect(() => {
@@ -56,6 +57,18 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
   const handleChange = (key: keyof SiteSettings, value: string) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
     setDirty(true);
+  };
+
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = ''; // allow re-selecting the same file
+    if (!file) return;
+    if (!file.type.startsWith('image/')) { setLogoError('Please choose an image file.'); return; }
+    if (file.size > 300 * 1024) { setLogoError('Image must be 300 KB or smaller.'); return; }
+    const reader = new FileReader();
+    reader.onload = () => { handleChange('logoImage', String(reader.result)); setLogoError(''); };
+    reader.onerror = () => setLogoError('Could not read that file.');
+    reader.readAsDataURL(file);
   };
 
   const handleSave = async () => {
@@ -247,19 +260,42 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
                         />
                       </Field>
 
+                      <Field label="Logo Image (optional)">
+                        <div className="flex items-center gap-3 flex-wrap">
+                          {formData.logoImage ? (
+                            <img src={formData.logoImage} alt="Logo preview" className="h-10 w-10 object-contain rounded bg-white border border-slate-200" />
+                          ) : (
+                            <span className="text-xs text-slate-400">No image — the truck icon is used</span>
+                          )}
+                          <label className="cursor-pointer text-sm font-semibold text-red-600 hover:text-red-700">
+                            Upload image
+                            <input type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp" className="hidden" onChange={handleLogoUpload} />
+                          </label>
+                          {formData.logoImage && (
+                            <button type="button" onClick={() => handleChange('logoImage', '')} className="text-sm text-slate-500 hover:text-slate-700">Remove</button>
+                          )}
+                        </div>
+                        {logoError && <p className="text-xs text-red-600 mt-1">{logoError}</p>}
+                        <p className="text-xs text-slate-500 mt-1">PNG, JPG, SVG or WebP, up to 300&nbsp;KB. Replaces the truck icon across the site.</p>
+                      </Field>
+
                       {/* Logo Preview */}
                       <div className="bg-slate-50 rounded p-5 border border-slate-200">
                         <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Logo Preview</p>
                         <div className="flex items-center gap-2">
-                          <div className={`${colorClasses[formData.primaryColor as PrimaryColor]?.bg || 'bg-red-600'} p-1.5 rounded`}>
-                            <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/>
-                              <path d="M15 18H9"/>
-                              <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
-                              <circle cx="17" cy="18" r="2"/>
-                              <circle cx="7" cy="18" r="2"/>
-                            </svg>
-                          </div>
+                          {formData.logoImage ? (
+                            <img src={formData.logoImage} alt="Logo" className="h-9 w-auto max-w-[120px] object-contain" />
+                          ) : (
+                            <div className={`${colorClasses[formData.primaryColor as PrimaryColor]?.bg || 'bg-red-600'} p-1.5 rounded`}>
+                              <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/>
+                                <path d="M15 18H9"/>
+                                <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
+                                <circle cx="17" cy="18" r="2"/>
+                                <circle cx="7" cy="18" r="2"/>
+                              </svg>
+                            </div>
+                          )}
                           <span className="text-2xl font-extrabold tracking-tight text-slate-900">
                             <span className={`${colorClasses[formData.primaryColor as PrimaryColor]?.text || 'text-red-600'}`}>{formData.siteNameAccent}</span>
                             {formData.siteName.slice(formData.siteNameAccent.length)}

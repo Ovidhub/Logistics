@@ -1,5 +1,10 @@
 RewriteEngine On
 
+# Never let LiteSpeed/proxy cache the dynamic API (responses vary per request).
+<IfModule LiteSpeed>
+CacheDisable public /
+</IfModule>
+
 # Make the Authorization header available to PHP (some hosts strip it).
 RewriteCond %{HTTP:Authorization} .
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

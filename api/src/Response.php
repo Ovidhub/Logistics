@@ -22,6 +22,9 @@ class Response
   {
     http_response_code($status);
     header('Content-Type: application/json');
+    // Dynamic API responses must never be cached (Hostinger/LiteSpeed caches GETs by URL).
+    header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+    header('Pragma: no-cache');
     echo json_encode($body);
   }
 }

@@ -18,9 +18,13 @@ export default function Footer() {
           {/* About */}
           <div>
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className={`${c.bg} p-1.5 rounded`}>
-                <Truck className="w-5 h-5 text-white" />
-              </div>
+              {settings.logoImage ? (
+                <img src={settings.logoImage} alt={settings.siteName} className="h-9 w-auto max-w-[150px] object-contain" />
+              ) : (
+                <div className={`${c.bg} p-1.5 rounded`}>
+                  <Truck className="w-5 h-5 text-white" />
+                </div>
+              )}
               <span className="text-2xl font-extrabold tracking-tight text-white">
                 <span className={c.text}>{accentPart || settings.siteName.charAt(0)}</span>
                 {restPart}
