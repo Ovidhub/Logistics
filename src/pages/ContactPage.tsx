@@ -215,9 +215,12 @@ export default function ContactPage() {
             >
               <div className="rounded shadow-lg overflow-hidden border border-slate-200">
                 <iframe
-                  title="Atrans head office on the map"
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=-74.00499820709229%2C40.71430500099844%2C-73.99499416351318%2C40.72076619891213&layer=mapnik&marker=40.71753560000001%2C-73.99999618530273"
+                  title={`${settings.siteName} head office on Google Maps`}
+                  src={`https://maps.google.com/maps?q=${encodeURIComponent(settings.address)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
                   className="w-full h-[300px] border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
                 />
               </div>
 
