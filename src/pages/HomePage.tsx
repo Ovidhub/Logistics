@@ -209,7 +209,7 @@ export default function HomePage() {
                 desc: 'Racked storage, pick-and-pack and bonded space with stock counts you can see online — invoiced per pallet, not per surprise.',
               },
               {
-                img: '/images/berth-800.jpg',
+                img: '/images/aerial-port-800.jpg',
                 title: 'Customs brokerage',
                 desc: 'Licensed brokers file entries, classify goods and clear holds before demurrage starts eating your margin.',
               },

@@ -247,7 +247,7 @@ export default function AdminPage({
       <div
         className="bg-cover bg-center py-12 px-4"
         style={{
-          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.68)), url(/images/hero-port.jpg)`,
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.68)), url(/images/aerial-port.jpg)`,
         }}
       >
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">

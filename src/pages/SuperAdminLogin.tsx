@@ -42,7 +42,7 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
       <div
         className="bg-cover bg-center py-16 px-4"
         style={{
-          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), url(/images/hero-port.jpg)`,
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), url(/images/berth.jpg)`,
         }}
       >
         <div className="max-w-7xl mx-auto">

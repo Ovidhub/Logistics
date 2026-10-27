@@ -37,7 +37,7 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
       <div
         className="bg-cover bg-center py-16 px-4"
         style={{
-          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.65)), url(/images/hero-port.jpg)`,
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.65)), url(/images/warehouse.jpg)`,
         }}
       >
         <div className="max-w-7xl mx-auto">

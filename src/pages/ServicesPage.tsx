@@ -48,7 +48,7 @@ const services = [
   },
   {
     icon: <FileText className="w-7 h-7" />,
-    image: '/images/berth.jpg',
+    image: '/images/aerial-port.jpg',
     title: 'Customs brokerage',
     desc: 'Licensed brokers who classify, file and clear — including post-entry adjustments and duty drawback when it applies to you.',
     features: ['Entry filing and bonds', 'Tariff classification', 'Duty drawback claims', 'Audit and compliance support'],
