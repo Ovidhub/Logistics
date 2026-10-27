@@ -1,4 +1,4 @@
-# Atrans Logistics
+# Posalfast Logistics
 
 A logistics / shipment-tracking single-page web application built with React, Vite, TypeScript and Tailwind CSS. It includes a public marketing site, a shipment tracking page, an admin portal for managing shipments, and a super-admin portal for editing site-wide content and settings.
 
@@ -37,8 +37,8 @@ Vercel and deploy. The PHP API in `api/` cannot run on Vercel — host it elsewh
 
 ### Prebuilt download bundles
 
-`download/` holds the compiled frontend (`atrans-website.zip`), the PHP API
-(`atrans-api.zip`) and the database (`atrans-database.sql`). Rebuild them with
+`download/` holds the compiled frontend (`posalfast-website.zip`), the PHP API
+(`posalfast-api.zip`) and the database (`posalfast-database.sql`). Rebuild them with
 `bash scripts/build-release.sh` after changing source files.
 
 ## Admin accounts

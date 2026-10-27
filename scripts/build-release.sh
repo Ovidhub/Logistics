@@ -4,9 +4,9 @@
 #   bash scripts/build-release.sh
 #
 # Produces:
-#   download/atrans-website.zip  – compiled frontend (index.html, assets/, images/)
-#   download/atrans-api.zip      – PHP API (no tests, no config.php)
-#   download/atrans-database.sql – copy of api/schema.sql (tables + accounts)
+#   download/posalfast-website.zip  – compiled frontend (index.html, assets/, images/)
+#   download/posalfast-api.zip      – PHP API (no tests, no config.php)
+#   download/posalfast-database.sql – copy of api/schema.sql (tables + accounts)
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -20,15 +20,15 @@ npm run build
 mkdir -p download
 
 echo "==> Packaging frontend"
-rm -f download/atrans-website.zip
-(cd dist && zip -qr ../download/atrans-website.zip index.html assets images)
+rm -f download/posalfast-website.zip
+(cd dist && zip -qr ../download/posalfast-website.zip index.html assets images)
 
 echo "==> Packaging API"
-rm -f download/atrans-api.zip
-zip -qr download/atrans-api.zip api -x "api/tests/*" -x "api/config.php" -x "api/*.sqlite"
+rm -f download/posalfast-api.zip
+zip -qr download/posalfast-api.zip api -x "api/tests/*" -x "api/config.php" -x "api/*.sqlite"
 
 echo "==> Copying database schema"
-cp api/schema.sql download/atrans-database.sql
+cp api/schema.sql download/posalfast-database.sql
 
 echo "==> Done"
 ls -lh download

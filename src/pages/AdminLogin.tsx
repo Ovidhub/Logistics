@@ -61,7 +61,7 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
             <div className="w-14 h-14 bg-red-50 rounded flex items-center justify-center mx-auto mb-4">
               <Shield className="w-7 h-7 text-red-600" />
             </div>
-            <h1 className="text-2xl font-extrabold text-slate-900">Sign in to Atrans admin</h1>
+            <h1 className="text-2xl font-extrabold text-slate-900">Sign in to Posalfast admin</h1>
             <p className="text-slate-500 text-sm mt-1">
               Create shipments, add scans and keep customers informed.
             </p>

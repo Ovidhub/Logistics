@@ -40,7 +40,7 @@ export default function AboutPage() {
           >
             <img
               src={WAREHOUSE_IMG}
-              alt="Forklift moving pallets inside the Atrans warehouse"
+              alt="Forklift moving pallets inside the Posalfast warehouse"
               loading="lazy"
               className="rounded shadow-lg w-full"
             />
@@ -61,7 +61,7 @@ export default function AboutPage() {
               Three trucks, one customer, and a promise to call back the same day.
             </h2>
             <p className="text-slate-600 leading-relaxed mb-4">
-              Atrans began in 2013 handling port-to-door deliveries for a single electronics importer.
+              Posalfast began in 2013 handling port-to-door deliveries for a single electronics importer.
               The work was simple; the industry around it was not. Brokers went quiet, tracking went
               stale and invoices arrived with lines nobody could explain.
             </p>
@@ -192,7 +192,7 @@ export default function AboutPage() {
           >
             <img
               src={TEAM_IMG}
-              alt="Atrans coordinators and warehouse team"
+              alt="Posalfast coordinators and warehouse team"
               loading="lazy"
               className="rounded shadow-lg w-full"
             />

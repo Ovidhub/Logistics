@@ -50,24 +50,24 @@ export interface SiteSettings {
 
 export const DEFAULT_SETTINGS: SiteSettings = {
   // Branding
-  siteName: 'Atrans',
-  siteNameAccent: 'A',
+  siteName: 'Posalfast',
+  siteNameAccent: 'P',
   logoIcon: 'truck',
   logoImage: '',
   tagline: 'Freight cleared, tracked and delivered',
 
   // Contact Info
-  address: '92 Bowery St New York, NY 10013',
-  phone: '+1 (800) 555-0199',
-  phoneSecondary: '+1 (212) 555-0123',
-  email: 'support@atrans.com',
-  emailSales: 'sales@atrans.com',
-  emailSupport: 'info@atrans.com',
+  address: '14 Adeola Odeku Street, Victoria Island, Lagos',
+  phone: '+234 700 555 0199',
+  phoneSecondary: '+234 812 555 0123',
+  email: 'support@posalfast.com',
+  emailSales: 'sales@posalfast.com',
+  emailSupport: 'info@posalfast.com',
 
   // Social Media
-  facebook: 'https://facebook.com/atrans',
-  twitter: 'https://twitter.com/atrans',
-  instagram: 'https://instagram.com/atrans',
+  facebook: 'https://facebook.com/posalfast',
+  twitter: 'https://twitter.com/posalfast',
+  instagram: 'https://instagram.com/posalfast',
 
   // Business Hours
   hoursWeekday: '9:00 AM - 6:00 PM',
@@ -83,7 +83,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   // About Section
   aboutTitle: 'We answer the phone at 6am and again at 11pm.',
   aboutDescription:
-    'Atrans clears and moves commercial freight for importers, exporters and distributors. Our coordinators run dedicated lanes across North America, Europe and West Africa — and every consignment is scanned, insured and visible from pickup to signature.',
+    'Posalfast clears and moves commercial freight for importers, exporters and distributors. Our coordinators run dedicated lanes between West Africa, Europe and North America — and every consignment is scanned, insured and visible from pickup to signature.',
   yearsExperience: '12+',
 
   // Stats
@@ -94,8 +94,8 @@ export const DEFAULT_SETTINGS: SiteSettings = {
 
   // Footer
   footerAbout:
-    'Atrans moves commercial freight by road, ocean and air — customs cleared before arrival, covered in full and tracked scan by scan, with one coordinator accountable for the outcome.',
-  copyrightText: 'Atrans Logistics. All rights reserved.',
+    'Posalfast moves commercial freight by road, ocean and air — customs cleared before arrival, covered in full and tracked scan by scan, with one coordinator accountable for the outcome.',
+  copyrightText: 'Posalfast Logistics. All rights reserved.',
 
   // Colors
   primaryColor: 'red',

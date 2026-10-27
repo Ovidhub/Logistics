@@ -1,13 +1,13 @@
 -- ===========================================================================
--- Atrans Logistics — production database
+-- Posalfast Logistics — production database
 -- Generated 2026-10-27 · MySQL 5.7+ / 8.x / MariaDB 10.3+
 --
 -- Import in phpMyAdmin (select your database -> Import) or:
---   mysql -u USER -p DATABASE_NAME < atrans-database.sql
+--   mysql -u USER -p DATABASE_NAME < posalfast-database.sql
 --
 -- Ships with NO sample shipments and TWO portal accounts:
---   admin      / Atrans#Admin2026
---   superadmin / Atrans#Super2026
+--   admin      / Posalfast#Admin2026
+--   superadmin / Posalfast#Super2026
 -- Change both passwords after the first login (README-UPLOAD.txt).
 -- ===========================================================================
 
@@ -67,15 +67,15 @@ CREATE TABLE IF NOT EXISTS settings (
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- Seed: live site content (branding, contact details, hero and about copy)
-INSERT INTO settings (id, data) VALUES (1, '{"siteName": "Atrans", "siteNameAccent": "A", "logoIcon": "truck", "logoImage": "", "tagline": "Freight cleared, tracked and delivered", "address": "92 Bowery St New York, NY 10013", "phone": "+1 (800) 555-0199", "phoneSecondary": "+1 (212) 555-0123", "email": "support@atrans.com", "emailSales": "sales@atrans.com", "emailSupport": "info@atrans.com", "facebook": "https://facebook.com/atrans", "twitter": "https://twitter.com/atrans", "instagram": "https://instagram.com/atrans", "hoursWeekday": "9:00 AM - 6:00 PM", "hoursSaturday": "10:00 AM - 4:00 PM", "hoursSunday": "Closed", "heroTitle": "Freight that lands when we said it would.", "heroSubtitle": "One contract covers collection, clearance, linehaul and final mile. Track every leg from your phone — and get a human on the line the moment something changes.", "heroCTA": "Track your freight", "aboutTitle": "We answer the phone at 6am and again at 11pm.", "aboutDescription": "Atrans clears and moves commercial freight for importers, exporters and distributors. Our coordinators run dedicated lanes across North America, Europe and West Africa — and every consignment is scanned, insured and visible from pickup to signature.", "yearsExperience": "12+", "statClients": "4,800+", "statCountries": "150+", "statDeliveries": "320K+", "statYears": "12+", "footerAbout": "Atrans moves commercial freight by road, ocean and air — customs cleared before arrival, covered in full and tracked scan by scan, with one coordinator accountable for the outcome.", "copyrightText": "Atrans Logistics. All rights reserved.", "primaryColor": "red"}')
+INSERT INTO settings (id, data) VALUES (1, '{"siteName": "Posalfast", "siteNameAccent": "P", "logoIcon": "truck", "logoImage": "", "tagline": "Freight cleared, tracked and delivered", "address": "14 Adeola Odeku Street, Victoria Island, Lagos", "phone": "+234 700 555 0199", "phoneSecondary": "+234 812 555 0123", "email": "support@posalfast.com", "emailSales": "sales@posalfast.com", "emailSupport": "info@posalfast.com", "facebook": "https://facebook.com/posalfast", "twitter": "https://twitter.com/posalfast", "instagram": "https://instagram.com/posalfast", "hoursWeekday": "9:00 AM - 6:00 PM", "hoursSaturday": "10:00 AM - 4:00 PM", "hoursSunday": "Closed", "heroTitle": "Freight that lands when we said it would.", "heroSubtitle": "One contract covers collection, clearance, linehaul and final mile. Track every leg from your phone — and get a human on the line the moment something changes.", "heroCTA": "Track your freight", "aboutTitle": "We answer the phone at 6am and again at 11pm.", "aboutDescription": "Posalfast clears and moves commercial freight for importers, exporters and distributors. Our coordinators run dedicated lanes between West Africa, Europe and North America — and every consignment is scanned, insured and visible from pickup to signature.", "yearsExperience": "12+", "statClients": "4,800+", "statCountries": "150+", "statDeliveries": "320K+", "statYears": "12+", "footerAbout": "Posalfast moves commercial freight by road, ocean and air — customs cleared before arrival, covered in full and tracked scan by scan, with one coordinator accountable for the outcome.", "copyrightText": "Posalfast Logistics. All rights reserved.", "primaryColor": "red"}')
   ON DUPLICATE KEY UPDATE data = VALUES(data);
 
 -- Seed: portal accounts
---   admin      -> Atrans#Admin2026
---   superadmin -> Atrans#Super2026
+--   admin      -> Posalfast#Admin2026
+--   superadmin -> Posalfast#Super2026
 INSERT INTO users (username, password_hash, role) VALUES
-  ('admin',      '$2y$10$Xesto24ROfsjglK0qX5fL.4wFhojozENH5elcky3rMslg0ISYC.FO', 'admin'),
-  ('superadmin', '$2y$10$5Fw9XnRWp/oYCDcA6Xcivuq1IyNjL7/mJZY1coLyX50hw1.jQq6ba', 'superadmin')
+  ('admin',      '$2y$10$VyHZxJDvTcVe6raz1zkom.F6KeNJQl6CXCAtLz9eqKTeJQ1bLMtFG', 'admin'),
+  ('superadmin', '$2y$10$.9fgb0BBt9.nIz52QuaV7uALeHvh5AjM1RMn3ZFQbvG1mtzq0jmrS', 'superadmin')
   ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash), role = VALUES(role);
 
 -- No sample shipments are inserted. Add your first consignment from

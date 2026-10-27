@@ -237,7 +237,7 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
                             value={formData.siteName}
                             onChange={(e) => handleChange('siteName', e.target.value)}
                             className={inputClass}
-                            placeholder="Atrans"
+                            placeholder="Posalfast"
                           />
                         </Field>
                         <Field label="Accent Letter (highlighted in logo)">
@@ -346,7 +346,7 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
                             value={formData.email}
                             onChange={(e) => handleChange('email', e.target.value)}
                             className={inputClass}
-                            placeholder="support@atrans.com"
+                            placeholder="support@posalfast.com"
                           />
                         </Field>
                         <Field label="Sales Email">
@@ -355,7 +355,7 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
                             value={formData.emailSales}
                             onChange={(e) => handleChange('emailSales', e.target.value)}
                             className={inputClass}
-                            placeholder="sales@atrans.com"
+                            placeholder="sales@posalfast.com"
                           />
                         </Field>
                         <Field label="Info Email">
@@ -364,7 +364,7 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
                             value={formData.emailSupport}
                             onChange={(e) => handleChange('emailSupport', e.target.value)}
                             className={inputClass}
-                            placeholder="info@atrans.com"
+                            placeholder="info@posalfast.com"
                           />
                         </Field>
                       </div>
@@ -379,7 +379,7 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
                           value={formData.facebook}
                           onChange={(e) => handleChange('facebook', e.target.value)}
                           className={inputClass}
-                          placeholder="https://facebook.com/atrans"
+                          placeholder="https://facebook.com/posalfast"
                         />
                       </Field>
                       <Field label="Twitter / X URL">
@@ -387,7 +387,7 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
                           value={formData.twitter}
                           onChange={(e) => handleChange('twitter', e.target.value)}
                           className={inputClass}
-                          placeholder="https://twitter.com/atrans"
+                          placeholder="https://twitter.com/posalfast"
                         />
                       </Field>
                       <Field label="Instagram URL">
@@ -395,7 +395,7 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
                           value={formData.instagram}
                           onChange={(e) => handleChange('instagram', e.target.value)}
                           className={inputClass}
-                          placeholder="https://instagram.com/atrans"
+                          placeholder="https://instagram.com/posalfast"
                         />
                       </Field>
                     </Section>
