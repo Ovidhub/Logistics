@@ -34,7 +34,7 @@ export default function ContactPage() {
 
   return (
     <div className="bg-white">
-      <PageBanner title="Contact us" breadcrumb="Contact" />
+      <PageBanner title="Talk to us" breadcrumb="Contact" />
 
       {/* Contact Info Cards */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
@@ -43,17 +43,17 @@ export default function ContactPage() {
             {[
               {
                 icon: <MapPin className="w-7 h-7" />,
-                title: 'Head office',
+                title: 'Office',
                 lines: settings.address.split(',').map((s) => s.trim()),
               },
               {
                 icon: <Phone className="w-7 h-7" />,
-                title: 'Talk to a person',
+                title: 'Phone',
                 lines: [settings.phone, settings.phoneSecondary, `Mon–Fri, ${settings.hoursWeekday}`],
               },
               {
                 icon: <Mail className="w-7 h-7" />,
-                title: 'Email the right desk',
+                title: 'Email',
                 lines: [settings.email, settings.emailSales, settings.emailSupport],
               },
             ].map((info, i) => (
@@ -87,13 +87,13 @@ export default function ContactPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Get in touch</p>
+              <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Quote request</p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3 leading-tight">
-                Tell us what’s moving
+                Book a lane, or ask us anything
               </h2>
               <p className="text-slate-600 mb-6">
-                Send the basics — origin, destination, weight and deadline — and a human replies with
-                pricing and a proposed route within one business day.
+                Send the lane, the weight and the date it needs to land. A coordinator comes back with
+                routing, transit time and one landed price — usually inside four working hours.
               </p>
 
               {submitted ? (
@@ -103,17 +103,16 @@ export default function ContactPage() {
                   className="bg-emerald-50 border-2 border-emerald-200 rounded p-6 text-center"
                 >
                   <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto mb-3" />
-                  <h3 className="text-lg font-extrabold text-emerald-900 mb-1">Message received.</h3>
+                  <h3 className="text-lg font-extrabold text-emerald-900 mb-1">That’s in our queue.</h3>
                   <p className="text-sm text-emerald-700">
-                    Thanks for the detail — someone from our team will come back to you within one
-                    business day, usually sooner.
+                    A coordinator will reply within four working hours — sooner if you flagged it urgent.
                   </p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Full name</label>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Your name</label>
                       <div className="relative">
                         <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                         <input
@@ -154,24 +153,25 @@ export default function ContactPage() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">What’s this about?</label>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">What do you need?</label>
                       <select
                         required
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                         className={inputClass}
                       >
-                        <option value="">Choose a subject…</option>
-                        <option value="quote">Request a quote</option>
-                        <option value="tracking">Track a shipment</option>
-                        <option value="support">Customer support</option>
-                        <option value="partnership">Partnership or supplier</option>
+                        <option value="">Choose one…</option>
+                        <option value="quote">Quote for a new lane</option>
+                        <option value="customs">Customs or clearance question</option>
+                        <option value="tracking">A live shipment</option>
+                        <option value="warehouse">Warehouse space</option>
+                        <option value="supplier">Supplier or carrier enquiry</option>
                         <option value="other">Something else</option>
                       </select>
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Details</label>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Shipment details</label>
                     <div className="relative">
                       <MessageSquare className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
                       <textarea
@@ -180,7 +180,7 @@ export default function ContactPage() {
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         rows={5}
                         className={`${inputClass} pl-10 resize-none`}
-                        placeholder="Origin, destination, weight, deadline — anything that helps us quote accurately."
+                        placeholder="Origin, destination, weight and deadline — plus anything unusual: hazmat, reefer, oversize."
                       />
                     </div>
                   </div>
@@ -227,14 +227,14 @@ export default function ContactPage() {
               <div className="bg-slate-900 text-white p-6 rounded">
                 <h3 className="text-lg font-extrabold mb-4 flex items-center gap-2">
                   <Clock className={`w-5 h-5 ${c.textLight}`} />
-                  When we’re open
+                  When the desk is staffed
                 </h3>
                 <ul className="space-y-2 text-sm">
                   {[
                     { day: 'Monday – Friday', hours: settings.hoursWeekday },
                     { day: 'Saturday', hours: settings.hoursSaturday },
                     { day: 'Sunday', hours: settings.hoursSunday },
-                    { day: 'Out-of-hours freight desk', hours: '24/7' },
+                    { day: 'Duty freight desk', hours: '24/7' },
                   ].map((item, i) => (
                     <li
                       key={i}
@@ -248,9 +248,10 @@ export default function ContactPage() {
               </div>
 
               <div className={`${c.bg} text-white p-6 rounded`}>
-                <h3 className="text-lg font-extrabold mb-2">Freight stuck right now?</h3>
+                <h3 className="text-lg font-extrabold mb-2">Freight held at the border?</h3>
                 <p className="text-sm text-white/90 mb-4">
-                  Call the out-of-hours desk. A duty coordinator answers — not a ticket queue.
+                  Call the duty desk. A coordinator answers, day or night — no ticket queue, no callback
+                  promise.
                 </p>
                 <a
                   href={`tel:${settings.phone.replace(/[^+\d]/g, '')}`}
@@ -268,37 +269,37 @@ export default function ContactPage() {
       <section className="py-20 bg-slate-50 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
-            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Answers</p>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Questions</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
-              Questions we get before the first quote
+              What new customers usually ask first
             </h2>
           </div>
 
           <div className="space-y-3">
             {[
               {
-                q: 'How do I track a shipment?',
-                a: 'Enter the tracking number on the Track page. You’ll see the full event history, current location, route map and estimated delivery — no login needed.',
+                q: 'How quickly will I get a rate?',
+                a: 'Standard lanes inside four working hours, complex multi-leg or hazardous moves within one business day. Rates are quoted landed — freight, fuel, clearance and cover in one figure.',
               },
               {
-                q: 'What does a quote include?',
-                a: 'Freight, fuel, terminal handling, customs brokerage and standard insurance, quoted as one number. If something cannot be known up front, we say so before you book.',
+                q: 'Can you collect today?',
+                a: 'In most metro areas yes, if you brief us before 11am and the cargo is packed and labelled. Air and ocean bookings usually need 24–48 hours before cut-off.',
               },
               {
-                q: 'How fast can you collect?',
-                a: 'Same-day collection is available in most metro areas if you brief us before 11am. Air and ocean bookings typically need 24–48 hours of notice.',
+                q: 'Who handles customs?',
+                a: 'Our own licensed brokers. Entries are filed before the flight or vessel arrives, and we watch demurrage clocks so you are not paying for a desk delay.',
               },
               {
-                q: 'Is my cargo insured?',
-                a: 'Every shipment carries full-value cover as standard. For high-value or unusual cargo we’ll arrange extended cover and confirm the terms in writing.',
+                q: 'What happens if cargo is damaged?',
+                a: 'Full-value cover is standard. Claims are handled in-house: photographs, survey and settlement processed by the coordinator who booked the freight.',
               },
               {
-                q: 'Can I change the delivery address after booking?',
-                a: 'Yes, until the consignment is out for final-mile delivery. Call the desk with the tracking number and we’ll re-route and re-confirm the ETA.',
+                q: 'Do you work with small volumes?',
+                a: 'Yes — LCL groupage, part loads and single-pallet storage are all normal. There is no minimum contract term on warehouse space.',
               },
               {
-                q: 'How do I get a proof-of-delivery receipt?',
-                a: 'Open the shipment on the Track page and use “Receipt” to print or download a PDF record with the delivery timestamp and signature.',
+                q: 'Where do I find proof of delivery?',
+                a: 'Open the consignment on the Track page and use “Receipt” for a PDF record with the delivery timestamp and signature, or ask your coordinator.',
               },
             ].map((faq, i) => (
               <FAQItem key={i} question={faq.q} answer={faq.a} />

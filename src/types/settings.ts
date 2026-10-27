@@ -54,7 +54,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   siteNameAccent: 'A',
   logoIcon: 'truck',
   logoImage: '',
-  tagline: 'Freight forwarding without the guesswork',
+  tagline: 'Freight cleared, tracked and delivered',
 
   // Contact Info
   address: '92 Bowery St New York, NY 10013',
@@ -75,15 +75,15 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   hoursSunday: 'Closed',
 
   // Hero Section
-  heroTitle: 'Your freight, moving. Your customers, informed.',
+  heroTitle: 'Freight that lands when we said it would.',
   heroSubtitle:
-    'Road, air and ocean freight with customs handled, cargo insured and live tracking on every load. One team stays accountable from pickup to proof of delivery.',
-  heroCTA: 'Track a shipment',
+    'One contract covers collection, clearance, linehaul and final mile. Track every leg from your phone — and get a human on the line the moment something changes.',
+  heroCTA: 'Track your freight',
 
   // About Section
-  aboutTitle: 'Logistics built on answers, not excuses.',
+  aboutTitle: 'We answer the phone at 6am and again at 11pm.',
   aboutDescription:
-    'Atrans has moved freight for growing businesses for over a decade. We pair dependable capacity with a tracking platform that tells you where your cargo is, who has it and when it lands — before you have to ask.',
+    'Atrans clears and moves commercial freight for importers, exporters and distributors. Our coordinators run dedicated lanes across North America, Europe and West Africa — and every consignment is scanned, insured and visible from pickup to signature.',
   yearsExperience: '12+',
 
   // Stats
@@ -94,7 +94,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
 
   // Footer
   footerAbout:
-    'Atrans moves freight by road, air and ocean — customs cleared, fully insured and tracked door to door, with one accountable team behind every shipment.',
+    'Atrans moves commercial freight by road, ocean and air — customs cleared before arrival, covered in full and tracked scan by scan, with one coordinator accountable for the outcome.',
   copyrightText: 'Atrans Logistics. All rights reserved.',
 
   // Colors

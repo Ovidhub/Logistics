@@ -17,8 +17,8 @@ import PageBanner from '../components/PageBanner';
 import { useSettings } from '../hooks/useSettings';
 import { colorClasses, type PrimaryColor } from '../utils/colors';
 
-const WAREHOUSE = 'https://images.pexels.com/photos/4487363/pexels-photo-4487363.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=700&w=900';
-const TEAM = 'https://images.pexels.com/photos/4483860/pexels-photo-4483860.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=700&w=900';
+const TEAM_IMG = '/images/team.jpg';
+const WAREHOUSE_IMG = '/images/warehouse.jpg';
 
 export default function AboutPage() {
   const { settings } = useSettings();
@@ -28,51 +28,52 @@ export default function AboutPage() {
     <div className="bg-white">
       <PageBanner title="About us" breadcrumb="About" />
 
-      {/* Intro Section */}
+      {/* Intro */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="relative"
           >
             <img
-              src={WAREHOUSE}
-              alt="Warehouse team loading freight"
+              src={WAREHOUSE_IMG}
+              alt="Forklift moving pallets inside the Atrans warehouse"
               loading="lazy"
               className="rounded shadow-lg w-full"
             />
             <div className={`absolute -bottom-6 -right-6 ${c.bg} text-white p-6 rounded shadow-xl hidden md:block`}>
               <p className="text-4xl font-extrabold">{settings.yearsExperience}</p>
-              <p className="text-xs uppercase tracking-wider">Years moving freight</p>
+              <p className="text-xs uppercase tracking-wider">Years clearing freight</p>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Who we are</p>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Our story</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-5 leading-tight">
-              We built the logistics company we kept wishing we could hire.
+              Three trucks, one customer, and a promise to call back the same day.
             </h2>
             <p className="text-slate-600 leading-relaxed mb-4">
-              Atrans started in 2013 with three trucks, two customers and a simple frustration: nobody
-              could tell you where a shipment was, or who to call when it went wrong. We decided to be
-              the exception — a forwarder that answers the phone and a tracker that tells the truth.
+              Atrans began in 2013 handling port-to-door deliveries for a single electronics importer.
+              The work was simple; the industry around it was not. Brokers went quiet, tracking went
+              stale and invoices arrived with lines nobody could explain.
             </p>
             <p className="text-slate-600 leading-relaxed mb-6">
-              Today we move freight for {settings.statClients} businesses across {settings.statCountries}{' '}
-              countries, combining owned road capacity with vetted air and ocean partners. Same
-              discipline as day one: one accountable team, clear pricing and a live view of every load.
+              We built the opposite. Today a team of coordinators, brokers and drivers moves freight for{' '}
+              {settings.statClients} shippers across {settings.statCountries} countries — with clearance
+              prepared before arrival, scans recorded at every handover and one person accountable for
+              the outcome.
             </p>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
-              {['ISO 9001 certified', 'IATA approved', 'GDP compliant', 'AEO authorised'].map((item) => (
+              {['ISO 9001:2015', 'IATA accredited', 'AEO authorised', 'GDP compliant'].map((item) => (
                 <div key={item} className="flex items-center gap-2">
                   <CheckCircle2 className={`w-4 h-4 ${c.text} flex-shrink-0`} />
                   <span className="text-sm font-semibold text-slate-700">{item}</span>
@@ -84,19 +85,19 @@ export default function AboutPage() {
               to="/contact"
               className={`inline-flex items-center gap-2 ${c.bg} ${c.bgHover} text-white text-sm font-semibold px-6 py-3 rounded transition-colors`}
             >
-              Talk to our team <ArrowRight className="w-4 h-4" />
+              Meet the team <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* Mission, Vision, Values */}
+      {/* Mission / vision / values */}
       <section className="py-20 bg-slate-50 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>What drives us</p>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>How we work</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
-              Mission, vision and the standards we hold
+              The rules we don’t bend
             </h2>
           </div>
 
@@ -104,26 +105,26 @@ export default function AboutPage() {
             {[
               {
                 icon: <Target className="w-7 h-7" />,
-                title: 'Our mission',
-                desc: 'Make freight predictable — so our customers can promise a delivery date to their customers and keep it, every time.',
+                title: 'Mission',
+                desc: 'Move freight so predictably that our customers stop building delay allowances into their own promises.',
               },
               {
                 icon: <Eye className="w-7 h-7" />,
-                title: 'Our vision',
-                desc: 'To be the logistics partner businesses name first, not the one they fall back on when something goes wrong.',
+                title: 'Vision',
+                desc: 'A single tracking view across every mode and border — so a supply chain is as visible as a courier parcel.',
               },
               {
                 icon: <Heart className="w-7 h-7" />,
-                title: 'Our values',
-                desc: 'Answers over excuses. Care over volume. We treat every pallet like it is the last one before launch day.',
+                title: 'Values',
+                desc: 'Say the hard thing early. Quote the real number. Pick up the phone. Own the mistake, then fix it.',
               },
             ].map((card, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: i * 0.08 }}
                 className={`bg-white rounded shadow-sm p-7 border-t-4 ${c.border} hover:-translate-y-1 transition-transform`}
               >
                 <div className={`${c.text} mb-4`}>{card.icon}</div>
@@ -135,42 +136,41 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Team Section */}
+      {/* People */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Our people</p>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>The crew</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-5 leading-tight">
-              The people behind your delivery
+              Every consignment has a name attached to it.
             </h2>
             <p className="text-slate-600 leading-relaxed mb-6">
-              Freight is a people business with a tracking number attached. Our drivers, brokers,
-              warehouse crews and account managers are the reason shipments arrive on time — so we
-              invest in them with proper training, fair pay and the authority to fix problems without
-              waiting for approval.
+              Brokers who know which tariff codes raise questions. Drivers who have run the same border
+              post for years. Warehouse leads who count twice. Our people are why a collection window is
+              a commitment rather than a suggestion.
             </p>
 
             <div className="space-y-5">
               {[
                 {
                   icon: <Users className="w-5 h-5" />,
-                  title: 'One team, one handover',
-                  desc: 'Your account manager stays with you from quote to delivery. No re-explaining your business to a new voice each week.',
+                  title: 'One coordinator, start to finish',
+                  desc: 'You deal with the same person from quote to proof of delivery — with a named backup for holidays.',
                 },
                 {
                   icon: <Award className="w-5 h-5" />,
-                  title: 'Recognised for service',
-                  desc: 'Repeat industry awards for reliability, and a client retention rate we are quietly proud of.',
+                  title: 'Trained, then trusted',
+                  desc: 'Customs and dangerous-goods certifications renewed annually, with authority to resolve issues on the spot.',
                 },
                 {
                   icon: <TrendingUp className="w-5 h-5" />,
-                  title: 'Growing where you grow',
-                  desc: 'We add lanes, hubs and capacity as our customers do — not a year behind them.',
+                  title: 'Measured weekly',
+                  desc: 'Lane-level on-time performance reviewed every Monday, shared with customers who want the numbers.',
                 },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4">
@@ -185,14 +185,14 @@ export default function AboutPage() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <img
-              src={TEAM}
-              alt="Atrans logistics team at work"
+              src={TEAM_IMG}
+              alt="Atrans coordinators and warehouse team"
               loading="lazy"
               className="rounded shadow-lg w-full"
             />
@@ -200,24 +200,24 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      {/* Differentiators */}
       <section className="py-20 bg-slate-50 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Why {settings.siteName}</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">What sets us apart</h2>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">Where we differ</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: <Globe className="w-6 h-6" />, title: 'Global network', desc: 'Vetted partners in 150+ countries, managed from one desk.' },
-              { icon: <Shield className="w-6 h-6" />, title: 'Secure handling', desc: 'Full-value insurance and a scan at every handover.' },
-              { icon: <Zap className="w-6 h-6" />, title: 'Speed where it counts', desc: 'Express lanes for the shipments your quarter depends on.' },
-              { icon: <Award className="w-6 h-6" />, title: 'Accountable service', desc: 'Named contacts, written SLAs, real answers.' },
+              { icon: <Globe className="w-6 h-6" />, title: 'Audited partners', desc: 'Every overseas agent re-checked annually on service and solvency.' },
+              { icon: <Shield className="w-6 h-6" />, title: 'Cover that pays', desc: 'Full-value cargo insurance with claims handled by our own team.' },
+              { icon: <Zap className="w-6 h-6" />, title: 'Decisions same day', desc: 'Rates, routing changes and holds answered before close of business.' },
+              { icon: <Award className="w-6 h-6" />, title: 'No hidden lines', desc: 'Duty, fuel and handling quoted up front — the invoice matches the quote.' },
             ].map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}

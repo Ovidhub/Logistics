@@ -12,7 +12,7 @@ interface PageBannerProps {
 export default function PageBanner({
   title,
   breadcrumb,
-  bgImage = 'https://images.pexels.com/photos/4170172/pexels-photo-4170172.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=1920',
+  bgImage = '/images/hero-port.jpg',
 }: PageBannerProps) {
   const { settings } = useSettings();
   const c = colorClasses[settings.primaryColor as PrimaryColor] || colorClasses.red;

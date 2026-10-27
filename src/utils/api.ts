@@ -1,12 +1,6 @@
-import { DemoError, demoRequest } from './demoBackend';
-
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 const TOKEN_KEY = 'swiftrack_token';
 const ROLE_KEY = 'swiftrack_role';
-
-// Static-host demo mode: when the PHP API is not deployed (Vercel, Netlify,
-// GitHub Pages), requests fall through to the in-browser demo store.
-const DEMO_FALLBACK = import.meta.env.VITE_DEMO_FALLBACK !== 'false';
 
 export function getToken(): string | null {
   return localStorage.getItem(TOKEN_KEY);
@@ -62,15 +56,17 @@ export async function api<T>(path: string, options: ApiOptions = {}): Promise<T>
     });
   } catch {
     // fetch rejects on a true network failure (server down, DNS, offline).
-    if (DEMO_FALLBACK) return runDemo<T>(path, options);
     throw new ApiError(0, `Cannot reach the server.${devHint}`);
   }
 
+  // A static host answering /api/... with its index.html means the PHP API is
+  // not deployed next to the frontend — say so plainly instead of "invalid JSON".
   const contentType = res.headers.get('content-type') || '';
-  // A static host answering /api/... with its index.html (or a plain 404 page)
-  // means no API is deployed — use the demo store instead of failing.
-  if (DEMO_FALLBACK && (contentType.includes('text/html') || /^\s*</.test(await res.clone().text()))) {
-    return runDemo<T>(path, options);
+  if (contentType.includes('text/html')) {
+    throw new ApiError(
+      0,
+      'The API is not reachable at /api. Upload the api/ folder next to the site, or set VITE_API_URL to the API address.'
+    );
   }
 
   if (res.status === 401 && options.auth) {
@@ -87,10 +83,6 @@ export async function api<T>(path: string, options: ApiOptions = {}): Promise<T>
     }
   }
 
-  if (DEMO_FALLBACK && data === null && !res.ok) {
-    return runDemo<T>(path, options);
-  }
-
   if (!res.ok) {
     let message: string;
     if (data && typeof data === 'object' && 'error' in data) {
@@ -105,14 +97,4 @@ export async function api<T>(path: string, options: ApiOptions = {}): Promise<T>
   }
 
   return data as T;
-}
-
-/** Route a request to the in-browser demo backend and normalise its errors. */
-async function runDemo<T>(path: string, options: ApiOptions): Promise<T> {
-  try {
-    return await demoRequest<T>(path, { method: options.method, body: options.body });
-  } catch (error) {
-    if (error instanceof DemoError) throw new ApiError(error.status, error.message);
-    throw error;
-  }
 }

@@ -39,3 +39,6 @@ api/config.php
 # Deploy config (server details) and staging
 .deploy.json
 .deploy_stage/
+
+# Generated site photos (kept out of the repo; only public/images ships)
+raw-images/

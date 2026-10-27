@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Crown, Lock, Eye, EyeOff, ChevronRight, ShieldAlert } from 'lucide-react';
 import { api, setAuth, clearAuth } from '../utils/api';
-import { useDemoMode } from '../utils/demoBackend';
 
 interface SuperAdminLoginProps {
   onLogin: () => void;
@@ -15,7 +14,6 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const demoMode = useDemoMode();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +42,7 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
       <div
         className="bg-cover bg-center py-16 px-4"
         style={{
-          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), url(https://images.pexels.com/photos/4170172/pexels-photo-4170172.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=1920)`,
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), url(/images/hero-port.jpg)`,
         }}
       >
         <div className="max-w-7xl mx-auto">
@@ -85,14 +83,6 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
               Super admin has elevated privileges to modify global site content. Changes affect all visitors.
             </p>
           </div>
-
-          {demoMode && (
-            <div className="mb-5 text-xs bg-slate-50 border border-slate-200 rounded px-3 py-2 text-slate-600">
-              <span className="font-semibold text-slate-800">Preview build:</span> sign in with{' '}
-              <code className="font-mono text-slate-900">superadmin</code> /{' '}
-              <code className="font-mono text-slate-900">demo1234</code>.
-            </div>
-          )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>

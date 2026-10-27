@@ -3,7 +3,6 @@ import { getToken, getRole, clearAuth } from './utils/api';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
-import DemoNotice from './components/DemoNotice';
 import MapSection from './components/MapSection';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -54,7 +53,6 @@ function App() {
         <div className="min-h-screen flex flex-col bg-white">
           <TopBar />
           <Navbar />
-          <DemoNotice />
           <main className="flex-1">
             <Routes>
               <Route path="/" element={<HomePage />} />

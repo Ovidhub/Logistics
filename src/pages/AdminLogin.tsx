@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Shield, Lock, Eye, EyeOff, ChevronRight } from 'lucide-react';
 import { api, setAuth } from '../utils/api';
-import { useDemoMode } from '../utils/demoBackend';
 
 interface AdminLoginProps {
   onLogin: () => void;
@@ -15,7 +14,6 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const demoMode = useDemoMode();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +37,7 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
       <div
         className="bg-cover bg-center py-16 px-4"
         style={{
-          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.65)), url(https://images.pexels.com/photos/4170172/pexels-photo-4170172.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=1920)`,
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.65)), url(/images/hero-port.jpg)`,
         }}
       >
         <div className="max-w-7xl mx-auto">
@@ -68,14 +66,6 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
               Create shipments, add scans and keep customers informed.
             </p>
           </div>
-
-          {demoMode && (
-            <div className="mb-5 text-xs bg-slate-50 border border-slate-200 rounded px-3 py-2 text-slate-600">
-              <span className="font-semibold text-slate-800">Preview build:</span> sign in with{' '}
-              <code className="font-mono text-slate-900">admin</code> /{' '}
-              <code className="font-mono text-slate-900">demo1234</code>.
-            </div>
-          )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>

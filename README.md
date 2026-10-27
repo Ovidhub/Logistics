@@ -4,11 +4,10 @@ A logistics / shipment-tracking single-page web application built with React, Vi
 
 > **Status:** full-stack app. The React frontend talks to a PHP + MySQL REST API (in `api/`) with JWT authentication. See [DEPLOY.md](DEPLOY.md) for Hostinger deployment.
 >
-> **Static preview:** on hosts that cannot run PHP (Vercel, Netlify, GitHub Pages) the
-> frontend falls back to an in-browser demo store (`src/utils/demoBackend.ts`) seeded
-> with three sample shipments, so tracking and the admin portals still work. Demo
-> sign-ins: `admin` / `demo1234` and `superadmin` / `demo1234`. Data lives in
-> `localStorage` and is never sent anywhere.
+> **Hosting note:** tracking, admin and site settings require the PHP API in `api/`.
+> On a static host without the API the marketing pages render normally and the
+> tracking page explains that `/api` is unreachable. Ready-to-upload bundles live in
+> [`download/`](download/) — see `download/README-UPLOAD.txt`.
 
 ## Tech stack
 
@@ -33,12 +32,14 @@ npm run preview  # preview the production build locally
 ### Deploying the frontend to Vercel
 
 `vercel.json` pins the Vite build (`npm run build` → `dist/`). Import the repo in
-Vercel and deploy — no environment variables are required. The PHP API in `api/`
-is not runnable on Vercel; the site serves from the demo store until
-`VITE_API_URL` points at a real backend.
+Vercel and deploy. The PHP API in `api/` cannot run on Vercel — host it elsewhere
+(Hostinger/cPanel) and point the frontend at it with `VITE_API_URL`.
 
-Set `VITE_DEMO_FALLBACK=false` to disable the demo store and surface API errors
-instead (useful once a real API is wired up).
+### Prebuilt download bundles
+
+`download/` holds the compiled frontend (`atrans-website.zip`), the PHP API
+(`atrans-api.zip`) and the database (`atrans-database.sql`). Rebuild them with
+`bash scripts/build-release.sh` after changing source files.
 
 ## Admin accounts
 
@@ -66,6 +67,6 @@ The API lives in [`api/`](api/) — plain PHP (no framework) with PDO + MySQL.
 
 ## Remaining known limitations
 
-- **Geocoding** (`src/utils/geocode.ts`) is still an approximate hard-coded
-  table; integrate a real geocoding API for accurate maps.
+- **Geocoding** (`src/utils/geocode.ts`) is an approximate hard-coded table for
+  the route map; the contact map uses Google Maps.
 - No automated frontend test suite (the API has one).

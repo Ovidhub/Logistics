@@ -8,69 +8,69 @@ import { colorClasses, type PrimaryColor } from '../utils/colors';
 const blogPosts = [
   {
     id: 1,
-    title: 'Air or ocean? A decision framework that survives a deadline',
+    title: 'Peak season without the panic: booking capacity in September',
     excerpt:
-      'A practical way to choose between speed and cost — including the break-even weight where air freight quietly stops being the expensive answer.',
-    author: 'Sarah Johnson',
-    date: 'Oct 14, 2026',
-    category: 'Guides',
-    image: 'https://images.pexels.com/photos/32010721/pexels-photo-32010721.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
-    comments: 24,
+      'Why the cheapest rate in October is booked in July — and the three questions worth asking your forwarder before the rush starts.',
+    author: 'Adaeze Nwosu',
+    date: 'Oct 20, 2026',
+    category: 'Operations',
+    image: '/images/ocean-freight-800.jpg',
+    comments: 19,
   },
   {
     id: 2,
-    title: 'The five customs documents that delay most first shipments',
+    title: 'What a landed-cost quote should itemise',
     excerpt:
-      'Miss one and your container waits at the terminal. Here is the checklist our brokers run before any export leaves the dock.',
-    author: 'Michael Chen',
-    date: 'Oct 2, 2026',
-    category: 'Customs',
-    image: 'https://images.pexels.com/photos/15346128/pexels-photo-15346128.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
-    comments: 18,
+      'Freight is the easy number. Here is the rest of the invoice — duty, terminal handling, bonds, demurrage risk — and how to sanity-check it.',
+    author: 'Daniel Okafor',
+    date: 'Oct 8, 2026',
+    category: 'Guides',
+    image: '/images/warehouse-800.jpg',
+    comments: 31,
   },
   {
     id: 3,
-    title: 'How to pack freight so it arrives the way it left',
+    title: 'Incoterms in plain English: who pays when the crane moves',
     excerpt:
-      'Pallet stacking, stretch-wrap tension and the three consignments our warehouse team sees damaged most often — with fixes that cost almost nothing.',
-    author: 'Lisa Wang',
-    date: 'Sep 18, 2026',
-    category: 'Operations',
-    image: 'https://images.pexels.com/photos/4487363/pexels-photo-4487363.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
-    comments: 27,
+      'FOB, CIF, DAP and the gap between them, explained by what actually happens on the quay rather than by acronym.',
+    author: 'Grace Mensah',
+    date: 'Sep 26, 2026',
+    category: 'Customs',
+    image: '/images/berth-800.jpg',
+    comments: 44,
   },
   {
     id: 4,
-    title: 'What real-time tracking should tell you — and what most portals hide',
+    title: 'Why your container gets held — and the three documents that fix it',
     excerpt:
-      'A status label is not visibility. The five data points worth demanding from any logistics partner before you sign the contract.',
-    author: 'James Wilson',
-    date: 'Sep 3, 2026',
-    category: 'Technology',
-    image: 'https://images.pexels.com/photos/31310062/pexels-photo-31310062.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
-    comments: 21,
+      'Most holds are paperwork, not smuggling. The commercial invoice, packing list and certificate details that clear 80% of them.',
+    author: 'Tunde Bakare',
+    date: 'Sep 11, 2026',
+    category: 'Customs',
+    image: '/images/air-freight-800.jpg',
+    comments: 26,
   },
   {
     id: 5,
-    title: 'Cutting empty miles: how we plan a week of trucking',
+    title: 'Backhauls: how we cut empty running by 11% in a year',
     excerpt:
-      'Backhaul matching, load pooling and the routing decisions that took 11% of deadhead mileage out of our network last year.',
-    author: 'David Park',
-    date: 'Aug 21, 2026',
+      'Matching return loads, pooling part shipments and the routing decisions that took deadhead miles off our network.',
+    author: 'Ifeoma Eze',
+    date: 'Aug 29, 2026',
     category: 'Sustainability',
-    image: 'https://images.pexels.com/photos/24246926/pexels-photo-24246926.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
-    comments: 32,
+    image: '/images/road-freight-800.jpg',
+    comments: 12,
   },
   {
     id: 6,
-    title: 'Warehouse slotting: the cheapest speed-up in your supply chain',
+    title: 'From scan to screen: how our tracking actually works',
     excerpt:
-      'Why the fastest pickers are beaten by the best layout — and how re-slotting your top 200 SKUs can cut pick time by a third.',
-    author: 'Emily Rodriguez',
-    date: 'Aug 6, 2026',
-    category: 'Operations',
-    image: 'https://images.pexels.com/photos/4487363/pexels-photo-4487363.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
-    comments: 15,
+      'What happens between a barcode beep at the depot and the status change on your phone — including where tracking normally breaks.',
+    author: 'Samuel Adeyemi',
+    date: 'Aug 14, 2026',
+    category: 'Technology',
+    image: '/images/hero-port-800.jpg',
+    comments: 23,
   },
 ];
 
@@ -93,22 +93,22 @@ export default function BlogPage() {
 
   return (
     <div className="bg-white">
-      <PageBanner title="The Atrans journal" breadcrumb="Insights" />
+      <PageBanner title="Journal" breadcrumb="Journal" />
 
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
-            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Insights</p>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Field notes</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
-              Practical notes from the loading dock
+              Notes from the quay, the depot and the desk
             </h2>
             <p className="text-slate-600 mt-3 max-w-2xl mx-auto">
-              Rate movements, customs changes and operating habits worth copying — written by the
-              people who move the cargo, not a content agency.
+              Trade lane movement, customs practice and operating habits our coordinators actually use —
+              written by the people doing the work.
             </p>
           </div>
 
-          {/* Search & Filter */}
+          {/* Filter */}
           <div className={`bg-slate-50 rounded p-5 mb-8 border-l-4 ${c.border}`}>
             <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between">
               <div className="relative flex-1 max-w-md">
@@ -140,13 +140,13 @@ export default function BlogPage() {
             </div>
           </div>
 
-          {/* Posts Grid */}
+          {/* Posts */}
           {filteredPosts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredPosts.map((post, i) => (
                 <motion.article
                   key={post.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
@@ -180,7 +180,7 @@ export default function BlogPage() {
                     <p className="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
                     <div className="flex items-center justify-between">
                       <button className={`inline-flex items-center gap-2 ${c.text} hover:opacity-80 text-sm font-bold transition-opacity`}>
-                        Read the article <ArrowRight className="w-4 h-4" />
+                        Read on <ArrowRight className="w-4 h-4" />
                       </button>
                       <div className="flex items-center gap-1 text-xs text-slate-400">
                         <MessageCircle className="w-3.5 h-3.5" />
@@ -194,8 +194,8 @@ export default function BlogPage() {
           ) : (
             <div className="text-center py-16 bg-slate-50 rounded">
               <Tag className="w-10 h-10 text-slate-300 mx-auto mb-3" />
-              <p className="text-slate-600 font-semibold">Nothing matches that search yet.</p>
-              <p className="text-sm text-slate-500 mt-1">Try a broader term, or clear the category filter.</p>
+              <p className="text-slate-600 font-semibold">No articles match that search.</p>
+              <p className="text-sm text-slate-500 mt-1">Try a different term, or clear the category filter.</p>
             </div>
           )}
 
@@ -223,16 +223,17 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* Newsletter CTA */}
+      {/* Newsletter */}
       <section className="py-16 bg-slate-900 text-white px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-extrabold mb-3">One useful email a month</h2>
+          <h2 className="text-2xl sm:text-3xl font-extrabold mb-3">The monthly despatch</h2>
           <p className="text-slate-300 mb-6">
-            Lane updates, rate movements and the occasional checklist. No sales blasts — unsubscribe in one click.
+            One email a month: rate movement, customs changes and a checklist you can use. No sales
+            sequences, unsubscribe in one click.
           </p>
           {subscribed ? (
             <div className="inline-flex items-center gap-2 bg-emerald-500/15 border border-emerald-400/40 text-emerald-200 text-sm font-semibold px-5 py-3 rounded">
-              <CheckCircle2 className="w-4 h-4" /> You’re on the list. Look out for the next dispatch.
+              <CheckCircle2 className="w-4 h-4" /> Subscribed. The next despatch lands on the first Monday.
             </div>
           ) : (
             <form

@@ -118,10 +118,10 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
       if (found) {
         setShipment(found);
       } else {
-        setError('We can’t find that tracking number. Check for stray spaces, or use the reference in your booking email.');
+        setError('No consignment matches that number. Check for stray spaces, or use the reference in your booking email.');
       }
     } catch {
-      setError('The tracking service didn’t respond. Please try again in a moment.');
+      setError('Tracking is temporarily unavailable. Please try again in a moment.');
     } finally {
       setLoading(false);
     }
@@ -135,11 +135,12 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
       <div
         className="bg-cover bg-center py-16 px-4 relative"
         style={{
-          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.65)), url(https://images.pexels.com/photos/4170172/pexels-photo-4170172.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=1920)`,
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.65)), url(/images/hero-port.jpg)`,
         }}
       >
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Track your shipment</h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Follow your freight</h1>
+          <p className="text-slate-300 text-sm mb-2">Every scan, every handover, one page.</p>
           <div className="flex items-center gap-2 text-sm text-slate-300">
             <Link to="/" className={`${c.textHover} transition-colors`}>Home</Link>
             <ChevronRight className="w-4 h-4" />
@@ -157,11 +158,11 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
         >
           <div className="flex items-center gap-2 mb-2">
             <Package className={`w-5 h-5 ${c.text}`} />
-            <h2 className="font-bold text-slate-900">Where is my shipment?</h2>
+            <h2 className="font-bold text-slate-900">Where is my freight?</h2>
           </div>
           <p className="text-sm text-slate-500 mb-4">
-            Enter the tracking number from your booking confirmation. No login, no sales call — just
-            the scans, the route and the estimated arrival.
+            Enter the reference from your booking confirmation to see each scan, the current position
+            and the estimated arrival. No account, no sales call.
           </p>
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3">
             <input
@@ -181,7 +182,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
               ) : (
                 <>
                   <Search className="w-4 h-4" />
-                  Track shipment
+                  Track freight
                 </>
               )}
             </button>
@@ -201,20 +202,6 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
             )}
           </AnimatePresence>
 
-          <p className="mt-4 text-xs text-slate-500">
-            Just looking around? Try a sample tracking number:{' '}
-            {['STX7B9K2M4P1', 'STQ3W8N5R7T2', 'STY6P2L9K3M8'].map((tn, i) => (
-              <span key={tn}>
-                <button
-                  onClick={() => { setTrackingNumber(tn); setError(''); setShipment(null); }}
-                  className={`${c.text} hover:opacity-80 underline cursor-pointer font-mono font-semibold`}
-                >
-                  {tn}
-                </button>
-                {i < 2 && ', '}
-              </span>
-            ))}
-          </p>
         </motion.div>
       </div>
 
@@ -363,7 +350,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
                 <div className="bg-white rounded shadow-sm border border-slate-200 p-6">
                   <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
                     <Clock className={`w-5 h-5 ${c.text}`} />
-                    Scan history
+                    Movement history
                   </h3>
                   <div className="space-y-0">
                     {[...shipment.events].reverse().map((event, index, arr) => (
@@ -468,25 +455,25 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
       {!shipment && (
         <div className="max-w-7xl mx-auto px-4 py-20">
           <div className="text-center mb-12">
-            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Why {settings.siteName}</p>
-            <h2 className="text-3xl font-extrabold text-slate-900">Tracking you don’t have to chase</h2>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Tracking</p>
+            <h2 className="text-3xl font-extrabold text-slate-900">Visibility without the phone calls</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 icon: <Search className="w-6 h-6" />,
-                title: 'Updates at every scan',
-                desc: 'Pickup, linehaul, customs and final mile — each handover is logged with a timestamp and location.',
+                title: 'Scanned at every handover',
+                desc: 'Collection, linehaul, clearance and final mile each log a timestamp, a location and the handler.',
               },
               {
                 icon: <Truck className="w-6 h-6" />,
-                title: 'Coverage in 150+ countries',
-                desc: `One tracking view across ${settings.statCountries} countries and every carrier we use, including partner legs.`,
+                title: 'Partner legs included',
+                desc: `One view across ${settings.statCountries} countries, including the carriers we hand off to.`,
               },
               {
                 icon: <Printer className="w-6 h-6" />,
-                title: 'Receipts on demand',
-                desc: 'Download a proof-of-delivery record as a PDF whenever finance or your customer asks for one.',
+                title: 'POD when you need it',
+                desc: 'Pull a signed proof-of-delivery PDF the moment finance or your customer asks for one.',
               },
             ].map((feature, i) => (
               <motion.div

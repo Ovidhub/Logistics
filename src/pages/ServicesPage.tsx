@@ -17,63 +17,56 @@ import PageBanner from '../components/PageBanner';
 import { useSettings } from '../hooks/useSettings';
 import { colorClasses, type PrimaryColor } from '../utils/colors';
 
-const PLANE = 'https://images.pexels.com/photos/32010721/pexels-photo-32010721.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=700';
-const SHIP = 'https://images.pexels.com/photos/24246926/pexels-photo-24246926.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=700';
-const TRUCK = 'https://images.pexels.com/photos/31310062/pexels-photo-31310062.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=700';
-const WAREHOUSE = 'https://images.pexels.com/photos/4170172/pexels-photo-4170172.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=700';
-const PORT = 'https://images.pexels.com/photos/15346128/pexels-photo-15346128.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=700';
-const TRUCK2 = 'https://images.pexels.com/photos/15379824/pexels-photo-15379824.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=700';
-
 const services = [
   {
     icon: <Plane className="w-7 h-7" />,
-    image: PLANE,
-    title: 'Air Freight',
-    desc: 'Next-flight-out for the shipment that cannot wait, and consolidated air lanes that keep cost per kilo sensible.',
-    features: ['Express and deferred options', 'Door-to-door or airport-to-airport', 'Temperature-controlled cargo', 'Dangerous goods certified'],
+    image: '/images/air-freight.jpg',
+    title: 'Air freight',
+    desc: 'Charter, consolidated and next-flight-out capacity for cargo with a fixed date on it — booked against a real cut-off, not a hopeful one.',
+    features: ['Next-flight-out recovery', 'Consolidated economy air', 'Temperature-sensitive cargo', 'Dangerous goods certified'],
   },
   {
     icon: <Ship className="w-7 h-7" />,
-    image: SHIP,
-    title: 'Ocean Freight',
-    desc: 'FCL and LCL sailings on the major trade lanes, with realistic transit times and clearance handled before your container hits the quay.',
-    features: ['FCL and LCL options', 'Port-to-port or door-to-door', 'Container-level tracking', 'Customs clearance included'],
+    image: '/images/ocean-freight.jpg',
+    title: 'Ocean freight',
+    desc: 'Weekly FCL sailings and LCL groupage on the trade lanes we know best, with transhipment risk explained before you book.',
+    features: ['FCL and LCL', 'Buyer’s consolidation', 'Reefer and OOG cargo', 'Detention and demurrage watch'],
   },
   {
     icon: <Truck className="w-7 h-7" />,
-    image: TRUCK,
-    title: 'Road Transport',
-    desc: 'Owned trucks and vetted carriers for regional, cross-border and metro runs — GPS on every load, no exceptions.',
-    features: ['Full and partial truckload', 'Cross-border documentation', 'Same-day metro delivery', 'Live GPS tracking'],
+    image: '/images/road-freight.jpg',
+    title: 'Road transport',
+    desc: 'Owned tractors for scheduled linehauls, vetted carriers for overflow, and a border team that pre-files cross-border paperwork.',
+    features: ['FTL and part loads', 'Cross-border bonded moves', 'Metro distribution', 'Live GPS on every load'],
   },
   {
     icon: <Warehouse className="w-7 h-7" />,
-    image: WAREHOUSE,
+    image: '/images/warehouse.jpg',
     title: 'Warehousing',
-    desc: 'Ambient and bonded storage with pick-and-pack, cycle counts and same-day dispatch from our hub network.',
-    features: ['Short and long-term storage', 'Pick, pack and fulfilment', 'Real-time inventory portal', '24/7 monitored sites'],
+    desc: 'Racked ambient space, bonded storage and pick-and-pack from hub locations, billed per pallet position with no minimum term.',
+    features: ['Bonded and ambient', 'Pick, pack, dispatch', 'Live stock portal', 'Cycle counts weekly'],
   },
   {
     icon: <FileText className="w-7 h-7" />,
-    image: PORT,
-    title: 'Customs Brokerage',
-    desc: 'Licensed brokers who classify, file and clear — so your goods move off the dock instead of accruing storage fees.',
-    features: ['Entry filing', 'Duty and tariff calculation', 'Compliance and audit support', 'Trade consulting'],
+    image: '/images/berth.jpg',
+    title: 'Customs brokerage',
+    desc: 'Licensed brokers who classify, file and clear — including post-entry adjustments and duty drawback when it applies to you.',
+    features: ['Entry filing and bonds', 'Tariff classification', 'Duty drawback claims', 'Audit and compliance support'],
   },
   {
     icon: <Package className="w-7 h-7" />,
-    image: TRUCK2,
-    title: 'Express Delivery',
-    desc: 'Time-definite delivery for urgent parts and documents, with proof of delivery the moment it lands.',
-    features: ['Same-day and next-day', 'Priority handling', 'Signature or photo POD', 'Dedicated courier'],
+    image: '/images/express.jpg',
+    title: 'Express delivery',
+    desc: 'Time-definite delivery for spare parts, samples and documents, with the recipient notified before the van leaves the depot.',
+    features: ['Same-day and next-day', 'Dedicated vehicle', 'Photo and signature POD', 'Recipient SMS updates'],
   },
 ];
 
 const process = [
-  { num: '01', title: 'Tell us what’s moving', desc: 'Send the lane, the weight and the deadline. We’ll ask the three questions that actually matter.' },
-  { num: '02', title: 'Approve the quote', desc: 'One price covering freight, customs and insurance. Same-day turnaround on standard lanes.' },
-  { num: '03', title: 'We collect', desc: 'Booked windows, scanned at pickup and on the road the same day wherever possible.' },
-  { num: '04', title: 'You watch it land', desc: 'Live tracking, proactive alerts and proof of delivery in your inbox.' },
+  { num: '01', title: 'Send the lane', desc: 'Origin, destination, weight, deadline. Four numbers is usually enough to price it.' },
+  { num: '02', title: 'Approve one price', desc: 'Freight, duty estimate and cover in a single figure — back inside four working hours.' },
+  { num: '03', title: 'We collect and clear', desc: 'Booked window, scanned at pickup, entry filed before the vessel or flight lands.' },
+  { num: '04', title: 'You watch it land', desc: 'Scan history, current position and proof of delivery in the same portal.' },
 ];
 
 export default function ServicesPage() {
@@ -84,16 +77,17 @@ export default function ServicesPage() {
     <div className="bg-white">
       <PageBanner title="Our services" breadcrumb="Services" />
 
-      {/* Services Grid */}
+      {/* Grid */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>What we offer</p>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Capabilities</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
-              Every mode, cleared and covered.
+              Six services. One point of accountability.
             </h2>
             <p className="text-slate-600 mt-3 max-w-2xl mx-auto">
-              Air, ocean, road, storage and customs under one contract — so you brief one team instead of five.
+              Mix the modes you need under a single contract — the same coordinator, the same invoice,
+              the same tracking view.
             </p>
           </div>
 
@@ -101,10 +95,10 @@ export default function ServicesPage() {
             {services.map((service, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
+                transition={{ delay: i * 0.06 }}
                 className="bg-white rounded shadow-sm overflow-hidden hover:shadow-xl transition-shadow border border-slate-100"
               >
                 <div className="aspect-[16/10] overflow-hidden relative">
@@ -135,7 +129,7 @@ export default function ServicesPage() {
                     to="/contact"
                     className={`inline-flex items-center gap-2 ${c.text} hover:opacity-80 text-sm font-bold transition-opacity`}
                   >
-                    Get a quote <ArrowRight className="w-4 h-4" />
+                    Price this service <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </motion.div>
@@ -144,23 +138,23 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Process Section */}
+      {/* Process */}
       <section className="py-20 bg-slate-900 text-white px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <p className={`${c.textLight} font-bold text-sm uppercase tracking-wider mb-3`}>How it works</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold">Four steps, no mystery</h2>
+            <p className={`${c.textLight} font-bold text-sm uppercase tracking-wider mb-3`}>The process</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold">Booking freight takes four steps</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {process.map((step, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="relative bg-slate-800 p-6 rounded text-center hover:bg-slate-700 transition-colors"
+                transition={{ delay: i * 0.08 }}
+                className="relative bg-slate-800 p-6 rounded hover:bg-slate-700 transition-colors"
               >
                 <div className={`text-5xl font-extrabold ${c.textLight} mb-3 opacity-30`}>{step.num}</div>
                 <h4 className="text-lg font-bold mb-2">{step.title}</h4>
@@ -174,13 +168,13 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Why Choose Our Services */}
+      {/* Included */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>What you get</p>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Standard terms</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
-              Included in every contract
+              Included on every booking
             </h2>
           </div>
 
@@ -188,28 +182,28 @@ export default function ServicesPage() {
             {[
               {
                 icon: <Clock className="w-6 h-6" />,
-                title: 'On-time delivery',
-                desc: 'Written service levels, and a call the moment a lane slips — not after you notice.',
+                title: 'Booked transit times',
+                desc: 'A date we commit to in writing, with an early call if a lane slips.',
               },
               {
                 icon: <Shield className="w-6 h-6" />,
-                title: 'Fully insured',
-                desc: 'Full-value cover on every shipment, with claims handled in-house instead of outsourced.',
+                title: 'Cargo cover',
+                desc: 'Full-value insurance as standard, extended cover available on request.',
               },
               {
                 icon: <DollarSign className="w-6 h-6" />,
-                title: 'Honest pricing',
-                desc: 'One transparent quote. No surprise fuel, handling or documentation line items.',
+                title: 'One landed price',
+                desc: 'Freight, fuel, duty estimate and clearance in a single quote.',
               },
               {
                 icon: <CheckCircle2 className="w-6 h-6" />,
-                title: 'Real people',
-                desc: 'A named contact who knows your lanes and answers on the first ring.',
+                title: 'A named coordinator',
+                desc: 'Someone who knows your lanes and answers their own phone.',
               },
             ].map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
@@ -228,16 +222,17 @@ export default function ServicesPage() {
       <section className={`py-16 ${c.bg} text-white px-4 sm:px-6 lg:px-8`}>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold mb-2">Need something we haven’t listed?</h2>
+            <h2 className="text-2xl sm:text-3xl font-extrabold mb-2">Not sure which mode you need?</h2>
             <p className="text-white/80">
-              Tell us what’s moving and we’ll build the route, the paperwork and the price around it.
+              Send the details and a lane specialist will tell you what is fastest, what is cheapest and
+              where the risk sits.
             </p>
           </div>
           <Link
             to="/contact"
             className={`bg-white ${c.text} hover:bg-slate-100 text-sm font-bold px-8 py-3 rounded transition-colors inline-flex items-center gap-2`}
           >
-            Talk to a specialist <ArrowRight className="w-4 h-4" />
+            Ask a lane specialist <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </section>

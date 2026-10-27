@@ -1,13 +1,29 @@
-SET NAMES utf8mb4;
+-- ===========================================================================
+-- Atrans Logistics — production database
+-- Generated 2026-10-27 · MySQL 5.7+ / 8.x / MariaDB 10.3+
+--
+-- Import in phpMyAdmin (select your database -> Import) or:
+--   mysql -u USER -p DATABASE_NAME < atrans-database.sql
+--
+-- Ships with NO sample shipments and TWO portal accounts:
+--   admin      / Atrans#Admin2026
+--   superadmin / Atrans#Super2026
+-- Change both passwords after the first login (README-UPLOAD.txt).
+-- ===========================================================================
 
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Portal accounts — bcrypt hashes, compatible with PHP password_verify()
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(50) NOT NULL UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
   role ENUM('admin','superadmin') NOT NULL,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Shipments
 CREATE TABLE IF NOT EXISTS shipments (
   id VARCHAR(16) PRIMARY KEY,
   tracking_number VARCHAR(20) NOT NULL UNIQUE,
@@ -25,9 +41,12 @@ CREATE TABLE IF NOT EXISTS shipments (
   destination VARCHAR(120) NOT NULL,
   status ENUM('pending','picked_up','in_transit','out_for_delivery','delivered','returned','cancelled') NOT NULL DEFAULT 'pending',
   estimated_delivery DATE NULL,
-  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY idx_shipments_tracking (tracking_number),
+  KEY idx_shipments_status (status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Tracking events (scan history) — deleting a shipment removes its events
 CREATE TABLE IF NOT EXISTS tracking_events (
   id VARCHAR(16) PRIMARY KEY,
   shipment_id VARCHAR(16) NOT NULL,
@@ -35,38 +54,29 @@ CREATE TABLE IF NOT EXISTS tracking_events (
   location VARCHAR(120) NOT NULL,
   timestamp DATETIME NOT NULL,
   description VARCHAR(255) NOT NULL,
+  KEY idx_events_shipment (shipment_id),
   CONSTRAINT fk_events_shipment FOREIGN KEY (shipment_id) REFERENCES shipments(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Site content edited in the super-admin portal (single JSON row)
 CREATE TABLE IF NOT EXISTS settings (
   id TINYINT PRIMARY KEY,
   data LONGTEXT NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Site settings (empty object; the frontend merges with its defaults).
-INSERT INTO settings (id, data) VALUES (1, '{}')
-  ON DUPLICATE KEY UPDATE data = data;
+SET FOREIGN_KEY_CHECKS = 1;
 
--- Seed admin accounts. REPLACE the hashes below using:
---   php api/tools/make_hash.php "your-password"
--- (The two placeholders correspond to the admin and superadmin accounts.)
+-- Seed: live site content (branding, contact details, hero and about copy)
+INSERT INTO settings (id, data) VALUES (1, '{"siteName": "Atrans", "siteNameAccent": "A", "logoIcon": "truck", "logoImage": "", "tagline": "Freight cleared, tracked and delivered", "address": "92 Bowery St New York, NY 10013", "phone": "+1 (800) 555-0199", "phoneSecondary": "+1 (212) 555-0123", "email": "support@atrans.com", "emailSales": "sales@atrans.com", "emailSupport": "info@atrans.com", "facebook": "https://facebook.com/atrans", "twitter": "https://twitter.com/atrans", "instagram": "https://instagram.com/atrans", "hoursWeekday": "9:00 AM - 6:00 PM", "hoursSaturday": "10:00 AM - 4:00 PM", "hoursSunday": "Closed", "heroTitle": "Freight that lands when we said it would.", "heroSubtitle": "One contract covers collection, clearance, linehaul and final mile. Track every leg from your phone — and get a human on the line the moment something changes.", "heroCTA": "Track your freight", "aboutTitle": "We answer the phone at 6am and again at 11pm.", "aboutDescription": "Atrans clears and moves commercial freight for importers, exporters and distributors. Our coordinators run dedicated lanes across North America, Europe and West Africa — and every consignment is scanned, insured and visible from pickup to signature.", "yearsExperience": "12+", "statClients": "4,800+", "statCountries": "150+", "statDeliveries": "320K+", "statYears": "12+", "footerAbout": "Atrans moves commercial freight by road, ocean and air — customs cleared before arrival, covered in full and tracked scan by scan, with one coordinator accountable for the outcome.", "copyrightText": "Atrans Logistics. All rights reserved.", "primaryColor": "red"}')
+  ON DUPLICATE KEY UPDATE data = VALUES(data);
+
+-- Seed: portal accounts
+--   admin      -> Atrans#Admin2026
+--   superadmin -> Atrans#Super2026
 INSERT INTO users (username, password_hash, role) VALUES
-  ('admin',      '$2y$10$REPLACE_THIS_ADMIN_HASH______________________________', 'admin'),
-  ('superadmin', '$2y$10$REPLACE_THIS_SUPERADMIN_HASH_________________________', 'superadmin')
-  ON DUPLICATE KEY UPDATE username = username;
+  ('admin',      '$2y$10$Xesto24ROfsjglK0qX5fL.4wFhojozENH5elcky3rMslg0ISYC.FO', 'admin'),
+  ('superadmin', '$2y$10$5Fw9XnRWp/oYCDcA6Xcivuq1IyNjL7/mJZY1coLyX50hw1.jQq6ba', 'superadmin')
+  ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash), role = VALUES(role);
 
--- Demo shipments so the deployed site is populated. Safe to delete later.
-INSERT INTO shipments (id, tracking_number, sender_name, sender_address, sender_phone, receiver_name, receiver_address, receiver_phone, item_description, weight, origin, destination, status, estimated_delivery, created_at) VALUES
- ('DEMO0001', 'STX7B9K2M4P1', 'Acme Electronics Ltd', '123 Industrial Way, Portland, OR 97201', '+1 (503) 555-0123', 'Sarah Johnson', '456 Maple Avenue, Seattle, WA 98101', '+1 (206) 555-0456', 'Laptop Computer - Dell XPS 15', 3.20, 'Portland, OR', 'Seattle, WA', 'in_transit', '2026-06-06', '2026-06-01 09:00:00'),
- ('DEMO0002', 'STQ3W8N5R7T2', 'Global Furniture Co', '789 Warehouse Blvd, Chicago, IL 60601', '+1 (312) 555-0789', 'Michael Chen', '321 Oak Street, San Francisco, CA 94102', '+1 (415) 555-0321', 'Dining Table Set - 6 Chairs', 45.00, 'Chicago, IL', 'San Francisco, CA', 'out_for_delivery', '2026-06-04', '2026-06-02 09:00:00'),
- ('DEMO0003', 'STY6P2L9K3M8', 'Fresh Foods Market', '555 Farm Road, Austin, TX 78701', '+1 (512) 555-0555', 'Emily Rodriguez', '888 Sunset Drive, Miami, FL 33101', '+1 (305) 555-0888', 'Organic Produce Box - 20 lbs', 20.50, 'Austin, TX', 'Miami, FL', 'delivered', '2026-06-03', '2026-06-01 09:00:00')
- ON DUPLICATE KEY UPDATE tracking_number = tracking_number;
-
-INSERT INTO tracking_events (id, shipment_id, status, location, timestamp, description) VALUES
- ('DEVT0001', 'DEMO0001', 'Order Placed', 'Portland, OR', '2026-06-01 09:00:00', 'Shipment has been registered in our system'),
- ('DEVT0002', 'DEMO0001', 'In Transit', 'Tacoma, WA', '2026-06-03 14:00:00', 'Package is on its way to the destination'),
- ('DEVT0003', 'DEMO0002', 'Order Placed', 'Chicago, IL', '2026-06-02 09:00:00', 'Shipment has been registered in our system'),
- ('DEVT0004', 'DEMO0002', 'Out for Delivery', 'San Francisco, CA', '2026-06-04 08:00:00', 'Package is out for delivery today'),
- ('DEVT0005', 'DEMO0003', 'Order Placed', 'Austin, TX', '2026-06-01 09:00:00', 'Shipment has been registered in our system'),
- ('DEVT0006', 'DEMO0003', 'Delivered', 'Miami, FL', '2026-06-03 16:00:00', 'Package has been delivered successfully')
- ON DUPLICATE KEY UPDATE shipment_id = shipment_id;
+-- No sample shipments are inserted. Add your first consignment from
+-- /#/admin/login once the API is connected to this database.

@@ -15,16 +15,18 @@ The app has two parts that both live under one domain:
 
 1. hPanel → **phpMyAdmin**, open your database.
 2. **Import** tab → upload `api/schema.sql` → **Go**.
-3. This creates the tables and seeds demo shipments, a settings row, and two placeholder admin accounts.
+3. This creates four tables, seeds the live site content, and creates two admin accounts (`admin` and `superadmin`) with the passwords documented at the top of `schema.sql`. It inserts **no sample shipments**.
 
-## 3. Set the admin passwords
+## 3. Change the admin passwords
 
-The seeded password hashes in `schema.sql` are placeholders. Generate real ones:
+`schema.sql` ships working bcrypt hashes so you can log in immediately. Change both
+after the first sign-in:
 
     php api/tools/make_hash.php "your-admin-password"
     php api/tools/make_hash.php "your-superadmin-password"
 
-In phpMyAdmin, edit the `users` table and paste each hash into the `password_hash` column for `admin` and `superadmin` respectively.
+In phpMyAdmin, edit the `users` table and paste each hash into the `password_hash`
+column for `admin` and `superadmin` respectively.
 
 ## 4. Configure the API
 
@@ -65,7 +67,7 @@ Final layout:
 ## 7. Verify
 
 - Visit `https://yourdomain.com/` — the site loads with demo shipments.
-- Track `STX7B9K2M4P1` on the Track page.
+- Create a shipment in the admin portal, then track its generated number.
 - `https://yourdomain.com/#/admin/login` — log in with your admin password, create/edit/delete a shipment.
 - `https://yourdomain.com/#/super-admin/login` — log in with your superadmin password, change site settings, confirm they persist after refresh.
 
