@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, User, ArrowRight, Tag, Search, MessageCircle } from 'lucide-react';
+import { Calendar, User, ArrowRight, Tag, Search, MessageCircle, CheckCircle2 } from 'lucide-react';
 import PageBanner from '../components/PageBanner';
 import { useSettings } from '../hooks/useSettings';
 import { colorClasses, type PrimaryColor } from '../utils/colors';
@@ -8,73 +8,80 @@ import { colorClasses, type PrimaryColor } from '../utils/colors';
 const blogPosts = [
   {
     id: 1,
-    title: 'The Future of Global Logistics: AI & Automation in 2026',
-    excerpt: 'Discover how artificial intelligence and automation are revolutionizing the logistics industry, making shipping faster and more efficient than ever before.',
+    title: 'Air or ocean? A decision framework that survives a deadline',
+    excerpt:
+      'A practical way to choose between speed and cost — including the break-even weight where air freight quietly stops being the expensive answer.',
     author: 'Sarah Johnson',
-    date: 'Jan 15, 2026',
-    category: 'Technology',
-    image: 'https://images.pexels.com/photos/4170172/pexels-photo-4170172.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
+    date: 'Oct 14, 2026',
+    category: 'Guides',
+    image: 'https://images.pexels.com/photos/32010721/pexels-photo-32010721.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
     comments: 24,
   },
   {
     id: 2,
-    title: 'Sustainable Shipping: How Atrans Reduces Carbon Footprint',
-    excerpt: 'Learn about our green initiatives, electric fleet adoption, and carbon-neutral shipping options that help businesses meet sustainability goals.',
+    title: 'The five customs documents that delay most first shipments',
+    excerpt:
+      'Miss one and your container waits at the terminal. Here is the checklist our brokers run before any export leaves the dock.',
     author: 'Michael Chen',
-    date: 'Jan 10, 2026',
-    category: 'Sustainability',
-    image: 'https://images.pexels.com/photos/24246926/pexels-photo-24246926.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
+    date: 'Oct 2, 2026',
+    category: 'Customs',
+    image: 'https://images.pexels.com/photos/15346128/pexels-photo-15346128.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
     comments: 18,
   },
   {
     id: 3,
-    title: 'Ocean Freight vs Air Freight: Choosing the Right Option',
-    excerpt: 'A comprehensive comparison of ocean and air freight services to help you decide which option best suits your shipping needs and budget.',
-    author: 'Emily Rodriguez',
-    date: 'Jan 5, 2026',
-    category: 'Guide',
-    image: 'https://images.pexels.com/photos/32010721/pexels-photo-32010721.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
-    comments: 32,
-  },
-  {
-    id: 4,
-    title: 'Top 10 Customs Clearance Tips for International Shipping',
-    excerpt: 'Avoid delays and extra costs with these expert tips on navigating customs clearance for your international shipments efficiently.',
-    author: 'David Park',
-    date: 'Dec 28, 2025',
-    category: 'Tips',
-    image: 'https://images.pexels.com/photos/15346128/pexels-photo-15346128.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
-    comments: 45,
-  },
-  {
-    id: 5,
-    title: 'Warehouse Management: Best Practices for E-commerce',
-    excerpt: 'Optimize your warehouse operations with proven strategies for inventory management, picking, packing, and order fulfillment.',
+    title: 'How to pack freight so it arrives the way it left',
+    excerpt:
+      'Pallet stacking, stretch-wrap tension and the three consignments our warehouse team sees damaged most often — with fixes that cost almost nothing.',
     author: 'Lisa Wang',
-    date: 'Dec 20, 2025',
+    date: 'Sep 18, 2026',
     category: 'Operations',
     image: 'https://images.pexels.com/photos/4487363/pexels-photo-4487363.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
     comments: 27,
   },
   {
-    id: 6,
-    title: 'Real-Time Tracking: Why It Matters for Your Business',
-    excerpt: 'Understand the importance of real-time shipment tracking and how it can improve customer satisfaction and reduce operational costs.',
+    id: 4,
+    title: 'What real-time tracking should tell you — and what most portals hide',
+    excerpt:
+      'A status label is not visibility. The five data points worth demanding from any logistics partner before you sign the contract.',
     author: 'James Wilson',
-    date: 'Dec 15, 2025',
+    date: 'Sep 3, 2026',
     category: 'Technology',
     image: 'https://images.pexels.com/photos/31310062/pexels-photo-31310062.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
     comments: 21,
   },
+  {
+    id: 5,
+    title: 'Cutting empty miles: how we plan a week of trucking',
+    excerpt:
+      'Backhaul matching, load pooling and the routing decisions that took 11% of deadhead mileage out of our network last year.',
+    author: 'David Park',
+    date: 'Aug 21, 2026',
+    category: 'Sustainability',
+    image: 'https://images.pexels.com/photos/24246926/pexels-photo-24246926.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
+    comments: 32,
+  },
+  {
+    id: 6,
+    title: 'Warehouse slotting: the cheapest speed-up in your supply chain',
+    excerpt:
+      'Why the fastest pickers are beaten by the best layout — and how re-slotting your top 200 SKUs can cut pick time by a third.',
+    author: 'Emily Rodriguez',
+    date: 'Aug 6, 2026',
+    category: 'Operations',
+    image: 'https://images.pexels.com/photos/4487363/pexels-photo-4487363.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',
+    comments: 15,
+  },
 ];
 
-const categories = ['All', 'Technology', 'Sustainability', 'Guide', 'Tips', 'Operations'];
+const categories = ['All', 'Guides', 'Customs', 'Operations', 'Technology', 'Sustainability'];
 
 export default function BlogPage() {
   const { settings } = useSettings();
   const c = colorClasses[settings.primaryColor as PrimaryColor] || colorClasses.red;
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
 
   const filteredPosts = blogPosts.filter((post) => {
     const matchesCategory = activeCategory === 'All' || post.category === activeCategory;
@@ -86,15 +93,18 @@ export default function BlogPage() {
 
   return (
     <div className="bg-white">
-      <PageBanner title="Our Blog" breadcrumb="Blog" />
+      <PageBanner title="The Atrans journal" breadcrumb="Insights" />
 
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
-            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Latest News</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">News & Insights</h2>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Insights</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
+              Practical notes from the loading dock
+            </h2>
             <p className="text-slate-600 mt-3 max-w-2xl mx-auto">
-              Stay updated with the latest trends, tips, and news from the world of logistics and shipping.
+              Rate movements, customs changes and operating habits worth copying — written by the
+              people who move the cargo, not a content agency.
             </p>
           </div>
 
@@ -107,7 +117,8 @@ export default function BlogPage() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search articles..."
+                  placeholder="Search the journal…"
+                  aria-label="Search articles"
                   className={`w-full pl-10 pr-4 py-2.5 rounded border border-slate-300 text-sm focus:outline-none focus:ring-2 ${c.ring} focus:border-transparent bg-white`}
                 />
               </div>
@@ -145,6 +156,7 @@ export default function BlogPage() {
                     <img
                       src={post.image}
                       alt={post.title}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <span className={`absolute top-4 left-4 ${c.bg} text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded`}>
@@ -167,8 +179,8 @@ export default function BlogPage() {
                     </h3>
                     <p className="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
                     <div className="flex items-center justify-between">
-                      <button className={`inline-flex items-center gap-2 ${c.text} hover:opacity-80 text-sm font-bold transition-colors`}>
-                        Read More <ArrowRight className="w-4 h-4" />
+                      <button className={`inline-flex items-center gap-2 ${c.text} hover:opacity-80 text-sm font-bold transition-opacity`}>
+                        Read the article <ArrowRight className="w-4 h-4" />
                       </button>
                       <div className="flex items-center gap-1 text-xs text-slate-400">
                         <MessageCircle className="w-3.5 h-3.5" />
@@ -182,7 +194,8 @@ export default function BlogPage() {
           ) : (
             <div className="text-center py-16 bg-slate-50 rounded">
               <Tag className="w-10 h-10 text-slate-300 mx-auto mb-3" />
-              <p className="text-slate-500">No articles found matching your criteria.</p>
+              <p className="text-slate-600 font-semibold">Nothing matches that search yet.</p>
+              <p className="text-sm text-slate-500 mt-1">Try a broader term, or clear the category filter.</p>
             </div>
           )}
 
@@ -192,6 +205,7 @@ export default function BlogPage() {
               {[1, 2, 3].map((page) => (
                 <button
                   key={page}
+                  aria-label={`Page ${page}`}
                   className={`w-10 h-10 rounded font-bold text-sm transition-colors ${
                     page === 1
                       ? `${c.bg} text-white`
@@ -212,28 +226,37 @@ export default function BlogPage() {
       {/* Newsletter CTA */}
       <section className="py-16 bg-slate-900 text-white px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-extrabold mb-3">Subscribe to Our Newsletter</h2>
-          <p className="text-slate-300 mb-6">Get the latest logistics insights delivered to your inbox weekly.</p>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert('Thanks for subscribing!');
-            }}
-            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-          >
-            <input
-              type="email"
-              required
-              placeholder="Enter your email"
-              className={`flex-1 px-4 py-3 rounded text-slate-900 focus:outline-none focus:ring-2 ${c.ring} bg-white text-sm`}
-            />
-            <button
-              type="submit"
-              className={`${c.bg} ${c.bgHover} text-white text-sm font-bold px-6 py-3 rounded transition-colors`}
+          <h2 className="text-2xl sm:text-3xl font-extrabold mb-3">One useful email a month</h2>
+          <p className="text-slate-300 mb-6">
+            Lane updates, rate movements and the occasional checklist. No sales blasts — unsubscribe in one click.
+          </p>
+          {subscribed ? (
+            <div className="inline-flex items-center gap-2 bg-emerald-500/15 border border-emerald-400/40 text-emerald-200 text-sm font-semibold px-5 py-3 rounded">
+              <CheckCircle2 className="w-4 h-4" /> You’re on the list. Look out for the next dispatch.
+            </div>
+          ) : (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setSubscribed(true);
+              }}
+              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
             >
-              Subscribe
-            </button>
-          </form>
+              <input
+                type="email"
+                required
+                placeholder="you@company.com"
+                aria-label="Email address"
+                className={`flex-1 px-4 py-3 rounded text-slate-900 focus:outline-none focus:ring-2 ${c.ring} bg-white text-sm`}
+              />
+              <button
+                type="submit"
+                className={`${c.bg} ${c.bgHover} text-white text-sm font-bold px-6 py-3 rounded transition-colors`}
+              >
+                Subscribe
+              </button>
+            </form>
+          )}
         </div>
       </section>
     </div>

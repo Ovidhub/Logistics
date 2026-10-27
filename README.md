@@ -1,8 +1,14 @@
-# SwiftTrack Logistics
+# Atrans Logistics
 
 A logistics / shipment-tracking single-page web application built with React, Vite, TypeScript and Tailwind CSS. It includes a public marketing site, a shipment tracking page, an admin portal for managing shipments, and a super-admin portal for editing site-wide content and settings.
 
 > **Status:** full-stack app. The React frontend talks to a PHP + MySQL REST API (in `api/`) with JWT authentication. See [DEPLOY.md](DEPLOY.md) for Hostinger deployment.
+>
+> **Static preview:** on hosts that cannot run PHP (Vercel, Netlify, GitHub Pages) the
+> frontend falls back to an in-browser demo store (`src/utils/demoBackend.ts`) seeded
+> with three sample shipments, so tracking and the admin portals still work. Demo
+> sign-ins: `admin` / `demo1234` and `superadmin` / `demo1234`. Data lives in
+> `localStorage` and is never sent anywhere.
 
 ## Tech stack
 
@@ -23,6 +29,16 @@ npm run dev      # start the dev server (http://localhost:5173)
 npm run build    # produce a production build in dist/
 npm run preview  # preview the production build locally
 ```
+
+### Deploying the frontend to Vercel
+
+`vercel.json` pins the Vite build (`npm run build` → `dist/`). Import the repo in
+Vercel and deploy — no environment variables are required. The PHP API in `api/`
+is not runnable on Vercel; the site serves from the demo store until
+`VITE_API_URL` points at a real backend.
+
+Set `VITE_DEMO_FALLBACK=false` to disable the demo store and surface API errors
+instead (useful once a real API is wired up).
 
 ## Admin accounts
 

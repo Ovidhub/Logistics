@@ -54,7 +54,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   siteNameAccent: 'A',
   logoIcon: 'truck',
   logoImage: '',
-  tagline: 'Digital & Trusted Transport Logistic Company',
+  tagline: 'Freight forwarding without the guesswork',
 
   // Contact Info
   address: '92 Bowery St New York, NY 10013',
@@ -75,26 +75,26 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   hoursSunday: 'Closed',
 
   // Hero Section
-  heroTitle: 'Digital & Trusted Transport Logistic Company',
+  heroTitle: 'Your freight, moving. Your customers, informed.',
   heroSubtitle:
-    'We provide reliable, fast, and secure logistics solutions worldwide. Track your shipments in real-time with our advanced tracking system.',
-  heroCTA: 'Track Your Shipment',
+    'Road, air and ocean freight with customs handled, cargo insured and live tracking on every load. One team stays accountable from pickup to proof of delivery.',
+  heroCTA: 'Track a shipment',
 
   // About Section
-  aboutTitle: 'We are proud of our workforce and have worked hard.',
+  aboutTitle: 'Logistics built on answers, not excuses.',
   aboutDescription:
-    'Atrans is a leading global logistics provider, delivering integrated freight and supply chain solutions. With over a decade of experience, we ensure your cargo reaches its destination safely and on time.',
+    'Atrans has moved freight for growing businesses for over a decade. We pair dependable capacity with a tracking platform that tells you where your cargo is, who has it and when it lands — before you have to ask.',
   yearsExperience: '12+',
 
   // Stats
-  statClients: '15K+',
+  statClients: '4,800+',
   statCountries: '150+',
-  statDeliveries: '50K+',
+  statDeliveries: '320K+',
   statYears: '12+',
 
   // Footer
   footerAbout:
-    'Digital & trusted transport logistic company providing reliable shipping solutions worldwide with full tracking capabilities.',
+    'Atrans moves freight by road, air and ocean — customs cleared, fully insured and tracked door to door, with one accountable team behind every shipment.',
   copyrightText: 'Atrans Logistics. All rights reserved.',
 
   // Colors

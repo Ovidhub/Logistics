@@ -55,9 +55,9 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-1">
             {navLink('/', 'Home')}
             {navLink('/about', 'About')}
-            {navLink('/services', 'Service')}
+            {navLink('/services', 'Services')}
             {navLink('/track', 'Track')}
-            {navLink('/blog', 'Blog')}
+            {navLink('/blog', 'Insights')}
             {navLink('/contact', 'Contact')}
           </div>
 
@@ -67,7 +67,7 @@ export default function Navbar() {
               to="/track"
               className={`${c.bg} ${c.bgHover} text-white text-sm font-semibold px-5 py-2.5 rounded transition-colors`}
             >
-              Track Package
+              Track shipment
             </Link>
           </div>
 
@@ -86,16 +86,16 @@ export default function Navbar() {
           <div className="lg:hidden border-t border-slate-100 py-3 space-y-1">
             {navLink('/', 'Home')}
             {navLink('/about', 'About')}
-            {navLink('/services', 'Service')}
+            {navLink('/services', 'Services')}
             {navLink('/track', 'Track')}
-            {navLink('/blog', 'Blog')}
+            {navLink('/blog', 'Insights')}
             {navLink('/contact', 'Contact')}
             <Link
               to="/track"
               onClick={() => setMobileOpen(false)}
               className={`block ${c.bg} ${c.bgHover} text-white text-sm font-semibold px-5 py-2.5 rounded transition-colors text-center mx-3 mt-2`}
             >
-              Track Package
+              Track shipment
             </Link>
           </div>
         )}

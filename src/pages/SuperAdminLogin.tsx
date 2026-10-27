@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Crown, Lock, Eye, EyeOff, ChevronRight, ShieldAlert } from 'lucide-react';
 import { api, setAuth, clearAuth } from '../utils/api';
+import { useDemoMode } from '../utils/demoBackend';
 
 interface SuperAdminLoginProps {
   onLogin: () => void;
@@ -14,6 +15,7 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const demoMode = useDemoMode();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,12 +52,12 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
             <div className="bg-yellow-500 p-1.5 rounded">
               <Crown className="w-5 h-5 text-white" />
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white">Super Admin Portal</h1>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-white">Super admin portal</h1>
           </div>
           <div className="flex items-center gap-2 text-sm text-slate-300">
             <Link to="/" className="hover:text-red-500 transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-yellow-500">Super Admin Login</span>
+            <span className="text-yellow-500">Super admin sign-in</span>
           </div>
         </div>
       </div>
@@ -71,8 +73,10 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
             <div className="w-14 h-14 bg-yellow-50 rounded flex items-center justify-center mx-auto mb-4">
               <Crown className="w-7 h-7 text-yellow-500" />
             </div>
-            <h1 className="text-2xl font-extrabold text-slate-900">Super Admin Access</h1>
-            <p className="text-slate-500 text-sm mt-1">Manage site-wide settings & content</p>
+            <h1 className="text-2xl font-extrabold text-slate-900">Super admin access</h1>
+            <p className="text-slate-500 text-sm mt-1">
+              Edit the words, numbers and contact details across the whole site.
+            </p>
           </div>
 
           <div className="bg-yellow-50 border border-yellow-200 p-3 rounded mb-6 flex items-start gap-2">
@@ -81,6 +85,14 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
               Super admin has elevated privileges to modify global site content. Changes affect all visitors.
             </p>
           </div>
+
+          {demoMode && (
+            <div className="mb-5 text-xs bg-slate-50 border border-slate-200 rounded px-3 py-2 text-slate-600">
+              <span className="font-semibold text-slate-800">Preview build:</span> sign in with{' '}
+              <code className="font-mono text-slate-900">superadmin</code> /{' '}
+              <code className="font-mono text-slate-900">demo1234</code>.
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
@@ -129,7 +141,7 @@ export default function SuperAdminLogin({ onLogin }: SuperAdminLoginProps) {
               className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2"
             >
               <Lock className="w-4 h-4" />
-              Access Super Admin
+              Open site settings
             </button>
           </form>
 

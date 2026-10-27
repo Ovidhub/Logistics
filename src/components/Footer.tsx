@@ -35,30 +35,32 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Quick Links</h4>
+            <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Company</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/" className={`${c.textHover} transition-colors`}>Home</Link></li>
-              <li><Link to="/about" className={`${c.textHover} transition-colors`}>About Us</Link></li>
+              <li><Link to="/about" className={`${c.textHover} transition-colors`}>About us</Link></li>
               <li><Link to="/services" className={`${c.textHover} transition-colors`}>Services</Link></li>
-              <li><Link to="/track" className={`${c.textHover} transition-colors`}>Track Shipment</Link></li>
+              <li><Link to="/track" className={`${c.textHover} transition-colors`}>Track a shipment</Link></li>
+              <li><Link to="/blog" className={`${c.textHover} transition-colors`}>Insights</Link></li>
               <li><Link to="/contact" className={`${c.textHover} transition-colors`}>Contact</Link></li>
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Our Services</h4>
+            <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Services</h4>
             <ul className="space-y-2 text-sm">
-              <li className={`${c.textHover} transition-colors cursor-pointer`}>Air Freight</li>
-              <li className={`${c.textHover} transition-colors cursor-pointer`}>Ocean Freight</li>
-              <li className={`${c.textHover} transition-colors cursor-pointer`}>Road Transport</li>
-              <li className={`${c.textHover} transition-colors cursor-pointer`}>Warehousing</li>
+              <li><Link to="/services" className={`${c.textHover} transition-colors`}>Air freight</Link></li>
+              <li><Link to="/services" className={`${c.textHover} transition-colors`}>Ocean freight</Link></li>
+              <li><Link to="/services" className={`${c.textHover} transition-colors`}>Road transport</Link></li>
+              <li><Link to="/services" className={`${c.textHover} transition-colors`}>Warehousing</Link></li>
+              <li><Link to="/services" className={`${c.textHover} transition-colors`}>Customs brokerage</Link></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Get In Touch</h4>
+            <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Talk to us</h4>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <MapPin className={`w-4 h-4 ${c.textLight} mt-0.5 flex-shrink-0`} />
@@ -77,7 +79,7 @@ export default function Footer() {
               to="/track"
               className={`inline-flex items-center gap-2 mt-4 ${c.bg} ${c.bgHover} text-white text-sm font-semibold px-4 py-2 rounded transition-colors`}
             >
-              Track Now <ArrowRight className="w-3.5 h-3.5" />
+              Track a shipment <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>

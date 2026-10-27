@@ -34,7 +34,7 @@ export default function ContactPage() {
 
   return (
     <div className="bg-white">
-      <PageBanner title="Contact Us" breadcrumb="Contact" />
+      <PageBanner title="Contact us" breadcrumb="Contact" />
 
       {/* Contact Info Cards */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
@@ -43,17 +43,17 @@ export default function ContactPage() {
             {[
               {
                 icon: <MapPin className="w-7 h-7" />,
-                title: 'Our Address',
+                title: 'Head office',
                 lines: settings.address.split(',').map((s) => s.trim()),
               },
               {
                 icon: <Phone className="w-7 h-7" />,
-                title: 'Call Us',
-                lines: [settings.phone, settings.phoneSecondary, `Mon-Fri ${settings.hoursWeekday}`],
+                title: 'Talk to a person',
+                lines: [settings.phone, settings.phoneSecondary, `Mon–Fri, ${settings.hoursWeekday}`],
               },
               {
                 icon: <Mail className="w-7 h-7" />,
-                title: 'Email Us',
+                title: 'Email the right desk',
                 lines: [settings.email, settings.emailSales, settings.emailSupport],
               },
             ].map((info, i) => (
@@ -87,12 +87,13 @@ export default function ContactPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Get In Touch</p>
+              <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Get in touch</p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3 leading-tight">
-                Send Us a Message
+                Tell us what’s moving
               </h2>
               <p className="text-slate-600 mb-6">
-                Have a question or need a quote? Fill out the form below and our team will get back to you within 24 hours.
+                Send the basics — origin, destination, weight and deadline — and a human replies with
+                pricing and a proposed route within one business day.
               </p>
 
               {submitted ? (
@@ -102,16 +103,17 @@ export default function ContactPage() {
                   className="bg-emerald-50 border-2 border-emerald-200 rounded p-6 text-center"
                 >
                   <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto mb-3" />
-                  <h3 className="text-lg font-extrabold text-emerald-900 mb-1">Message Sent Successfully!</h3>
+                  <h3 className="text-lg font-extrabold text-emerald-900 mb-1">Message received.</h3>
                   <p className="text-sm text-emerald-700">
-                    Thanks for reaching out. We'll get back to you within 24 hours.
+                    Thanks for the detail — someone from our team will come back to you within one
+                    business day, usually sooner.
                   </p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Full Name</label>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Full name</label>
                       <div className="relative">
                         <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                         <input
@@ -119,12 +121,12 @@ export default function ContactPage() {
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           className={`${inputClass} pl-10`}
-                          placeholder="John Doe"
+                          placeholder="Your name"
                         />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Email</label>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Work email</label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                         <input
@@ -133,7 +135,7 @@ export default function ContactPage() {
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           className={`${inputClass} pl-10`}
-                          placeholder="you@example.com"
+                          placeholder="you@company.com"
                         />
                       </div>
                     </div>
@@ -152,24 +154,24 @@ export default function ContactPage() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Subject</label>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">What’s this about?</label>
                       <select
                         required
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                         className={inputClass}
                       >
-                        <option value="">Select a subject...</option>
-                        <option value="quote">Request a Quote</option>
-                        <option value="tracking">Tracking Inquiry</option>
-                        <option value="support">Customer Support</option>
-                        <option value="partnership">Partnership</option>
-                        <option value="other">Other</option>
+                        <option value="">Choose a subject…</option>
+                        <option value="quote">Request a quote</option>
+                        <option value="tracking">Track a shipment</option>
+                        <option value="support">Customer support</option>
+                        <option value="partnership">Partnership or supplier</option>
+                        <option value="other">Something else</option>
                       </select>
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Message</label>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase">Details</label>
                     <div className="relative">
                       <MessageSquare className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
                       <textarea
@@ -178,7 +180,7 @@ export default function ContactPage() {
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         rows={5}
                         className={`${inputClass} pl-10 resize-none`}
-                        placeholder="Tell us how we can help you..."
+                        placeholder="Origin, destination, weight, deadline — anything that helps us quote accurately."
                       />
                     </div>
                   </div>
@@ -190,12 +192,12 @@ export default function ContactPage() {
                     {submitting ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Sending...
+                        Sending…
                       </>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        Send Message
+                        Send message
                       </>
                     )}
                   </button>
@@ -213,7 +215,7 @@ export default function ContactPage() {
             >
               <div className="rounded shadow-lg overflow-hidden border border-slate-200">
                 <iframe
-                  title="Atrans Location"
+                  title="Atrans head office on the map"
                   src="https://www.openstreetmap.org/export/embed.html?bbox=-74.00499820709229%2C40.71430500099844%2C-73.99499416351318%2C40.72076619891213&layer=mapnik&marker=40.71753560000001%2C-73.99999618530273"
                   className="w-full h-[300px] border-0"
                 />
@@ -222,14 +224,14 @@ export default function ContactPage() {
               <div className="bg-slate-900 text-white p-6 rounded">
                 <h3 className="text-lg font-extrabold mb-4 flex items-center gap-2">
                   <Clock className={`w-5 h-5 ${c.textLight}`} />
-                  Business Hours
+                  When we’re open
                 </h3>
                 <ul className="space-y-2 text-sm">
                   {[
-                    { day: 'Monday - Friday', hours: settings.hoursWeekday },
+                    { day: 'Monday – Friday', hours: settings.hoursWeekday },
                     { day: 'Saturday', hours: settings.hoursSaturday },
                     { day: 'Sunday', hours: settings.hoursSunday },
-                    { day: 'Emergency Support', hours: '24/7 Available' },
+                    { day: 'Out-of-hours freight desk', hours: '24/7' },
                   ].map((item, i) => (
                     <li
                       key={i}
@@ -243,8 +245,10 @@ export default function ContactPage() {
               </div>
 
               <div className={`${c.bg} text-white p-6 rounded`}>
-                <h3 className="text-lg font-extrabold mb-2">Need Urgent Help?</h3>
-                <p className="text-sm text-white/90 mb-4">Our 24/7 hotline is always available for emergencies.</p>
+                <h3 className="text-lg font-extrabold mb-2">Freight stuck right now?</h3>
+                <p className="text-sm text-white/90 mb-4">
+                  Call the out-of-hours desk. A duty coordinator answers — not a ticket queue.
+                </p>
                 <a
                   href={`tel:${settings.phone.replace(/[^+\d]/g, '')}`}
                   className={`inline-flex items-center gap-2 bg-white ${c.text} hover:bg-slate-100 text-sm font-bold px-5 py-2.5 rounded transition-colors`}
@@ -261,35 +265,37 @@ export default function ContactPage() {
       <section className="py-20 bg-slate-50 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
-            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>FAQ</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Answers</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
+              Questions we get before the first quote
+            </h2>
           </div>
 
           <div className="space-y-3">
             {[
               {
-                q: 'How do I track my shipment?',
-                a: 'Simply visit our Track page, enter your tracking number, and you\'ll see real-time updates including location, status, and estimated delivery time.',
+                q: 'How do I track a shipment?',
+                a: 'Enter the tracking number on the Track page. You’ll see the full event history, current location, route map and estimated delivery — no login needed.',
               },
               {
-                q: 'What countries do you ship to?',
-                a: 'We deliver to over 150 countries worldwide. Contact us if you need shipping to a specific destination not listed on our service map.',
+                q: 'What does a quote include?',
+                a: 'Freight, fuel, terminal handling, customs brokerage and standard insurance, quoted as one number. If something cannot be known up front, we say so before you book.',
               },
               {
-                q: 'How are shipping rates calculated?',
-                a: 'Rates depend on weight, dimensions, destination, and chosen service type (air, ocean, or road). Request a free quote for accurate pricing.',
+                q: 'How fast can you collect?',
+                a: 'Same-day collection is available in most metro areas if you brief us before 11am. Air and ocean bookings typically need 24–48 hours of notice.',
               },
               {
-                q: 'Is my shipment insured?',
-                a: 'Yes, all shipments include basic insurance coverage. Additional insurance is available for high-value items at competitive rates.',
+                q: 'Is my cargo insured?',
+                a: 'Every shipment carries full-value cover as standard. For high-value or unusual cargo we’ll arrange extended cover and confirm the terms in writing.',
               },
               {
-                q: 'Can I change the delivery address after shipment?',
-                a: 'Address changes are possible before the package is out for delivery. Contact our support team immediately to request a change.',
+                q: 'Can I change the delivery address after booking?',
+                a: 'Yes, until the consignment is out for final-mile delivery. Call the desk with the tracking number and we’ll re-route and re-confirm the ETA.',
               },
               {
-                q: 'How can I get a printed receipt?',
-                a: 'On the tracking page, click "Print Receipt" to view, print, or download your shipment receipt as PDF or text file.',
+                q: 'How do I get a proof-of-delivery receipt?',
+                a: 'Open the shipment on the Track page and use “Receipt” to print or download a PDF record with the delivery timestamp and signature.',
               },
             ].map((faq, i) => (
               <FAQItem key={i} question={faq.q} answer={faq.a} />

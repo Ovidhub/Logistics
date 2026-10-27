@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Shield, Lock, Eye, EyeOff, ChevronRight } from 'lucide-react';
 import { api, setAuth } from '../utils/api';
+import { useDemoMode } from '../utils/demoBackend';
 
 interface AdminLoginProps {
   onLogin: () => void;
@@ -14,6 +15,7 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const demoMode = useDemoMode();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,11 +43,11 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
         }}
       >
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Admin Portal</h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Admin portal</h1>
           <div className="flex items-center gap-2 text-sm text-slate-300">
             <Link to="/" className="hover:text-red-500 transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-red-500">Admin Login</span>
+            <span className="text-red-500">Admin sign-in</span>
           </div>
         </div>
       </div>
@@ -61,9 +63,19 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
             <div className="w-14 h-14 bg-red-50 rounded flex items-center justify-center mx-auto mb-4">
               <Shield className="w-7 h-7 text-red-600" />
             </div>
-            <h1 className="text-2xl font-extrabold text-slate-900">Sign In to Atrans Admin</h1>
-            <p className="text-slate-500 text-sm mt-1">Manage shipments and tracking</p>
+            <h1 className="text-2xl font-extrabold text-slate-900">Sign in to Atrans admin</h1>
+            <p className="text-slate-500 text-sm mt-1">
+              Create shipments, add scans and keep customers informed.
+            </p>
           </div>
+
+          {demoMode && (
+            <div className="mb-5 text-xs bg-slate-50 border border-slate-200 rounded px-3 py-2 text-slate-600">
+              <span className="font-semibold text-slate-800">Preview build:</span> sign in with{' '}
+              <code className="font-mono text-slate-900">admin</code> /{' '}
+              <code className="font-mono text-slate-900">demo1234</code>.
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
@@ -116,7 +128,7 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
               className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded transition-colors flex items-center justify-center gap-2"
             >
               <Lock className="w-4 h-4" />
-              Sign In
+              Sign in
             </button>
           </form>
 

@@ -141,8 +141,8 @@ export default function ReceiptModal({ shipment, onClose }: ReceiptModalProps) {
                   <FileText className={`w-5 h-5 ${c.text}`} />
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-slate-900">Shipment Receipt</h2>
-                  <p className="text-xs text-slate-500">Print or download for your records</p>
+                  <h2 className="text-lg font-semibold text-slate-900">Shipment receipt</h2>
+                  <p className="text-xs text-slate-500">Print it, or download a copy for your records</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -169,7 +169,7 @@ export default function ReceiptModal({ shipment, onClose }: ReceiptModalProps) {
                   {downloading ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span className="hidden sm:inline">Generating...</span>
+                      <span className="hidden sm:inline">Generating…</span>
                     </>
                   ) : (
                     <>

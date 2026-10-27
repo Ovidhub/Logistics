@@ -29,51 +29,51 @@ const services = [
     icon: <Plane className="w-7 h-7" />,
     image: PLANE,
     title: 'Air Freight',
-    desc: 'Fast, reliable air cargo services with global coverage. Perfect for time-sensitive and high-value shipments requiring rapid delivery.',
-    features: ['Express delivery', 'Door-to-door service', 'Temperature controlled', 'Dangerous goods'],
+    desc: 'Next-flight-out for the shipment that cannot wait, and consolidated air lanes that keep cost per kilo sensible.',
+    features: ['Express and deferred options', 'Door-to-door or airport-to-airport', 'Temperature-controlled cargo', 'Dangerous goods certified'],
   },
   {
     icon: <Ship className="w-7 h-7" />,
     image: SHIP,
     title: 'Ocean Freight',
-    desc: 'Cost-effective sea freight solutions for large volume shipments. Full container loads (FCL) and less than container loads (LCL) available.',
-    features: ['FCL & LCL options', 'Port-to-port shipping', 'Container tracking', 'Customs clearance'],
+    desc: 'FCL and LCL sailings on the major trade lanes, with realistic transit times and clearance handled before your container hits the quay.',
+    features: ['FCL and LCL options', 'Port-to-port or door-to-door', 'Container-level tracking', 'Customs clearance included'],
   },
   {
     icon: <Truck className="w-7 h-7" />,
     image: TRUCK,
     title: 'Road Transport',
-    desc: 'Efficient ground transportation across cities and countries. Our modern fleet ensures safe, timely delivery to any destination.',
-    features: ['Full truck load', 'Less than truck load', 'Last-mile delivery', 'Real-time GPS'],
+    desc: 'Owned trucks and vetted carriers for regional, cross-border and metro runs — GPS on every load, no exceptions.',
+    features: ['Full and partial truckload', 'Cross-border documentation', 'Same-day metro delivery', 'Live GPS tracking'],
   },
   {
     icon: <Warehouse className="w-7 h-7" />,
     image: WAREHOUSE,
     title: 'Warehousing',
-    desc: 'State-of-the-art storage facilities with inventory management, fulfillment services, and 24/7 security monitoring.',
-    features: ['Climate controlled', 'Inventory management', 'Pick & pack', 'Distribution'],
+    desc: 'Ambient and bonded storage with pick-and-pack, cycle counts and same-day dispatch from our hub network.',
+    features: ['Short and long-term storage', 'Pick, pack and fulfilment', 'Real-time inventory portal', '24/7 monitored sites'],
   },
   {
     icon: <FileText className="w-7 h-7" />,
     image: PORT,
-    title: 'Custom Brokerage',
-    desc: 'Expert customs clearance services to navigate international trade regulations smoothly and avoid costly delays.',
-    features: ['Documentation', 'Duty calculation', 'Compliance support', 'Trade consulting'],
+    title: 'Customs Brokerage',
+    desc: 'Licensed brokers who classify, file and clear — so your goods move off the dock instead of accruing storage fees.',
+    features: ['Entry filing', 'Duty and tariff calculation', 'Compliance and audit support', 'Trade consulting'],
   },
   {
     icon: <Package className="w-7 h-7" />,
     image: TRUCK2,
     title: 'Express Delivery',
-    desc: 'Premium express delivery services for urgent shipments. Same-day, next-day, and time-definite delivery options available.',
-    features: ['Same-day delivery', 'Next-day delivery', 'Priority handling', 'Signature required'],
+    desc: 'Time-definite delivery for urgent parts and documents, with proof of delivery the moment it lands.',
+    features: ['Same-day and next-day', 'Priority handling', 'Signature or photo POD', 'Dedicated courier'],
   },
 ];
 
 const process = [
-  { num: '01', title: 'Get Quote', desc: 'Request a free quote for your shipment needs.' },
-  { num: '02', title: 'Book Service', desc: 'Choose your service and confirm booking online.' },
-  { num: '03', title: 'Pickup', desc: 'Our team picks up your cargo at scheduled time.' },
-  { num: '04', title: 'Delivery', desc: 'Track in real-time until safe delivery.' },
+  { num: '01', title: 'Tell us what’s moving', desc: 'Send the lane, the weight and the deadline. We’ll ask the three questions that actually matter.' },
+  { num: '02', title: 'Approve the quote', desc: 'One price covering freight, customs and insurance. Same-day turnaround on standard lanes.' },
+  { num: '03', title: 'We collect', desc: 'Booked windows, scanned at pickup and on the road the same day wherever possible.' },
+  { num: '04', title: 'You watch it land', desc: 'Live tracking, proactive alerts and proof of delivery in your inbox.' },
 ];
 
 export default function ServicesPage() {
@@ -82,18 +82,18 @@ export default function ServicesPage() {
 
   return (
     <div className="bg-white">
-      <PageBanner title="Our Services" breadcrumb="Services" />
+      <PageBanner title="Our services" breadcrumb="Services" />
 
       {/* Services Grid */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>What We Offer</p>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>What we offer</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
-              Complete Logistics Solutions
+              Every mode, cleared and covered.
             </h2>
             <p className="text-slate-600 mt-3 max-w-2xl mx-auto">
-              From air freight to warehousing, we offer end-to-end logistics services tailored to meet your business needs.
+              Air, ocean, road, storage and customs under one contract — so you brief one team instead of five.
             </p>
           </div>
 
@@ -111,6 +111,7 @@ export default function ServicesPage() {
                   <img
                     src={service.image}
                     alt={service.title}
+                    loading="lazy"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   />
                   <div className={`absolute top-4 left-4 ${c.bg} text-white p-2.5 rounded shadow-lg`}>
@@ -132,9 +133,9 @@ export default function ServicesPage() {
 
                   <Link
                     to="/contact"
-                    className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 text-sm font-bold transition-colors"
+                    className={`inline-flex items-center gap-2 ${c.text} hover:opacity-80 text-sm font-bold transition-opacity`}
                   >
-                    Get Quote <ArrowRight className="w-4 h-4" />
+                    Get a quote <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </motion.div>
@@ -147,8 +148,8 @@ export default function ServicesPage() {
       <section className="py-20 bg-slate-900 text-white px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <p className="text-red-500 font-bold text-sm uppercase tracking-wider mb-3">How It Works</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold">Simple 4-Step Process</h2>
+            <p className={`${c.textLight} font-bold text-sm uppercase tracking-wider mb-3`}>How it works</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold">Four steps, no mystery</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -161,11 +162,11 @@ export default function ServicesPage() {
                 transition={{ delay: i * 0.1 }}
                 className="relative bg-slate-800 p-6 rounded text-center hover:bg-slate-700 transition-colors"
               >
-                <div className="text-5xl font-extrabold text-red-600 mb-3 opacity-30">{step.num}</div>
+                <div className={`text-5xl font-extrabold ${c.textLight} mb-3 opacity-30`}>{step.num}</div>
                 <h4 className="text-lg font-bold mb-2">{step.title}</h4>
                 <p className="text-sm text-slate-400">{step.desc}</p>
                 {i < process.length - 1 && (
-                  <ArrowRight className="hidden md:block absolute -right-4 top-1/2 -translate-y-1/2 text-red-600 w-6 h-6 z-10" />
+                  <ArrowRight className={`hidden md:block absolute -right-4 top-1/2 -translate-y-1/2 ${c.textLight} w-6 h-6 z-10`} />
                 )}
               </motion.div>
             ))}
@@ -177,16 +178,34 @@ export default function ServicesPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <p className="text-red-600 font-bold text-sm uppercase tracking-wider mb-3">Why Atrans Services</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">Benefits You Get</h2>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>What you get</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
+              Included in every contract
+            </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: <Clock className="w-6 h-6" />, title: 'On-Time Delivery', desc: 'We guarantee timely delivery for all your shipments.' },
-              { icon: <Shield className="w-6 h-6" />, title: 'Fully Insured', desc: 'Every shipment is covered by comprehensive insurance.' },
-              { icon: <DollarSign className="w-6 h-6" />, title: 'Best Prices', desc: 'Competitive rates without compromising on quality.' },
-              { icon: <CheckCircle2 className="w-6 h-6" />, title: 'Quality Service', desc: 'Award-winning service trusted by thousands of clients.' },
+              {
+                icon: <Clock className="w-6 h-6" />,
+                title: 'On-time delivery',
+                desc: 'Written service levels, and a call the moment a lane slips — not after you notice.',
+              },
+              {
+                icon: <Shield className="w-6 h-6" />,
+                title: 'Fully insured',
+                desc: 'Full-value cover on every shipment, with claims handled in-house instead of outsourced.',
+              },
+              {
+                icon: <DollarSign className="w-6 h-6" />,
+                title: 'Honest pricing',
+                desc: 'One transparent quote. No surprise fuel, handling or documentation line items.',
+              },
+              {
+                icon: <CheckCircle2 className="w-6 h-6" />,
+                title: 'Real people',
+                desc: 'A named contact who knows your lanes and answers on the first ring.',
+              },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -194,9 +213,9 @@ export default function ServicesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="bg-slate-50 rounded p-6 border-l-4 border-red-600"
+                className={`bg-slate-50 rounded p-6 border-l-4 ${c.border}`}
               >
-                <div className="text-red-600 mb-3">{item.icon}</div>
+                <div className={`${c.text} mb-3`}>{item.icon}</div>
                 <h4 className="font-bold text-slate-900 mb-2">{item.title}</h4>
                 <p className="text-sm text-slate-500">{item.desc}</p>
               </motion.div>
@@ -206,17 +225,19 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-red-600 text-white px-4 sm:px-6 lg:px-8">
+      <section className={`py-16 ${c.bg} text-white px-4 sm:px-6 lg:px-8`}>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold mb-2">Need a Custom Solution?</h2>
-            <p className="text-red-100">Contact our logistics experts for a tailored quote today.</p>
+            <h2 className="text-2xl sm:text-3xl font-extrabold mb-2">Need something we haven’t listed?</h2>
+            <p className="text-white/80">
+              Tell us what’s moving and we’ll build the route, the paperwork and the price around it.
+            </p>
           </div>
           <Link
             to="/contact"
-            className="bg-white text-red-600 hover:bg-slate-100 text-sm font-bold px-8 py-3 rounded transition-colors inline-flex items-center gap-2"
+            className={`bg-white ${c.text} hover:bg-slate-100 text-sm font-bold px-8 py-3 rounded transition-colors inline-flex items-center gap-2`}
           >
-            Request a Quote <ArrowRight className="w-4 h-4" />
+            Talk to a specialist <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </section>

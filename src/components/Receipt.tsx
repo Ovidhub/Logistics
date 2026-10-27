@@ -67,11 +67,11 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
               <h1 className="text-2xl font-bold text-slate-900">
                 <span className={c.text}>{accentPart}</span>{restPart}
               </h1>
-              <p className="text-xs text-slate-500">Logistics &amp; Shipment Receipt</p>
+              <p className="text-xs text-slate-500">Logistics &amp; shipment receipt</p>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-xs text-slate-500 uppercase tracking-wider">Receipt ID</p>
+            <p className="text-xs text-slate-500 uppercase tracking-wider">Receipt no.</p>
             <p className="text-sm font-mono font-semibold text-slate-900">{id}</p>
             <p className="text-xs text-slate-500 mt-1">Issued: {issuedAt}</p>
           </div>
@@ -82,11 +82,11 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
       <div className="mb-6">
         <div className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-lg p-4">
           <div>
-            <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Tracking Number</p>
+            <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Tracking number</p>
             <p className="text-xl font-bold font-mono text-slate-900">{shipment.trackingNumber}</p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Current Status</p>
+            <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Current status</p>
             <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full ${c.bgLight} ${c.text} border ${c.border}`}>
               <CheckCircle2 className="w-4 h-4" />
               <span className="text-sm font-semibold">{STATUS_LABELS[shipment.status]}</span>
@@ -99,7 +99,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
       <div className="mb-6">
         <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
           <MapPin className={`w-4 h-4 ${c.text}`} />
-          Route Information
+          Route
         </h2>
         <div className="border border-slate-200 rounded-lg p-4">
           <div className="grid grid-cols-3 gap-4 items-center">
@@ -121,14 +121,14 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-slate-400" />
               <div>
-                <p className="text-xs text-slate-500">Shipped On</p>
+                <p className="text-xs text-slate-500">Booked</p>
                 <p className="text-sm font-medium text-slate-900">{formatDateOnly(shipment.createdAt)}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-slate-400" />
               <div>
-                <p className="text-xs text-slate-500">Est. Delivery</p>
+                <p className="text-xs text-slate-500">Estimated delivery</p>
                 <p className="text-sm font-medium text-slate-900">{formatDateOnly(shipment.estimatedDelivery)}</p>
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
         </div>
       </div>
 
-      {/* Package Details */}
+      {/* Cargo details */}
       <div className="mb-6">
         <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
           <Package className={`w-4 h-4 ${c.text}`} />
@@ -146,7 +146,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
           <table className="w-full text-sm">
             <tbody>
               <tr className="border-b border-slate-200">
-                <td className="px-4 py-3 bg-slate-50 font-medium text-slate-700 w-1/3">Description</td>
+                <td className="px-4 py-3 bg-slate-50 font-medium text-slate-700 w-1/3">Item</td>
                 <td className="px-4 py-3 text-slate-900">{shipment.itemDescription}</td>
               </tr>
               <tr>
@@ -167,7 +167,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
         <div>
           <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
             <User className={`w-4 h-4 ${c.text}`} />
-            Sender
+            Collected from
           </h2>
           <div className="border border-slate-200 rounded-lg p-4 space-y-2">
             <p className="font-semibold text-slate-900">{shipment.senderName}</p>
@@ -180,7 +180,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
         <div>
           <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
             <User className={`w-4 h-4 ${c.text}`} />
-            Receiver
+            Delivering to
           </h2>
           <div className="border border-slate-200 rounded-lg p-4 space-y-2">
             <p className="font-semibold text-slate-900">{shipment.receiverName}</p>
@@ -192,7 +192,7 @@ export default function Receipt({ shipment, receiptId }: ReceiptProps) {
         </div>
       </div>
 
-      {/* Tracking History */}
+      {/* Scan history */}
       <div className="mb-6">
         <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
           <Clock className={`w-4 h-4 ${c.text}`} />

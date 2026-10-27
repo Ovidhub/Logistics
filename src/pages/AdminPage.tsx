@@ -252,7 +252,7 @@ export default function AdminPage({
       >
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Admin Dashboard</h1>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Shipment control</h1>
             <div className="flex items-center gap-2 text-sm text-slate-300">
               <Link to="/" className="hover:text-red-500 transition-colors">Home</Link>
               <ChevronRight className="w-4 h-4" />
@@ -264,7 +264,7 @@ export default function AdminPage({
             className="bg-white/10 hover:bg-white/20 backdrop-blur text-white border border-white/30 px-4 py-2.5 rounded font-semibold flex items-center gap-2 transition-colors text-sm self-start sm:self-auto"
           >
             <LogOut className="w-4 h-4" />
-            Logout
+            Sign out
           </button>
         </div>
       </div>
@@ -273,8 +273,8 @@ export default function AdminPage({
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
           {[
-            { label: 'Total Shipments', value: stats.total, icon: <Package className="w-5 h-5" />, color: 'border-slate-900', iconBg: 'bg-slate-900' },
-            { label: 'In Transit', value: stats.inTransit, icon: <Truck className="w-5 h-5" />, color: 'border-red-600', iconBg: 'bg-red-600' },
+            { label: 'Shipments', value: stats.total, icon: <Package className="w-5 h-5" />, color: 'border-slate-900', iconBg: 'bg-slate-900' },
+            { label: 'In transit', value: stats.inTransit, icon: <Truck className="w-5 h-5" />, color: 'border-red-600', iconBg: 'bg-red-600' },
             { label: 'Delivered', value: stats.delivered, icon: <CheckCircle2 className="w-5 h-5" />, color: 'border-emerald-600', iconBg: 'bg-emerald-600' },
             { label: 'Pending', value: stats.pending, icon: <Clock className="w-5 h-5" />, color: 'border-amber-500', iconBg: 'bg-amber-500' },
           ].map((stat, i) => (
@@ -302,7 +302,7 @@ export default function AdminPage({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by tracking #, sender, receiver, or item..."
+              placeholder="Search tracking number, sender, receiver or item…"
               className="w-full pl-10 pr-4 py-2.5 rounded border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
             />
           </div>
@@ -311,7 +311,7 @@ export default function AdminPage({
             className="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded font-semibold flex items-center justify-center gap-2 transition-colors text-sm"
           >
             <Plus className="w-4 h-4" />
-            Add New Shipment
+            New shipment
           </button>
         </div>
 
@@ -321,11 +321,11 @@ export default function AdminPage({
             <table className="w-full">
               <thead>
                 <tr className="bg-slate-900 text-white">
-                  <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider">Tracking #</th>
+                  <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider">Tracking no.</th>
                   <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider">Item</th>
                   <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider">Route</th>
                   <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider">Status</th>
-                  <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider">Est. Delivery</th>
+                  <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider">Est. delivery</th>
                   <th className="text-right px-4 py-3 text-xs font-bold uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
@@ -373,7 +373,7 @@ export default function AdminPage({
                           <button
                             onClick={() => openStatus(shipment)}
                             className="p-1.5 text-red-600 hover:bg-red-50 rounded transition-colors"
-                            title="Update Status"
+                            title="Add update"
                           >
                             <Activity className="w-4 h-4" />
                           </button>
@@ -513,7 +513,7 @@ export default function AdminPage({
       {/* Add Modal */}
       <AnimatePresence>
         {showAddModal && (
-          <Modal onClose={() => setShowAddModal(false)} title="Add New Shipment">
+          <Modal onClose={() => setShowAddModal(false)} title="New shipment">
             <form onSubmit={handleAdd} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -584,7 +584,7 @@ export default function AdminPage({
       {/* Edit Modal */}
       <AnimatePresence>
         {showEditModal && selectedShipment && (
-          <Modal onClose={() => setShowEditModal(false)} title="Edit Shipment">
+          <Modal onClose={() => setShowEditModal(false)} title="Edit shipment">
             <form onSubmit={handleEdit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -655,7 +655,7 @@ export default function AdminPage({
       {/* Status Update Modal */}
       <AnimatePresence>
         {showStatusModal && selectedShipment && (
-          <Modal onClose={() => setShowStatusModal(false)} title="Update Shipment Status">
+          <Modal onClose={() => setShowStatusModal(false)} title="Add a status update">
             <form onSubmit={handleStatusUpdate} className="space-y-4">
               <div className="bg-red-50 border border-red-100 p-3 rounded">
                 <p className="text-xs text-slate-500 mb-1 uppercase font-bold">Tracking Number</p>
@@ -684,7 +684,7 @@ export default function AdminPage({
                   value={statusUpdate.description}
                   onChange={(e) => setStatusUpdate({ ...statusUpdate, description: e.target.value })}
                   className={`${inputClass} min-h-[80px] resize-none`}
-                  placeholder="Enter update details..."
+                  placeholder="What happened? e.g. cleared customs at Newark"
                 />
               </div>
               <div className="flex justify-end gap-3 pt-2">
@@ -702,13 +702,13 @@ export default function AdminPage({
       {/* Delete Modal */}
       <AnimatePresence>
         {showDeleteModal && selectedShipment && (
-          <Modal onClose={() => setShowDeleteModal(false)} title="Delete Shipment">
+          <Modal onClose={() => setShowDeleteModal(false)} title="Delete shipment">
             <div className="text-center py-4">
               <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <AlertTriangle className="w-7 h-7 text-red-600" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Delete Shipment?</h3>
-              <p className="text-sm text-slate-500 mb-1">This will permanently remove:</p>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">Delete this shipment?</h3>
+              <p className="text-sm text-slate-500 mb-1">This permanently removes:</p>
               <p className="font-mono font-bold text-slate-900 mb-6">{selectedShipment.trackingNumber}</p>
               <div className="flex justify-center gap-3">
                 <button onClick={() => setShowDeleteModal(false)} className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Cancel</button>

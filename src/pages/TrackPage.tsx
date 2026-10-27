@@ -108,7 +108,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
     setShipment(null);
 
     if (!trackingNumber.trim()) {
-      setError('Please enter a tracking number');
+      setError('Enter a tracking number to continue.');
       return;
     }
 
@@ -118,10 +118,10 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
       if (found) {
         setShipment(found);
       } else {
-        setError('No shipment found with this tracking number. Please check and try again.');
+        setError('We can’t find that tracking number. Check for stray spaces, or use the reference in your booking email.');
       }
     } catch {
-      setError('Something went wrong. Please try again.');
+      setError('The tracking service didn’t respond. Please try again in a moment.');
     } finally {
       setLoading(false);
     }
@@ -139,7 +139,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
         }}
       >
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Track Your Shipment</h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Track your shipment</h1>
           <div className="flex items-center gap-2 text-sm text-slate-300">
             <Link to="/" className={`${c.textHover} transition-colors`}>Home</Link>
             <ChevronRight className="w-4 h-4" />
@@ -155,10 +155,14 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
           animate={{ opacity: 1, y: 0 }}
           className={`bg-white shadow-xl rounded p-6 sm:p-8 border-t-4 ${c.borderT}`}
         >
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-2">
             <Package className={`w-5 h-5 ${c.text}`} />
-            <h2 className="font-bold text-slate-900">Enter Tracking Number</h2>
+            <h2 className="font-bold text-slate-900">Where is my shipment?</h2>
           </div>
+          <p className="text-sm text-slate-500 mb-4">
+            Enter the tracking number from your booking confirmation. No login, no sales call — just
+            the scans, the route and the estimated arrival.
+          </p>
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3">
             <input
               type="text"
@@ -177,7 +181,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
               ) : (
                 <>
                   <Search className="w-4 h-4" />
-                  Track Now
+                  Track shipment
                 </>
               )}
             </button>
@@ -198,7 +202,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
           </AnimatePresence>
 
           <p className="mt-4 text-xs text-slate-500">
-            Demo tracking numbers:{' '}
+            Just looking around? Try a sample tracking number:{' '}
             {['STX7B9K2M4P1', 'STQ3W8N5R7T2', 'STY6P2L9K3M8'].map((tn, i) => (
               <span key={tn}>
                 <button
@@ -232,7 +236,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
                   <div className="flex items-center gap-2 mb-1">
                     <Package className={`w-4 h-4 ${c.text}`} />
                     <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">
-                      Tracking Number
+                      Tracking number
                     </span>
                   </div>
                   <p className="text-2xl font-extrabold text-slate-900 tracking-wider font-mono">
@@ -245,7 +249,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
                     className="inline-flex items-center gap-2 px-4 py-2 rounded bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold transition-colors"
                   >
                     <Printer className="w-4 h-4" />
-                    Print Receipt
+                    Print receipt
                   </button>
                   <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold ${statusColorsNeutral[shipment.status]}`}>
                     {statusIcons[shipment.status]}
@@ -297,7 +301,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
                 <div className={`bg-white rounded shadow-sm border border-slate-200 p-6 border-t-4 ${c.borderT}`}>
                   <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
                     <MapPin className={`w-5 h-5 ${c.text}`} />
-                    Route Information
+                    Route
                   </h3>
                   <div className="flex items-center gap-4">
                     <div className="flex-1">
@@ -316,14 +320,14 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
                     <div className="flex items-center gap-2">
                       <Calendar className={`w-4 h-4 ${c.text}`} />
                       <div>
-                        <p className="text-xs text-slate-500">Shipped On</p>
+                        <p className="text-xs text-slate-500">Booked</p>
                         <p className="text-sm font-bold text-slate-900">{formatDateOnly(shipment.createdAt)}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <Calendar className={`w-4 h-4 ${c.text}`} />
                       <div>
-                        <p className="text-xs text-slate-500">Est. Delivery</p>
+                        <p className="text-xs text-slate-500">Estimated delivery</p>
                         <p className="text-sm font-bold text-slate-900">{formatDateOnly(shipment.estimatedDelivery)}</p>
                       </div>
                     </div>
@@ -334,7 +338,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
                 <div className="bg-white rounded shadow-sm border border-slate-200 p-6">
                   <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
                     <Globe className={`w-5 h-5 ${c.text}`} />
-                    Live Route Map
+                    Live route
                   </h3>
                   <RouteMap shipment={shipment} height="360px" />
                   <div className="mt-3 flex items-center justify-center gap-6 text-xs text-slate-500 flex-wrap">
@@ -349,7 +353,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
                     {shipment.status !== 'pending' && shipment.status !== 'delivered' && shipment.status !== 'cancelled' && shipment.status !== 'returned' && (
                       <div className="flex items-center gap-1.5">
                         <span className={`w-2.5 h-2.5 rounded-full ${c.bg} border-2 border-white shadow`} />
-                        Current Location
+                        Current position
                       </div>
                     )}
                   </div>
@@ -359,7 +363,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
                 <div className="bg-white rounded shadow-sm border border-slate-200 p-6">
                   <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
                     <Clock className={`w-5 h-5 ${c.text}`} />
-                    Tracking History
+                    Scan history
                   </h3>
                   <div className="space-y-0">
                     {[...shipment.events].reverse().map((event, index, arr) => (
@@ -398,11 +402,11 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
                 <div className="bg-white rounded shadow-sm border border-slate-200 p-6">
                   <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
                     <Box className={`w-5 h-5 ${c.text}`} />
-                    Package Details
+                    Cargo details
                   </h3>
                   <div className="space-y-3">
                     <div>
-                      <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Description</p>
+                      <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Item</p>
                       <p className="text-sm font-bold text-slate-900">{shipment.itemDescription}</p>
                     </div>
                     <div className="flex items-center gap-2">
@@ -418,7 +422,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
                 <div className="bg-white rounded shadow-sm border border-slate-200 p-6">
                   <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
                     <Home className={`w-5 h-5 ${c.text}`} />
-                    Sender
+                    Collected from
                   </h3>
                   <div className="space-y-3">
                     <div className="flex items-start gap-2">
@@ -438,7 +442,7 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
                 <div className="bg-white rounded shadow-sm border border-slate-200 p-6">
                   <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
                     <User className={`w-5 h-5 ${c.text}`} />
-                    Receiver
+                    Delivering to
                   </h3>
                   <div className="space-y-3">
                     <div className="flex items-start gap-2">
@@ -465,24 +469,24 @@ export default function TrackPage({ getShipmentByTracking }: TrackPageProps) {
         <div className="max-w-7xl mx-auto px-4 py-20">
           <div className="text-center mb-12">
             <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Why {settings.siteName}</p>
-            <h2 className="text-3xl font-extrabold text-slate-900">Trusted Shipment Tracking</h2>
+            <h2 className="text-3xl font-extrabold text-slate-900">Tracking you don’t have to chase</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 icon: <Search className="w-6 h-6" />,
-                title: 'Real-Time Tracking',
-                desc: 'Monitor your shipments live with up-to-the-minute updates and accurate GPS location data.',
+                title: 'Updates at every scan',
+                desc: 'Pickup, linehaul, customs and final mile — each handover is logged with a timestamp and location.',
               },
               {
                 icon: <Truck className="w-6 h-6" />,
-                title: 'Worldwide Coverage',
-                desc: `We deliver to ${settings.statCountries} countries with our extensive logistics network and partners.`,
+                title: 'Coverage in 150+ countries',
+                desc: `One tracking view across ${settings.statCountries} countries and every carrier we use, including partner legs.`,
               },
               {
                 icon: <Printer className="w-6 h-6" />,
-                title: 'Printable Receipts',
-                desc: 'Download or print your shipment receipts anytime as PDF or text format.',
+                title: 'Receipts on demand',
+                desc: 'Download a proof-of-delivery record as a PDF whenever finance or your customer asks for one.',
               },
             ].map((feature, i) => (
               <motion.div
