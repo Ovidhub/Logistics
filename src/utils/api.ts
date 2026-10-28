@@ -55,8 +55,17 @@ export async function api<T>(path: string, options: ApiOptions = {}): Promise<T>
       body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
     });
   } catch {
-    // fetch rejects on a true network failure (server down, DNS, offline).
-    throw new ApiError(0, `Cannot reach the server.${devHint}`);
+    // fetch rejects on a true network failure: server down, DNS, offline, or —
+    // most often when the API sits on its own subdomain — a CORS block, because
+    // the browser refuses to expose the response when the preflight fails.
+    // Name the likely cause; the generic wording sent people hunting for a
+    // wrong password when the real problem was a missing Allow-Origin header.
+    throw new ApiError(
+      0,
+      `Cannot reach ${API_URL}. The server may be down, or it may not allow requests ` +
+        'from this site (CORS). Check that the API sends an Access-Control-Allow-Origin ' +
+        `header and answers OPTIONS requests.${devHint}`
+    );
   }
 
   // Detect "there is no API here" so the user gets the real reason instead of a
