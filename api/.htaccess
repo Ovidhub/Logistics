@@ -1,4 +1,5 @@
 RewriteEngine On
+RewriteBase /
 
 # Never let LiteSpeed/proxy cache the dynamic API (responses vary per request).
 <IfModule LiteSpeed>
@@ -9,7 +10,15 @@ CacheDisable public /
 RewriteCond %{HTTP:Authorization} .
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+# Stop here if we are already on the front controller. Without this guard a
+# misresolved REQUEST_FILENAME (seen on some cPanel subdomain docroots) makes
+# the rule below rewrite index.php into itself until Apache gives up, which
+# surfaces as a 500 on every route while /index.php itself still works.
+RewriteRule ^index\.php$ - [L]
+
 # Route everything that is not a real file/dir to the front controller.
+# The target is root-relative so it resolves correctly from a subdomain
+# document root as well as from a subfolder install.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
+RewriteRule ^ /index.php [QSA,L]
