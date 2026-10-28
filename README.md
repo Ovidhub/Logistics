@@ -1,5 +1,10 @@
 # Posalfast Logistics
 
+Posalfast Logistics Ltd is a UK freight forwarder (head office: 12 Fenchurch Avenue, London EC3M 5AD).
+Site copy is written for a UK audience and refers to the UK customs regime (HMRC, CDS, UK Global
+Tariff, GB EORI, GVMS) and UK gateways (Felixstowe, Southampton, London Gateway, Heathrow,
+Manchester, East Midlands, Dover, Eurotunnel).
+
 A logistics / shipment-tracking single-page web application built with React, Vite, TypeScript and Tailwind CSS. It includes a public marketing site, a shipment tracking page, an admin portal for managing shipments, and a super-admin portal for editing site-wide content and settings.
 
 > **Status:** full-stack app. The React frontend talks to a PHP + MySQL REST API (in `api/`) with JWT authentication. See [DEPLOY.md](DEPLOY.md) for Hostinger deployment.

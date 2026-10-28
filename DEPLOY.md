@@ -1,4 +1,4 @@
-# Deploying SwiftTrack to Hostinger
+# Deploying Posalfast to Hostinger
 
 The app has two parts that both live under one domain:
 
