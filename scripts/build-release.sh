@@ -7,6 +7,8 @@
 #   download/posalfast-website.zip  – compiled frontend (index.html, assets/, images/)
 #   download/posalfast-api.zip      – PHP API (no tests, no config.php)
 #   download/posalfast-database.sql – copy of api/schema.sql (tables + accounts)
+#   download/posalfast-database.zip – same SQL in a zip, so a browser downloads it
+#                                     instead of displaying it as plain text
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -29,6 +31,13 @@ zip -qr download/posalfast-api.zip api -x "api/tests/*" -x "api/config.php" -x "
 
 echo "==> Copying database schema"
 cp api/schema.sql download/posalfast-database.sql
+
+# GitHub (and several browsers) render a .sql file as text instead of
+# downloading it. Ship the same file zipped as well, so "click to download"
+# behaves the way people expect.
+echo "==> Zipping database schema"
+rm -f download/posalfast-database.zip
+(cd download && zip -q posalfast-database.zip posalfast-database.sql)
 
 echo "==> Done"
 ls -lh download

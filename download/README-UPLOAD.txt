@@ -7,6 +7,8 @@ FILES IN THIS PACKAGE
 ---------------------
 posalfast-website.zip   -> upload to public_html (the React site: index.html, assets/, images/)
 posalfast-database.sql  -> import into a MySQL database (tables + admin accounts, no sample data)
+posalfast-database.zip  -> the same SQL in a zip. Use this one if your browser opens the
+                           .sql as text instead of saving it; unzip, then import the .sql
 posalfast-api.zip       -> optional: the PHP API. Upload as public_html/api/ for live tracking/admin.
 
 STEP 1 — CREATE THE DATABASE
