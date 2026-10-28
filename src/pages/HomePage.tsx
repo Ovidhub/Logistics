@@ -216,7 +216,7 @@ export default function HomePage() {
               {
                 img: '/images/road-freight-800.jpg',
                 title: 'Fleet and final mile',
-                desc: 'Metro and cross-border trucking with scheduled collections, POD photos and ETAs pushed straight to your customer.',
+                desc: 'Regional and cross-border trucking with booked collection windows, POD photos and ETAs pushed straight to your customer.',
               },
             ].map((service, i) => (
               <motion.div
