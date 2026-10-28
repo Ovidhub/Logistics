@@ -522,7 +522,7 @@ export default function AdminPage({
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Sender Phone</label>
-                  <input required value={formData.senderPhone} onChange={(e) => setFormData({ ...formData, senderPhone: e.target.value })} className={inputClass} placeholder="+1 (555) 000-0000" />
+                  <input required value={formData.senderPhone} onChange={(e) => setFormData({ ...formData, senderPhone: e.target.value })} className={inputClass} placeholder="+44 20 7946 0000" />
                 </div>
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Sender Email</label>
@@ -538,7 +538,7 @@ export default function AdminPage({
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Receiver Phone</label>
-                  <input required value={formData.receiverPhone} onChange={(e) => setFormData({ ...formData, receiverPhone: e.target.value })} className={inputClass} placeholder="+1 (555) 000-0000" />
+                  <input required value={formData.receiverPhone} onChange={(e) => setFormData({ ...formData, receiverPhone: e.target.value })} className={inputClass} placeholder="+44 20 7946 0000" />
                 </div>
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-bold text-slate-700 mb-1 uppercase">Receiver Email</label>

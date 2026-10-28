@@ -8,10 +8,10 @@ import { colorClasses, type PrimaryColor } from '../utils/colors';
 const blogPosts = [
   {
     id: 1,
-    title: 'Peak season without the panic: booking capacity in September',
+    title: 'Q4 peak without the panic: booking capacity in September',
     excerpt:
-      'Why the cheapest rate in October is booked in July — and the three questions worth asking your forwarder before the rush starts.',
-    author: 'Adaeze Nwosu',
+      'Why the cheapest rate into Felixstowe in October is booked in July — and the three questions worth asking your forwarder before the rush starts.',
+    author: 'Eleanor Whitfield',
     date: 'Oct 20, 2026',
     category: 'Operations',
     image: '/images/ocean-freight-800.jpg',
@@ -21,8 +21,8 @@ const blogPosts = [
     id: 2,
     title: 'What a landed-cost quote should itemise',
     excerpt:
-      'Freight is the easy number. Here is the rest of the invoice — duty, terminal handling, bonds, demurrage risk — and how to sanity-check it.',
-    author: 'Daniel Okafor',
+      'Freight is the easy number. Here is the rest of the sterling invoice — duty, terminal handling, bonds, demurrage risk — and how to sanity-check it.',
+    author: 'Callum Reid',
     date: 'Oct 8, 2026',
     category: 'Guides',
     image: '/images/warehouse-800.jpg',
@@ -33,7 +33,7 @@ const blogPosts = [
     title: 'Incoterms in plain English: who pays when the crane moves',
     excerpt:
       'FOB, CIF, DAP and the gap between them, explained by what actually happens on the quay rather than by acronym.',
-    author: 'Grace Mensah',
+    author: 'Priya Raghavan',
     date: 'Sep 26, 2026',
     category: 'Customs',
     image: '/images/berth-800.jpg',
@@ -41,10 +41,10 @@ const blogPosts = [
   },
   {
     id: 4,
-    title: 'Why your container gets held — and the three documents that fix it',
+    title: 'Why your container gets held at Felixstowe — and the three documents that fix it',
     excerpt:
       'Most holds are paperwork, not smuggling. The commercial invoice, packing list and certificate details that clear 80% of them.',
-    author: 'Tunde Bakare',
+    author: 'Tom Fairbrother',
     date: 'Sep 11, 2026',
     category: 'Customs',
     image: '/images/air-freight-800.jpg',
@@ -52,10 +52,10 @@ const blogPosts = [
   },
   {
     id: 5,
-    title: 'Backhauls: how we cut empty running by 11% in a year',
+    title: 'Backhauls: how we cut empty running by 11% across the UK network',
     excerpt:
-      'Matching return loads, pooling part shipments and the routing decisions that took deadhead miles off our network.',
-    author: 'Ifeoma Eze',
+      'Matching return loads, pooling part shipments and the routing decisions that took deadhead miles off our M25 and M6 corridors.',
+    author: 'Hannah Mercer',
     date: 'Aug 29, 2026',
     category: 'Sustainability',
     image: '/images/road-freight-800.jpg',
@@ -66,7 +66,7 @@ const blogPosts = [
     title: 'From scan to screen: how our tracking actually works',
     excerpt:
       'What happens between a barcode beep at the depot and the status change on your phone — including where tracking normally breaks.',
-    author: 'Samuel Adeyemi',
+    author: 'Jamie Okonkwo',
     date: 'Aug 14, 2026',
     category: 'Technology',
     image: '/images/hero-port-800.jpg',
@@ -103,8 +103,8 @@ export default function BlogPage() {
               Notes from the quay, the depot and the desk
             </h2>
             <p className="text-slate-600 mt-3 max-w-2xl mx-auto">
-              Trade lane movement, customs practice and operating habits our coordinators actually use —
-              written by the people doing the work.
+              UK trade lane movement, HMRC customs practice and operating habits our coordinators actually
+              use — written by the people doing the work.
             </p>
           </div>
 

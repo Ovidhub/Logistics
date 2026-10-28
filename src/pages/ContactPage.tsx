@@ -148,7 +148,7 @@ export default function ContactPage() {
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           className={`${inputClass} pl-10`}
-                          placeholder="+1 (555) 000-0000"
+                          placeholder="+44 20 7946 0000"
                         />
                       </div>
                     </div>
@@ -283,11 +283,15 @@ export default function ContactPage() {
               },
               {
                 q: 'Can you collect today?',
-                a: 'In most metro areas yes, if you brief us before 11am and the cargo is packed and labelled. Air and ocean bookings usually need 24–48 hours before cut-off.',
+                a: 'Across most of the UK, yes — brief us before 11am and have the cargo packed and labelled. Air and ocean bookings usually need 24–48 hours before cut-off, and Dover or Eurotunnel departures need the GVMS entry lodged first.',
               },
               {
                 q: 'Who handles customs?',
-                a: 'Our own licensed brokers. Entries are filed before the flight or vessel arrives, and we watch demurrage clocks so you are not paying for a desk delay.',
+                a: 'Our own HMRC-registered brokers, filing on CDS. Entries are lodged before the flight or vessel arrives, and we watch demurrage and detention clocks so you are not paying for a desk delay.',
+              },
+              {
+                q: 'Do we need an EORI number?',
+                a: 'Yes — UK imports and exports need a GB EORI. If you do not have one, we register it with HMRC for you, along with a duty deferment account and postponed VAT accounting so duty is not paid at the border.',
               },
               {
                 q: 'What happens if cargo is damaged?',
@@ -295,7 +299,7 @@ export default function ContactPage() {
               },
               {
                 q: 'Do you work with small volumes?',
-                a: 'Yes — LCL groupage, part loads and single-pallet storage are all normal. There is no minimum contract term on warehouse space.',
+                a: 'Yes — LCL groupage, part loads and single-pallet storage are all normal at our Kent and Midlands sites. There is no minimum contract term on warehouse space.',
               },
               {
                 q: 'Where do I find proof of delivery?',

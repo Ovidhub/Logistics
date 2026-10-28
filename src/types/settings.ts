@@ -57,12 +57,12 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   tagline: 'Freight cleared, tracked and delivered',
 
   // Contact Info
-  address: '14 Adeola Odeku Street, Victoria Island, Lagos',
-  phone: '+234 700 555 0199',
-  phoneSecondary: '+234 812 555 0123',
-  email: 'support@posalfast.com',
+  address: '12 Fenchurch Avenue, London EC3M 5AD',
+  phone: '+44 20 7946 0199',
+  phoneSecondary: '+44 7700 900123',
+  email: 'hello@posalfast.com',
   emailSales: 'sales@posalfast.com',
-  emailSupport: 'info@posalfast.com',
+  emailSupport: 'support@posalfast.com',
 
   // Social Media
   facebook: 'https://facebook.com/posalfast',
@@ -70,32 +70,32 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   instagram: 'https://instagram.com/posalfast',
 
   // Business Hours
-  hoursWeekday: '9:00 AM - 6:00 PM',
-  hoursSaturday: '10:00 AM - 4:00 PM',
+  hoursWeekday: '08:00 - 18:00',
+  hoursSaturday: '09:00 - 13:00',
   hoursSunday: 'Closed',
 
   // Hero Section
   heroTitle: 'Freight that lands when we said it would.',
   heroSubtitle:
-    'One contract covers collection, clearance, linehaul and final mile. Track every leg from your phone — and get a human on the line the moment something changes.',
+    'One contract covers collection at your supplier, HMRC clearance and delivery to your door. CDS entries are filed before the vessel berths at Felixstowe, Southampton or London Gateway — and a coordinator in London answers their own phone when something changes.',
   heroCTA: 'Track your freight',
 
   // About Section
-  aboutTitle: 'We answer the phone at 6am and again at 11pm.',
+  aboutTitle: 'We answer the phone at 8am and again at 8pm.',
   aboutDescription:
-    'Posalfast clears and moves commercial freight for importers, exporters and distributors. Our coordinators run dedicated lanes between West Africa, Europe and North America — and every consignment is scanned, insured and visible from pickup to signature.',
-  yearsExperience: '12+',
+    'Posalfast is a UK freight forwarder clearing and moving commercial freight for importers, exporters and distributors. Our coordinators run dedicated lanes between the UK, Europe and North America — filing CDS entries at Felixstowe, Southampton and Heathrow, and keeping every consignment scanned, insured and visible from collection to signature.',
+  yearsExperience: '13+',
 
   // Stats
-  statClients: '4,800+',
+  statClients: '2,400+',
   statCountries: '150+',
   statDeliveries: '320K+',
-  statYears: '12+',
+  statYears: '13+',
 
   // Footer
   footerAbout:
-    'Posalfast moves commercial freight by road, ocean and air — customs cleared before arrival, covered in full and tracked scan by scan, with one coordinator accountable for the outcome.',
-  copyrightText: 'Posalfast Logistics. All rights reserved.',
+    'Posalfast Logistics Ltd moves commercial freight by road, ocean and air from our London head office — UK customs cleared before arrival, covered in full and tracked scan by scan, with one coordinator accountable for the outcome.',
+  copyrightText: 'Posalfast Logistics Ltd. All rights reserved.',
 
   // Colors
   primaryColor: 'red',

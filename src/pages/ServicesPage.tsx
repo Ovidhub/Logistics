@@ -22,50 +22,50 @@ const services = [
     icon: <Plane className="w-7 h-7" />,
     image: '/images/air-freight.jpg',
     title: 'Air freight',
-    desc: 'Charter, consolidated and next-flight-out capacity for cargo with a fixed date on it — booked against a real cut-off, not a hopeful one.',
-    features: ['Next-flight-out recovery', 'Consolidated economy air', 'Temperature-sensitive cargo', 'Dangerous goods certified'],
+    desc: 'Charter, consolidated and next-flight-out capacity out of Heathrow, Manchester and East Midlands — booked against a real cut-off, not a hopeful one.',
+    features: ['Next-flight-out recovery', 'Consolidated economy air', 'Temperature-controlled pharma', 'IATA dangerous goods certified'],
   },
   {
     icon: <Ship className="w-7 h-7" />,
     image: '/images/ocean-freight.jpg',
     title: 'Ocean freight',
-    desc: 'Weekly FCL sailings and LCL groupage on the trade lanes we know best, with transhipment risk explained before you book.',
-    features: ['FCL and LCL', 'Buyer’s consolidation', 'Reefer and OOG cargo', 'Detention and demurrage watch'],
+    desc: 'Weekly FCL sailings and LCL groupage into Felixstowe, Southampton and London Gateway, with transhipment risk and demurrage exposure explained before you book.',
+    features: ['FCL and LCL', 'Buyer’s consolidation', 'Reefer and out-of-gauge cargo', 'Terminal handling costed up front'],
   },
   {
     icon: <Truck className="w-7 h-7" />,
     image: '/images/road-freight.jpg',
     title: 'Road transport',
-    desc: 'Owned tractors for scheduled linehauls, vetted carriers for overflow, and a border team that pre-files cross-border paperwork.',
-    features: ['FTL and part loads', 'Cross-border bonded moves', 'Metro distribution', 'Live GPS on every load'],
+    desc: 'UK domestic FTL and part loads, plus Dover and Eurotunnel RoRo crossings with GVMS pre-lodgement so the trailer keeps moving on the other side.',
+    features: ['FTL and part loads', 'Dover and Eurotunnel RoRo', 'GVMS pre-lodgement', 'Live GPS on every load'],
   },
   {
     icon: <Warehouse className="w-7 h-7" />,
     image: '/images/warehouse.jpg',
     title: 'Warehousing',
-    desc: 'Racked ambient space, bonded storage and pick-and-pack from hub locations, billed per pallet position with no minimum term.',
+    desc: 'Racked ambient space, bonded storage and pick-and-pack from Kent, the Midlands and Manchester, billed per pallet position with no minimum term.',
     features: ['Bonded and ambient', 'Pick, pack, dispatch', 'Live stock portal', 'Cycle counts weekly'],
   },
   {
     icon: <FileText className="w-7 h-7" />,
     image: '/images/aerial-port.jpg',
     title: 'Customs brokerage',
-    desc: 'Licensed brokers who classify, file and clear — including post-entry adjustments and duty drawback when it applies to you.',
-    features: ['Entry filing and bonds', 'Tariff classification', 'Duty drawback claims', 'Audit and compliance support'],
+    desc: 'HMRC-compliant entries filed on CDS by our own brokers — UK Global Tariff classification, duty deferment, postponed VAT accounting and post-entry adjustments.',
+    features: ['CDS entry filing', 'EORI and duty deferment', 'UK Global Tariff classification', 'PVA and duty reclaim'],
   },
   {
     icon: <Package className="w-7 h-7" />,
     image: '/images/express.jpg',
     title: 'Express delivery',
-    desc: 'Time-definite delivery for spare parts, samples and documents, with the recipient notified before the van leaves the depot.',
-    features: ['Same-day and next-day', 'Dedicated vehicle', 'Photo and signature POD', 'Recipient SMS updates'],
+    desc: 'Time-definite UK delivery for spare parts, samples and documents, with the recipient texted before the van leaves our depot.',
+    features: ['Same-day and next-day UK', 'Dedicated vehicle', 'Photo and signature POD', 'Recipient SMS updates'],
   },
 ];
 
 const process = [
   { num: '01', title: 'Send the lane', desc: 'Origin, destination, weight, deadline. Four numbers is usually enough to price it.' },
-  { num: '02', title: 'Approve one price', desc: 'Freight, duty estimate and cover in a single figure — back inside four working hours.' },
-  { num: '03', title: 'We collect and clear', desc: 'Booked window, scanned at pickup, entry filed before the vessel or flight lands.' },
+  { num: '02', title: 'Approve one price', desc: 'Freight, duty estimate and cover in a single sterling figure — back inside four working hours.' },
+  { num: '03', title: 'We collect and clear', desc: 'Booked window, scanned at collection, CDS entry filed before the vessel or flight lands.' },
   { num: '04', title: 'You watch it land', desc: 'Scan history, current position and proof of delivery in the same portal.' },
 ];
 
@@ -183,7 +183,7 @@ export default function ServicesPage() {
               {
                 icon: <Clock className="w-6 h-6" />,
                 title: 'Booked transit times',
-                desc: 'A date we commit to in writing, with an early call if a lane slips.',
+                desc: 'A UK delivery date we commit to in writing, with an early call if a lane slips.',
               },
               {
                 icon: <Shield className="w-6 h-6" />,
@@ -193,7 +193,7 @@ export default function ServicesPage() {
               {
                 icon: <DollarSign className="w-6 h-6" />,
                 title: 'One landed price',
-                desc: 'Freight, fuel, duty estimate and clearance in a single quote.',
+                desc: 'Freight, fuel, duty estimate and clearance in one sterling price.',
               },
               {
                 icon: <CheckCircle2 className="w-6 h-6" />,

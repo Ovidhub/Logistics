@@ -316,7 +316,7 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
                           value={formData.address}
                           onChange={(e) => handleChange('address', e.target.value)}
                           className={inputClass}
-                          placeholder="92 Bowery St New York, NY 10013"
+                          placeholder="12 Fenchurch Avenue, London EC3M 5AD"
                         />
                       </Field>
 
@@ -326,7 +326,7 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
                             value={formData.phone}
                             onChange={(e) => handleChange('phone', e.target.value)}
                             className={inputClass}
-                            placeholder="+1 (800) 555-0199"
+                            placeholder="+44 20 7946 0199"
                           />
                         </Field>
                         <Field label="Secondary Phone">
@@ -334,7 +334,7 @@ export default function SuperAdminPage({ onLogout }: SuperAdminPageProps) {
                             value={formData.phoneSecondary}
                             onChange={(e) => handleChange('phoneSecondary', e.target.value)}
                             className={inputClass}
-                            placeholder="+1 (212) 555-0123"
+                            placeholder="+44 7700 900123"
                           />
                         </Field>
                       </div>

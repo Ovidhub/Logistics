@@ -46,7 +46,7 @@ export default function AboutPage() {
             />
             <div className={`absolute -bottom-6 -right-6 ${c.bg} text-white p-6 rounded shadow-xl hidden md:block`}>
               <p className="text-4xl font-extrabold">{settings.yearsExperience}</p>
-              <p className="text-xs uppercase tracking-wider">Years clearing freight</p>
+              <p className="text-xs uppercase tracking-wider">Years clearing UK customs</p>
             </div>
           </motion.div>
 
@@ -58,22 +58,22 @@ export default function AboutPage() {
           >
             <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Our story</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-5 leading-tight">
-              Three trucks, one customer, and a promise to call back the same day.
+              Three trucks out of Felixstowe, one customer, and a promise to call back the same day.
             </h2>
             <p className="text-slate-600 leading-relaxed mb-4">
-              Posalfast began in 2013 handling port-to-door deliveries for a single electronics importer.
-              The work was simple; the industry around it was not. Brokers went quiet, tracking went
-              stale and invoices arrived with lines nobody could explain.
+              Posalfast began in 2013 running port-to-door deliveries out of Felixstowe for a single
+              electronics importer. The work was simple; the industry around it was not. Brokers went
+              quiet, tracking went stale and invoices arrived with lines nobody could explain.
             </p>
             <p className="text-slate-600 leading-relaxed mb-6">
-              We built the opposite. Today a team of coordinators, brokers and drivers moves freight for{' '}
-              {settings.statClients} shippers across {settings.statCountries} countries — with clearance
-              prepared before arrival, scans recorded at every handover and one person accountable for
-              the outcome.
+              We built the opposite. From a head office in the City of London, a team of coordinators,
+              brokers and drivers now moves freight for {settings.statClients} shippers across{' '}
+              {settings.statCountries} countries — with HMRC clearance prepared before arrival, scans
+              recorded at every handover and one person accountable for the outcome.
             </p>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
-              {['ISO 9001:2015', 'IATA accredited', 'AEO authorised', 'GDP compliant'].map((item) => (
+              {['AEO authorised (HMRC)', 'ISO 9001:2015', 'IATA accredited', 'GDP compliant'].map((item) => (
                 <div key={item} className="flex items-center gap-2">
                   <CheckCircle2 className={`w-4 h-4 ${c.text} flex-shrink-0`} />
                   <span className="text-sm font-semibold text-slate-700">{item}</span>
@@ -106,12 +106,12 @@ export default function AboutPage() {
               {
                 icon: <Target className="w-7 h-7" />,
                 title: 'Mission',
-                desc: 'Move freight so predictably that our customers stop building delay allowances into their own promises.',
+                desc: 'Move freight so predictably that UK importers stop building delay allowances into their own promises.',
               },
               {
                 icon: <Eye className="w-7 h-7" />,
                 title: 'Vision',
-                desc: 'A single tracking view across every mode and border — so a supply chain is as visible as a courier parcel.',
+                desc: 'One tracking view from Felixstowe or Heathrow to the customer’s door — so a supply chain is as visible as a courier parcel.',
               },
               {
                 icon: <Heart className="w-7 h-7" />,
@@ -150,8 +150,8 @@ export default function AboutPage() {
               Every consignment has a name attached to it.
             </h2>
             <p className="text-slate-600 leading-relaxed mb-6">
-              Brokers who know which tariff codes raise questions. Drivers who have run the same border
-              post for years. Warehouse leads who count twice. Our people are why a collection window is
+              Brokers who know which UK Global Tariff codes raise questions. Drivers who have run the same
+              Dover crossing for years. Warehouse leads who count twice. Our people are why a collection window is
               a commitment rather than a suggestion.
             </p>
 
@@ -165,7 +165,7 @@ export default function AboutPage() {
                 {
                   icon: <Award className="w-5 h-5" />,
                   title: 'Trained, then trusted',
-                  desc: 'Customs and dangerous-goods certifications renewed annually, with authority to resolve issues on the spot.',
+                  desc: 'Customs and dangerous-goods certifications renewed annually, with authority to clear HMRC queries on the spot.',
                 },
                 {
                   icon: <TrendingUp className="w-5 h-5" />,
@@ -210,7 +210,7 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: <Globe className="w-6 h-6" />, title: 'Audited partners', desc: 'Every overseas agent re-checked annually on service and solvency.' },
+              { icon: <Globe className="w-6 h-6" />, title: 'Audited partners', desc: 'Every overseas agent re-checked annually on service, solvency and UK delivery record.' },
               { icon: <Shield className="w-6 h-6" />, title: 'Cover that pays', desc: 'Full-value cargo insurance with claims handled by our own team.' },
               { icon: <Zap className="w-6 h-6" />, title: 'Decisions same day', desc: 'Rates, routing changes and holds answered before close of business.' },
               { icon: <Award className="w-6 h-6" />, title: 'No hidden lines', desc: 'Duty, fuel and handling quoted up front — the invoice matches the quote.' },

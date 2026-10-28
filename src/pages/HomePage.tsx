@@ -68,7 +68,7 @@ export default function HomePage() {
                 <CheckCircle2 className="w-4 h-4" /> Cargo cover as standard
               </span>
               <span className="inline-flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4" /> Customs in-house
+                <CheckCircle2 className="w-4 h-4" /> HMRC clearance in-house
               </span>
             </div>
           </motion.div>
@@ -82,22 +82,22 @@ export default function HomePage() {
             {
               icon: <Truck className="w-7 h-7" />,
               title: 'Road transport',
-              desc: 'Scheduled linehauls and metro runs with GPS on every load.',
+              desc: 'UK linehauls, Dover and Eurotunnel crossings, GPS on every load.',
             },
             {
               icon: <Ship className="w-7 h-7" />,
               title: 'Ocean freight',
-              desc: 'FCL and LCL bookings on the lanes we sail every week.',
+              desc: 'FCL and LCL into Felixstowe, Southampton and London Gateway.',
             },
             {
               icon: <Plane className="w-7 h-7" />,
               title: 'Air freight',
-              desc: 'Next-flight-out for cargo that cannot miss its window.',
+              desc: 'Next-flight-out from Heathrow, Manchester and East Midlands.',
             },
             {
               icon: <Package className="w-7 h-7" />,
               title: 'Warehousing',
-              desc: 'Bonded and ambient storage with same-day dispatch.',
+              desc: 'Bonded and ambient space in Kent, the Midlands and Manchester.',
             },
           ].map((s, i) => (
             <motion.div
@@ -136,7 +136,7 @@ export default function HomePage() {
             />
             <div className="absolute bottom-4 left-4 bg-slate-900/90 text-white rounded px-4 py-3">
               <p className="text-2xl font-extrabold leading-none">{settings.yearsExperience}</p>
-              <p className="text-[11px] uppercase tracking-wider text-white/70">Years clearing freight</p>
+              <p className="text-[11px] uppercase tracking-wider text-white/70">Years clearing UK customs</p>
             </div>
           </motion.div>
 
@@ -146,7 +146,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Since 2013</p>
+            <p className={`${c.text} font-bold text-sm uppercase tracking-wider mb-3`}>Established 2013 · London</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-5 leading-tight">
               {settings.aboutTitle}
             </h2>
@@ -258,7 +258,7 @@ export default function HomePage() {
             { value: settings.statClients, label: 'Active shippers' },
             { value: settings.statCountries, label: 'Countries served' },
             { value: settings.statDeliveries, label: 'Consignments booked' },
-            { value: settings.statYears, label: 'Years clearing freight' },
+            { value: settings.statYears, label: 'Years clearing UK customs' },
           ].map((stat, i) => (
             <motion.div
               key={i}
@@ -286,7 +286,7 @@ export default function HomePage() {
             {[
               'Quote back inside four hours',
               'Scans at every handover',
-              'Duty and tax quoted up front',
+              'Duty and VAT quoted in sterling',
               'One coordinator per account',
               'Collection windows in writing',
               'Claims settled in-house',

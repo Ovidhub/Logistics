@@ -14,7 +14,7 @@ export default function MapSection() {
 
   if (pathname.startsWith('/admin') || pathname.startsWith('/super-admin')) return null;
 
-  const address = settings.address || 'New York, NY';
+  const address = settings.address || 'London, UK';
   const query = encodeURIComponent(address);
   const embedSrc = `https://maps.google.com/maps?q=${query}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
   const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${query}`;
