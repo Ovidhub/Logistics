@@ -1,6 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL || '/api';
-const TOKEN_KEY = 'swiftrack_token';
-const ROLE_KEY = 'swiftrack_role';
+const TOKEN_KEY = 'posalfast_token';
+const ROLE_KEY = 'posalfast_role';
 
 export function getToken(): string | null {
   return localStorage.getItem(TOKEN_KEY);
@@ -59,13 +59,20 @@ export async function api<T>(path: string, options: ApiOptions = {}): Promise<T>
     throw new ApiError(0, `Cannot reach the server.${devHint}`);
   }
 
-  // A static host answering /api/... with its index.html means the PHP API is
-  // not deployed next to the frontend — say so plainly instead of "invalid JSON".
+  // Detect "there is no API here" so the user gets the real reason instead of a
+  // bare status code. Two shapes occur in practice:
+  //   1. A static host rewriting everything to index.html -> text/html body.
+  //   2. A static host refusing the verb, because /api/... is not a real
+  //      endpoint there -> 404 or 405 with an empty or plain-text body.
   const contentType = res.headers.get('content-type') || '';
-  if (contentType.includes('text/html')) {
+  const looksUnrouted =
+    (res.status === 404 || res.status === 405) && !contentType.includes('application/json');
+  if (contentType.includes('text/html') || looksUnrouted) {
     throw new ApiError(
       0,
-      'The API is not reachable at /api. Upload the api/ folder next to the site, or set VITE_API_URL to the API address.'
+      `The API is not reachable at ${API_URL}. This page needs the PHP API (the api/ folder) ` +
+        'hosted somewhere PHP runs, with VITE_API_URL pointing at it. ' +
+        'See download/README-UPLOAD.txt for the upload steps.'
     );
   }
 

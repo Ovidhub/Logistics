@@ -73,8 +73,16 @@ The Google Map on the last section of every page follows the address you set her
 
 TROUBLESHOOTING
 ---------------
-Tracking says "The API is not reachable at /api"
+Tracking or login says "The API is not reachable at /api"
   -> Step 3 was skipped, or public_html/api/ is in the wrong place.
+
+Login says "Request failed (405)" (or 404)
+  -> The site is being served by a static host (Vercel, Netlify, GitHub Pages)
+     that has no PHP runtime, so the POST to /api/auth/login is refused before
+     it reaches any PHP code. This is NOT a wrong username or password.
+     Fix: host the api/ folder on PHP hosting (e.g. a subdomain such as
+     api.yourdomain.com pointing at your cPanel IP), then rebuild the frontend
+     with VITE_API_URL=https://api.yourdomain.com/api so it calls that address.
 Login fails with a 401 straight after a successful sign-in
   -> api/.htaccess is missing (it carries the Authorization header).
 404 on every /api/... request
