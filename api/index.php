@@ -12,9 +12,34 @@ require __DIR__ . '/src/Settings.php';
 require __DIR__ . '/src/Mailer.php';
 require __DIR__ . '/src/handlers.php';
 
-Db::init($config);
-
 $method = $_SERVER['REQUEST_METHOD'];
+
+// The frontend and this API may live on different origins (static host + PHP
+// host), so answer the browser's preflight before doing any work. Two reasons
+// this must come first: routing OPTIONS through the table below would 404 and
+// break the login, and a preflight must not need the database at all — if it
+// did, a database hiccup would surface in the browser as an opaque CORS error
+// instead of a readable one.
+$allowOrigin = $config['cors_origin'] ?? '*';
+if ($method === 'OPTIONS') {
+  Response::cors($allowOrigin);
+  http_response_code(204);
+  exit;
+}
+
+// A wrong database password in config.php is the most common first-run
+// mistake. Answer with readable JSON (and CORS headers so the browser shows the
+// message instead of a network error) rather than an HTML fatal error page.
+try {
+  Db::init($config);
+} catch (Throwable $e) {
+  Response::send(
+    503,
+    ['error' => 'Database connection failed. Check the db settings in api/config.php.'],
+    $allowOrigin
+  );
+  exit;
+}
 
 $uriPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 if (php_sapi_name() === 'cli-server') {
@@ -40,7 +65,7 @@ if ($path === '') $path = '/';
 $routes = require __DIR__ . '/src/routes.php';
 $match = Router::match($routes, $method, $path);
 if ($match === null) {
-  Response::send(404, ['error' => 'Not found']);
+  Response::send(404, ['error' => 'Not found'], $allowOrigin);
   exit;
 }
 [$handler, $params] = $match;
@@ -60,4 +85,4 @@ try {
   $result = Response::error(500, 'Server error');
 }
 
-Response::send($result['status'], $result['body']);
+Response::send($result['status'], $result['body'], $allowOrigin);

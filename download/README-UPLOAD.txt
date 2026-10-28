@@ -41,8 +41,24 @@ Tracking, the admin portal and the super-admin portal need the API and database.
 4. Confirm public_html/api/.htaccess exists (it ships in the zip). It is required
    for routing and for the Authorization header used by the portals.
 
-If you host the API on a different domain, add VITE_API_URL before building the
-frontend, or edit the API base URL in the built bundle.
+IF THE WEBSITE IS ON A STATIC HOST (Vercel / Netlify) AND THE API IS NOT
+-----------------------------------------------------------------------
+Vercel cannot run PHP, so the API must live on this PHP hosting instead. Put the
+API on a subdomain of its own and point the frontend at it:
+
+1. cPanel -> Domains -> Create A New Domain -> "api.yourdomain.com"
+   Document root: public_html/api   (so index.php sits at the subdomain root)
+2. Upload + extract posalfast-api.zip into that document root.
+3. Visit https://api.yourdomain.com/settings — you should get JSON, not HTML.
+4. Rebuild the frontend with the API address baked in, then redeploy:
+     VITE_API_URL=https://api.yourdomain.com npm run build
+   (no trailing /api unless the files really live in an /api folder)
+5. In api/config.php leave 'cors_origin' => '*' , or set it to
+   'https://posalfast.com'. Do not remove it: without CORS headers the browser
+   blocks the login before it reaches PHP.
+
+A wrong database password now returns a JSON 503 ("Database connection failed")
+instead of a blank page, so check api/config.php if you see that message.
 
 STEP 4 — SIGN IN
 ----------------
