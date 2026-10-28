@@ -14,6 +14,23 @@ A logistics / shipment-tracking single-page web application built with React, Vi
 > tracking page explains that `/api` is unreachable. Ready-to-upload bundles live in
 > [`download/`](download/) — see `download/README-UPLOAD.txt`.
 
+## Before launch: placeholder content to replace
+
+The site currently ships with stand-in details. None of these are real, so replace
+them (super-admin portal, or `src/types/settings.ts` + `api/schema.sql` for the seed)
+before the site is promoted publicly:
+
+- **Address** — `12 Fenchurch Avenue, London EC3M 5AD` is a stand-in, not a registered office.
+- **Phones** — `+44 20 7946 0199` and `+44 7700 900123` are Ofcom *drama* ranges reserved
+  for fiction, so they will never connect.
+- **Social links** — facebook/twitter/instagram all point at `/posalfast`, which may not exist.
+- **Accreditations** — the About page claims `AEO authorised (HMRC)`, `ISO 9001:2015`,
+  `IATA accredited` and `GDP compliant`. Remove any the company does not actually hold;
+  these are specific statuses an importer can check.
+- **Statistics** — `2,400+` shippers, `320K+` consignments and `13+` years are illustrative.
+- **Journal authors** — the six bylines on the Insights page are invented names.
+- **Company identifiers** — no Companies House number or VAT number is shown anywhere yet.
+
 ## Tech stack
 
 - **React 19** + **TypeScript**
